@@ -1,0 +1,12 @@
+{
+  "name": "365magazine",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@gitlab.com:tim-oc/365magazine.git",
+  "author": "Tim O'Connell <tim@splyt.com>",
+  "license": "UNLICENSED",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
