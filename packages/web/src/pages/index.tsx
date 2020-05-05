@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
 import { Link } from 'gatsby';
-
-import Layout from '../components/layout';
+import React, { FC } from 'react';
+import { Text } from 'rebass';
 import Image from '../components/image';
+import Layout from '../components/layout';
 import SEO from '../components/seo';
+
 
 const IndexPage: FC = () => (
   <Layout>
@@ -15,6 +16,14 @@ const IndexPage: FC = () => (
       <Image />
     </div>
     <Link to="/page-2/">Go to page 2</Link>
+    <Text
+      sx={{
+        color: 'red',
+        fontSize: 30,
+      }}
+    >
+      test
+    </Text>
   </Layout>
 );
 

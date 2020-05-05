@@ -15,3 +15,5 @@ parserOptions:
 
 rules:
   '@typescript-eslint/ban-ts-ignore': off
+  react/prop-types: off
+  object-curly-newline: off
