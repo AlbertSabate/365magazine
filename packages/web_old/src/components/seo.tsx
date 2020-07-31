@@ -7,6 +7,7 @@
 
 import React, { FC } from 'react';
 import { Helmet } from 'react-helmet';
+import { useStaticQuery, graphql } from 'gatsby';
 
 
 interface SeoProps {
@@ -16,19 +17,20 @@ interface SeoProps {
   title: string;
 }
 
-const SEO: FC<SeoProps> = ({
-  description = 'Sussex Lifestyle Blog',
-  lang = 'en',
-  meta = [],
-  title,
-}) => {
-  const site = {
-    siteMetadata: {
-      description,
-      title: '365',
-      author: '365 Magazine',
-    },
-  };
+const SEO: FC<SeoProps> = ({ description = '', lang = 'en', meta = [], title }) => {
+  const { site } = useStaticQuery(
+    graphql`
+      query {
+        site {
+          siteMetadata {
+            title
+            description
+            author
+          }
+        }
+      }
+    `,
+  );
 
   const metaDescription = description || site.siteMetadata.description;
 

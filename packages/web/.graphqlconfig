@@ -1,0 +1,12 @@
+{
+  "name": "Sanity GraphQL Schema",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Sanity-Dev": {
+        "url": "https://n4kphzu5.api.sanity.io/v1/graphql/dev/default",
+        "introspect": true
+      }
+    }
+  }
+}

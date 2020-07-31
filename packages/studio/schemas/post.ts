@@ -9,6 +9,11 @@ export default {
       type: 'string',
     },
     {
+      name: 'tagline',
+      title: 'Tagline',
+      type: 'string',
+    },
+    {
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -38,13 +43,19 @@ export default {
       of: [{ type: 'reference', to: { type: 'category' } }],
     },
     {
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'tag' } }],
+    },
+    {
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
     },
     {
-      name: 'body',
-      title: 'Body',
+      name: 'content',
+      title: 'Content',
       type: 'blockContent',
     },
   ],

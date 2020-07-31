@@ -5,6 +5,7 @@ module.exports = {
     author: '@gatsbyjs',
   },
   plugins: [
+    'gatsby-plugin-theme-ui',
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-typescript',
@@ -18,6 +19,15 @@ module.exports = {
       options: {
         name: 'images',
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-sanity',
+      options: {
+        projectId: 'n4kphzu5',
+        dataset: 'dev',
+        // token: local-web
+        token: 'sk21lKhaOWiSgaQuvfGt96bFWA9JgiTGshhD4h9WY0t9u2XdoizSW5TGNwRAlJjfgKS3GU9S7ZbWdWFvbADCczCNCjWs0dzWVvNmWKKX6u10FXoLSez4SqdR9ljaaSXrYBwaWUAaJpJ5kDOPvCjI7Btfn7E814iwszS7MnrKocnzNHDp2TIZ',
       },
     },
     'gatsby-transformer-sharp',

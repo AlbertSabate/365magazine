@@ -14,6 +14,13 @@ parserOptions:
   project: ./tsconfig.json
 
 rules:
+  max-len:
+    - error
+    - 120
   '@typescript-eslint/ban-ts-ignore': off
   react/prop-types: off
   object-curly-newline: off
+  '@typescript-eslint/explicit-function-return-type': off
+  jsx-quotes:
+    - error
+    - prefer-single
