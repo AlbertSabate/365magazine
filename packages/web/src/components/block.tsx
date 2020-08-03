@@ -1,10 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading,no-underscore-dangle */
 import React, { FC } from 'react';
-import { Text, Heading } from 'rebass';
-import { BlockContent, HeadingTag } from '../schema/block';
+import { Text, Heading, Image } from 'rebass';
+import { SANITY_PROJECT } from '../lib/with-apollo';
+import { BlockContent, HeadingTag, isBlockImage } from '../schema/block';
+import imageUrlBuilder from '@sanity/image-url';
 
 
-export const Block: FC<{ content: BlockContent }> = ({ content, ...props }) => {
+const builder = imageUrlBuilder(SANITY_PROJECT);
+
+export const Block: FC<{ content: BlockContent; variant?: string }> = ({ content, variant, ...props }) => {
   const El: FC = (() => {
     // if (content.listItem) {
     //   return (
@@ -31,7 +35,7 @@ export const Block: FC<{ content: BlockContent }> = ({ content, ...props }) => {
         return ({ children }) => (
           <Text
             as='p'
-            variant='p'
+            variant={variant || 'p'}
             {...props}
           >
             {children}
@@ -39,6 +43,12 @@ export const Block: FC<{ content: BlockContent }> = ({ content, ...props }) => {
         );
     }
   })();
+
+  if (isBlockImage(content)) {
+    return (
+      <Image src={builder.image(content.asset)} />
+    );
+  }
 
   return (
     <El>

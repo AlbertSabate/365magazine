@@ -12,6 +12,7 @@
     "@apollo/react-hooks": "^3.1.5",
     "@apollo/react-ssr": "^3.1.5",
     "@emotion/core": "^10.0.28",
+    "@sanity/image-url": "^0.140.19",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link-http": "^1.5.17",
@@ -29,12 +30,12 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.16.3",
+    "@graphql-codegen/typescript": "1.16.3",
+    "@graphql-codegen/typescript-react-apollo": "1.16.3",
     "@types/react": "^16.9.41",
     "@types/react-helmet": "^6.0.0",
     "@types/rebass": "^4.0.6",
     "@types/theme-ui": "^0.3.4",
-    "csstype": "^2.6.10",
-    "@graphql-codegen/typescript": "1.16.3",
-    "@graphql-codegen/typescript-react-apollo": "1.16.3"
+    "csstype": "^2.6.10"
   }
 }

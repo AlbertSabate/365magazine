@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, forwardRef } from 'react';
 import { Box, Link, Image, Flex, Text, Heading } from 'rebass';
 
 
@@ -52,11 +52,26 @@ const NavItem: FC<NavItemProps> = ({ name, link, invert }) => (
   </Link>
 );
 
-const Header: FC = () => (
-  <>
+
+type HeaderProps = {
+  sticky?: boolean;
+  scrollingDown?: boolean;
+  headerHeight: number;
+};
+
+const Header = forwardRef<HTMLDivElement, HeaderProps>(({ sticky, scrollingDown, headerHeight }, ref) => (
+  <Box
+    as='header'
+    bg='white'
+    width='100%'
+    ref={ref}
+    sx={{
+      position: sticky ? 'fixed' : 'static',
+      top: scrollingDown ? `${-headerHeight}px` : '0px',
+      transition: 'top .3s ease',
+    }}
+  >
     <Flex
-      as='header'
-      bg='white'
       flexDirection='row'
       flexWrap='nowrap'
       justifyContent='flex-start'
@@ -105,6 +120,7 @@ const Header: FC = () => (
       >
         {LEFT_NAV_ITEMS.map((n) => (
           <NavItem
+            key={n.name}
             name={n.name}
             link={n.link}
           />
@@ -120,6 +136,7 @@ const Header: FC = () => (
       >
         {RIGHT_NAV_ITEMS.map((n) => (
           <NavItem
+            key={n.name}
             name={n.name}
             link={n.link}
             invert
@@ -127,7 +144,7 @@ const Header: FC = () => (
         ))}
       </Flex>
     </Flex>
-  </>
-);
+  </Box>
+));
 
 export default Header;

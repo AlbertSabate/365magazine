@@ -13,6 +13,7 @@ type StandardProps = Omit<CSS.StandardProperties, (
 )> & {
   fontWeight?: number | FontsNames;
   fontSize?: Globals | number | string | FontsNames;
+  marginTop?: number | string;
   marginBottom?: number | string;
 };
 
@@ -25,7 +26,7 @@ type AppTheme = Theme & {
 
 const theme: AppTheme = {
   space: [4, 9, 15, 22, 28, 34, 48],
-  fontSizes: [15, 18, 22, 24, 28, 32, 36, 48],
+  fontSizes: [13, 15, 18, 22, 24, 28, 32, 36, 48],
   colors,
   fonts: {
     body: '"Montserrat", sans-serif',
@@ -38,49 +39,64 @@ const theme: AppTheme = {
     display: 400,
   },
   lineHeights: {
-    body: 1.5,
-    heading: 1.5,
+    body: 1.3,
+    heading: 1.2,
     display: 1.5,
   },
   text: {
+    'post-intro': {
+      fontFamily: 'body',
+      fontSize: 2,
+      lineHeight: 'display',
+    },
     'nav-logo': {
       fontFamily: 'heading',
       fontWeight: 'heading',
       fontSize: '42px',
       color: 'black',
       letterSpacing: '-2px',
+      lineHeight: 'display',
     },
     nav: {
       fontFamily: 'heading',
       fontWeight: 'heading',
+      fontSize: 2,
+      lineHeight: 'body',
     },
     p: {
       marginBottom: 1,
       fontSize: 1,
+      lineHeight: 'body',
     },
     h1: {
-      fontFamily: 'heading',
-      fontWeight: 'heading',
+      fontFamily: 'body',
+      fontWeight: 'body',
       lineHeight: 'heading',
-      fontSize: 6,
+      fontSize: 8,
+      textTransform: 'uppercase',
+      marginBottom: 3,
     },
     h2: {
       fontFamily: 'heading',
       fontWeight: 'heading',
       lineHeight: 'heading',
-      fontSize: 5,
+      fontSize: 6,
     },
     h3: {
-      fontFamily: 'heading',
+      fontFamily: 'display',
       fontWeight: 'heading',
       lineHeight: 'heading',
-      fontSize: 4,
+      fontSize: 5,
+      marginTop: 4,
+      marginBottom: 2,
     },
     h4: {
       fontFamily: 'heading',
       fontWeight: 'heading',
       lineHeight: 'heading',
-      fontSize: 3,
+      fontSize: 2,
+      marginTop: 3,
+      marginBottom: 1,
     },
   },
 };

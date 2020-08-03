@@ -9,13 +9,21 @@ import { AppContextType } from 'next/dist/next-server/lib/utils';
 import Head from 'next/head';
 import { Router } from 'next/router';
 import React from 'react';
+import { SanityProjectDetails } from '../types/sanity.types';
 
 
 const SANITY_PROJECT_ID = 'n4kphzu5';
 const SANITY_DATASET = 'dev';
 const SANITY_TAG = 'default';
-const SANITY_USE_CDN = true;
+const SANITY_USE_CDN = false;
 const SANITY_TOKEN = 'skH4iyPeo4EYaoIshd9MoHRZMpHZPU3wIb9H2bY4N3V2yihnQreIqT4huZ0x2sakfT5emgcwmlBAlgqFRVIt7YA45vuOzmfXsF6mbooIK5KwSbULLiUZbC3JYTI5KPS6XWzA6f352rud4YELUgaqfFEsfu3pux888h4zmw2SiFZ5OG8lRkJw';
+
+export const SANITY_PROJECT: SanityProjectDetails = {
+  projectId: SANITY_PROJECT_ID,
+  dataset: SANITY_DATASET,
+};
+
+const SANITY_BASE_URL = `https://${SANITY_PROJECT_ID}.${SANITY_USE_CDN ? 'apicdn' : 'api'}.sanity.io`;
 
 
 type ApolloClientCache = {};
@@ -41,7 +49,7 @@ let globalApolloClient = null;
 const createApolloClient = (initialState?: NormalizedCacheObject, ctx?: CustomContext) => new ApolloClient({
   ssrMode: !!ctx,
   link: new HttpLink({
-    uri: `https://${SANITY_PROJECT_ID}.${SANITY_USE_CDN ? 'apicdn' : 'api'}.sanity.io/v1/graphql/${SANITY_DATASET}/${SANITY_TAG}`,
+    uri: `${SANITY_BASE_URL}/v1/graphql/${SANITY_DATASET}/${SANITY_TAG}`,
     fetch: ctx ? require('cross-fetch') : fetch,
     headers: {
       authorization: `Bearer ${SANITY_TOKEN}`,
