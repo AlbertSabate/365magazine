@@ -2,8 +2,8 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { WithRouterProps } from 'next/dist/client/with-router';
 import { withRouter } from 'next/router';
-import React, { FC, useCallback, useRef, useState } from 'react';
-import { Box, Flex, Heading, Image, Text } from 'rebass';
+import React, { FC, useCallback, useState } from 'react';
+import { Box, Flex, Heading, Image } from 'theme-ui';
 import { Block, BlockGroup } from '../components/block';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
@@ -85,14 +85,18 @@ const Post: FC<WithRouterProps> = ({ router, ...props }) => {
           py={4}
         >
           <Flex
-            flexDirection={isMainImagePortrait ? 'row' : 'column'}
-            flexWrap='wrap'
             mb={3}
+            sx={{
+              flexDirection: isMainImagePortrait ? 'row' : 'column',
+              flexWrap: 'wrap',
+            }}
           >
             {post.mainImage && (
               <Box
-                flex='0 0 auto'
                 mr={isMainImagePortrait ? 4 : '0px'}
+                sx={{
+                  flex: '0 0 auto',
+                }}
               >
                 <Image
                   src={post.mainImage.asset.url}
@@ -106,8 +110,10 @@ const Post: FC<WithRouterProps> = ({ router, ...props }) => {
               </Box>
             )}
             <Box
-              flex={isMainImagePortrait ? '1 0 480px' : '0 0 auto'}
               mb={4}
+              sx={{
+                flex: isMainImagePortrait ? '1 0 480px' : '0 0 auto',
+              }}
             >
               <Heading
                 as='h1'

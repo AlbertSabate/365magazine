@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import Link from 'next/link';
 import React, { FC, useCallback, useState } from 'react';
-import { Box, Button, Flex, Text } from 'rebass';
+import { Box, Button, Flex, Text } from 'theme-ui';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import withApollo from '../lib/with-apollo';
@@ -187,31 +187,31 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
     <Link href={`/${post.slug.current}`}>
       <Button
         p='0px'
-        height={PANEL_HEIGHT}
-        width={PANEL_WIDTH}
         sx={{
           border: '1px solid black',
           backgroundImage: post.mainImage && `url(${post.mainImage.asset.url})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           borderRadius: '0px',
+          height: PANEL_HEIGHT,
+          width: PANEL_WIDTH,
         }}
       >
         <Box
-          height='100%'
-          width='100%'
           sx={{
+            height: '100%',
             overflow: 'hidden',
             position: 'relative',
+            width: '100%',
             ...hoverStyles,
           }}
         >
           <Box
-            width='100%'
             sx={{
-              top: `${vStart}px`,
               position: 'absolute',
+              top: `${vStart}px`,
               transition: 'top .1s ease',
+              width: '100%',
             }}
           >
             <Box
@@ -230,10 +230,12 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
             {post.tagline && (
               <Box
                 bg='rgba(0,0,0,0.8)'
-                maxHeight={vStart}
                 ref={taglineRef}
                 px={1}
                 py={2}
+                sx={{
+                  maxHeight: vStart,
+                }}
               >
                 <Text>
                   {post.tagline}
@@ -255,9 +257,11 @@ const IndexPage: FC = (props) => {
     <Layout>
       <SEO title='Home' />
       <Flex
-        flexDirection='row'
-        justifyContent='flex-start'
-        alignItems='flex-start'
+        sx={{
+          alignItems: 'flex-start',
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+        }}
       >
         {data && data.allPost.map((p) => (
           <PostPreview key={p._id} post={p} />

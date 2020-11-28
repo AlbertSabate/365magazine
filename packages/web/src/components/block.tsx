@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading,no-underscore-dangle */
 import React, { FC } from 'react';
-import { Text, Heading, Image } from 'rebass';
+import { Text, Heading, Image } from 'theme-ui';
 import { SANITY_PROJECT } from '../lib/with-apollo';
 import { BlockContent, HeadingTag, isBlockImage } from '../schema/block';
 import imageUrlBuilder from '@sanity/image-url';
@@ -9,6 +9,12 @@ import imageUrlBuilder from '@sanity/image-url';
 const builder = imageUrlBuilder(SANITY_PROJECT);
 
 export const Block: FC<{ content: BlockContent; variant?: string }> = ({ content, variant, ...props }) => {
+  if (isBlockImage(content)) {
+    return (
+      <Image src={builder.image(content.asset).url()} />
+    );
+  }
+
   const El: FC = (() => {
     // if (content.listItem) {
     //   return (
@@ -44,19 +50,15 @@ export const Block: FC<{ content: BlockContent; variant?: string }> = ({ content
     }
   })();
 
-  if (isBlockImage(content)) {
-    return (
-      <Image src={builder.image(content.asset)} />
-    );
-  }
-
   return (
     <El>
       {content.children.map((c) => (
         <Text
           as='span'
           key={c._key}
-          fontWeight={c.marks.includes('strong') ? 'bold' : undefined}
+          sx={{
+            fontWeight: c.marks.includes('strong') ? 'bold' : undefined,
+          }}
         >
           {c.text}
         </Text>

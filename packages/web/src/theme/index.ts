@@ -1,27 +1,14 @@
-import { Globals } from 'csstype';
-import { Theme } from 'theme-ui';
 import type * as CSS from 'csstype';
+import { Theme } from 'theme-ui';
 import colors from './colors';
 
 
 type FontsNames = ('body' | 'heading' | 'display');
 
-type StandardProps = Omit<CSS.StandardProperties, (
-  | 'fontWeight'
-  | 'fontSize'
-  | 'marginBottom'
-)> & {
-  fontWeight?: number | FontsNames;
-  fontSize?: Globals | number | string | FontsNames;
-  marginTop?: number | string;
-  marginBottom?: number | string;
-};
-
 type AppTheme = Theme & {
-  fonts: { [K in FontsNames]: CSS.FontFamilyProperty };
+  fonts: { [K in FontsNames]: CSS.Property.FontFamily };
   fontWeights: { [K in FontsNames]: number };
-  lineHeights: { [K in FontsNames]: CSS.LineHeightProperty<string | 0 | number> };
-  text: { [K in string]: StandardProps };
+  lineHeights: { [K in FontsNames]: CSS.Property.LineHeight<string | 0 | number> };
 };
 
 const theme: AppTheme = {

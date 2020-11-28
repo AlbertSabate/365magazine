@@ -1,10 +1,9 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
-import { Box } from 'rebass';
 import { Global } from '@emotion/core';
-import { ThemeProvider } from 'theme-ui';
+import React, { FC, useCallback, useEffect, useState } from 'react';
+import { Box, ThemeProvider } from 'theme-ui';
+import theme from '../theme';
 import Header from './header';
 import ResetCss from './reset-css';
-import theme from '../theme';
 
 
 const isServer = typeof window === 'undefined';

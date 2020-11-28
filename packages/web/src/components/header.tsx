@@ -1,5 +1,5 @@
 import React, { FC, forwardRef } from 'react';
-import { Box, Link, Image, Flex, Text, Heading } from 'rebass';
+import { Box, Link, Image, Flex, Text, Heading } from 'theme-ui';
 
 
 const LEFT_NAV_ITEMS = [
@@ -63,24 +63,24 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ sticky, scrollingDown,
   <Box
     as='header'
     bg='white'
-    width='100%'
     ref={ref}
     sx={{
       position: sticky ? 'fixed' : 'static',
       top: scrollingDown ? `${-headerHeight}px` : '0px',
       transition: 'top .3s ease',
+      width: '100%',
     }}
   >
     <Flex
-      flexDirection='row'
-      flexWrap='nowrap'
-      justifyContent='flex-start'
-      alignItems='center'
       px={3}
       py={0}
       sx={{
+        alignItems: 'center',
         borderBottom: '1px solid',
         borderColor: 'grey-light',
+        flexDirection: 'row',
+        flexWrap: 'nowrap',
+        justifyContent: 'flex-start',
       }}
     >
       <Link
@@ -103,20 +103,22 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ sticky, scrollingDown,
     <Flex
       as='nav'
       bg='white'
-      flexDirection='row'
-      flexWrap='nowrap'
       sx={{
         textTransform: 'uppercase',
         borderBottom: '1px solid',
         borderColor: 'grey-light',
+        flexDirection: 'row',
+        flexWrap: 'nowrap',
       }}
     >
       <Flex
-        flex={12}
-        flexDirection='row'
-        flexWrap='nowrap'
-        justifyContent='flex-start'
-        alignItems='center'
+        sx={{
+          alignItems: 'center',
+          flex: 12,
+          flexDirection: 'row',
+          flexWrap: 'nowrap',
+          justifyContent: 'flex-start',
+        }}
       >
         {LEFT_NAV_ITEMS.map((n) => (
           <NavItem
@@ -127,12 +129,14 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ sticky, scrollingDown,
         ))}
       </Flex>
       <Flex
-        flex='1 0 auto'
-        flexDirection='row'
-        flexWrap='nowrap'
-        justifyContent='flex-end'
-        alignItems='center'
         bg='black'
+        sx={{
+          alignItems: 'center',
+          flex: '1 0 auto',
+          flexDirection: 'row',
+          flexWrap: 'nowrap',
+          justifyContent: 'flex-end',
+        }}
       >
         {RIGHT_NAV_ITEMS.map((n) => (
           <NavItem
