@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "next build src",
-    "dev": "next src",
+    "start": "next src",
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
@@ -23,7 +23,6 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
-    "rebass": "^4.0.7",
     "theme-ui": "^0.3.1",
     "typeface-montserrat": "^0.0.75",
     "typeface-playfair-display": "^1.1.4"
