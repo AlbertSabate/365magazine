@@ -1,9 +1,9 @@
 ```
 # start web dev server on :8000
-yarn workspace @365/web start
+yarn start:web
 ```
 
 ```
 # start editor dev server on :3333
-yarn workspace @365/studio start
+yarn start:studio
 ```

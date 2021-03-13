@@ -12,28 +12,28 @@
     "@apollo/react-hooks": "^4.0.0",
     "@apollo/react-ssr": "^4.0.0",
     "@emotion/core": "<11",
-    "@sanity/image-url": "^0.140.19",
+    "@sanity/image-url": "^0.140.22",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link-http": "^1.5.17",
-    "cross-fetch": "^3.0.5",
-    "graphql": "^15.1.0",
+    "cross-fetch": "^3.1.0",
+    "graphql": "^15.5.0",
     "graphql-tag": "^2.10.3",
-    "next": "^10.0.3",
+    "next": "^10.0.8",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
-    "theme-ui": "^0.3.1",
+    "theme-ui": "^0.3.5",
     "typeface-montserrat": "^1.1.13",
     "typeface-playfair-display": "^1.1.4"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "1.19.3",
-    "@graphql-codegen/typescript": "1.18.1",
-    "@graphql-codegen/typescript-react-apollo": "2.2.1",
-    "@types/react": "^17.0.0",
+    "@graphql-codegen/cli": "1.21.2",
+    "@graphql-codegen/typescript": "1.21.1",
+    "@graphql-codegen/typescript-react-apollo": "2.2.2",
+    "@types/react": "^17.0.3",
     "@types/react-helmet": "^6.0.0",
     "@types/theme-ui": "^0.3.4",
-    "csstype": "^3.0.5"
+    "csstype": "^3.0.7"
   }
 }
