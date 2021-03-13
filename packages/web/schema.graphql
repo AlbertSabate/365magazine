@@ -116,6 +116,10 @@ type RootQuery {
     "Category document ID"
     id: ID!
   ): Category
+  Document(
+    "Document document ID"
+    id: ID!
+  ): Document
   Post(
     "Post document ID"
     id: ID!
@@ -148,6 +152,14 @@ type RootQuery {
     sort: [CategorySorting!],
     where: CategoryFilter
   ): [Category!]!
+  allDocument(
+    "Max documents to return"
+    limit: Int,
+    "Offset at which to start returning documents from"
+    offset: Int,
+    sort: [DocumentSorting!],
+    where: DocumentFilter
+  ): [Document!]!
   allPost(
     "Max documents to return"
     limit: Int,
@@ -342,7 +354,7 @@ enum SortOrder {
 
 input AuthorFilter {
   "Apply filters on document level"
-  _: DocumentFilter
+  _: Sanity_DocumentFilter
   _createdAt: DatetimeFilter
   _id: IDFilter
   _key: StringFilter
@@ -375,7 +387,7 @@ input BooleanFilter {
 
 input CategoryFilter {
   "Apply filters on document level"
-  _: DocumentFilter
+  _: Sanity_DocumentFilter
   _createdAt: DatetimeFilter
   _id: IDFilter
   _key: StringFilter
@@ -428,10 +440,21 @@ input DatetimeFilter {
 }
 
 input DocumentFilter {
-  "All documents that are drafts."
-  is_draft: Boolean
-  "All documents referencing the given document ID."
-  references: ID
+  "Apply filters on document level"
+  _: Sanity_DocumentFilter
+  _createdAt: DatetimeFilter
+  _id: IDFilter
+  _rev: StringFilter
+  _type: StringFilter
+  _updatedAt: DatetimeFilter
+}
+
+input DocumentSorting {
+  _createdAt: SortOrder
+  _id: SortOrder
+  _rev: SortOrder
+  _type: SortOrder
+  _updatedAt: SortOrder
 }
 
 input FileFilter {
@@ -519,7 +542,7 @@ input IntFilter {
 
 input PostFilter {
   "Apply filters on document level"
-  _: DocumentFilter
+  _: Sanity_DocumentFilter
   _createdAt: DatetimeFilter
   _id: IDFilter
   _key: StringFilter
@@ -566,7 +589,7 @@ input SanityAssetSourceDataSorting {
 
 input SanityFileAssetFilter {
   "Apply filters on document level"
-  _: DocumentFilter
+  _: Sanity_DocumentFilter
   _createdAt: DatetimeFilter
   _id: IDFilter
   _key: StringFilter
@@ -610,7 +633,7 @@ input SanityFileAssetSorting {
 
 input SanityImageAssetFilter {
   "Apply filters on document level"
-  _: DocumentFilter
+  _: Sanity_DocumentFilter
   _createdAt: DatetimeFilter
   _id: IDFilter
   _key: StringFilter
@@ -770,6 +793,13 @@ input SanityImagePaletteSwatchSorting {
   title: SortOrder
 }
 
+input Sanity_DocumentFilter {
+  "All documents that are drafts."
+  is_draft: Boolean
+  "All documents referencing the given document ID."
+  references: ID
+}
+
 input SlugFilter {
   _key: StringFilter
   _type: StringFilter
@@ -795,7 +825,7 @@ input StringFilter {
 
 input TagFilter {
   "Apply filters on document level"
-  _: DocumentFilter
+  _: Sanity_DocumentFilter
   _createdAt: DatetimeFilter
   _id: IDFilter
   _key: StringFilter

@@ -1,5 +1,7 @@
-export default {
-  name: 'author',
+import SchemaTypes from './types';
+
+const Author = {
+  name: SchemaTypes.Author,
   title: 'Author',
   type: 'document',
   fields: [
@@ -46,3 +48,5 @@ export default {
     },
   },
 };
+
+export default Author;

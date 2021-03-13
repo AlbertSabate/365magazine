@@ -1,5 +1,7 @@
-export default {
-  name: 'tag',
+import SchemaTypes from './types';
+
+const Tag = {
+  name: SchemaTypes.Tag,
   title: 'Tag',
   type: 'document',
   fields: [
@@ -15,3 +17,5 @@ export default {
     },
   ],
 };
+
+export default Tag;

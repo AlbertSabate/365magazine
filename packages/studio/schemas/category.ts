@@ -1,5 +1,7 @@
-export default {
-  name: 'category',
+import SchemaTypes from './types';
+
+const BlockContent = {
+  name: SchemaTypes.Category,
   title: 'Category',
   type: 'document',
   fields: [
@@ -15,3 +17,5 @@ export default {
     },
   ],
 };
+
+export default BlockContent;

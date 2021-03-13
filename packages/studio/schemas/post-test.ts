@@ -1,8 +1,8 @@
 import SchemaTypes from './types';
 
-const Post = {
-  name: SchemaTypes.Post,
-  title: 'Post',
+export default {
+  name: 'post-test',
+  title: 'Post Test',
   type: 'document',
   fields: [
     {
@@ -58,7 +58,11 @@ const Post = {
     {
       name: 'content',
       title: 'Content',
-      type: 'blockContent',
+      type: 'array',
+      of: [
+        { type: 'block' },
+        { type: SchemaTypes.RecipeStep },
+      ],
     },
   ],
 
@@ -74,5 +78,3 @@ const Post = {
     },
   },
 };
-
-export default Post;
