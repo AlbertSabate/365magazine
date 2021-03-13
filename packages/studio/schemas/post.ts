@@ -1,9 +1,11 @@
+import { MdDescription } from 'react-icons/md';
 import SchemaTypes from './types';
 
 const Post = {
   name: SchemaTypes.Post,
   title: 'Post',
   type: 'document',
+  icon: MdDescription,
   fields: [
     {
       name: 'title',
@@ -32,7 +34,7 @@ const Post = {
     },
     {
       name: 'mainImage',
-      title: 'Main image',
+      title: 'Main Image',
       type: 'image',
       options: {
         hotspot: true,

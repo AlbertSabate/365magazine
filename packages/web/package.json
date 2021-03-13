@@ -34,6 +34,7 @@
     "@types/react": "^17.0.3",
     "@types/react-helmet": "^6.0.0",
     "@types/theme-ui": "^0.3.4",
-    "csstype": "^3.0.7"
+    "csstype": "^3.0.7",
+    "eslint-plugin-jsx-a11y": "^6.4.1"
   }
 }

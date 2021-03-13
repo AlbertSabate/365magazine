@@ -1,9 +1,11 @@
+import { MdDescription } from 'react-icons/md';
 import SchemaTypes from './types';
 
-export default {
-  name: 'post-test',
-  title: 'Post Test',
+const Recipe = {
+  name: SchemaTypes.Recipe,
+  title: 'Recipe',
   type: 'document',
+  icon: MdDescription,
   fields: [
     {
       name: 'title',
@@ -27,12 +29,11 @@ export default {
     {
       name: 'author',
       title: 'Author',
-      type: 'reference',
-      to: { type: SchemaTypes.Author },
+      type: SchemaTypes.AuthorLink,
     },
     {
       name: 'mainImage',
-      title: 'Main image',
+      title: 'Main Image',
       type: 'image',
       options: {
         hotspot: true,
@@ -56,11 +57,40 @@ export default {
       type: 'datetime',
     },
     {
+      name: 'recipeInfo',
+      title: 'Recipe Info',
+      type: 'object',
+      fields: [
+        {
+          name: 'makes',
+          title: 'Makes (amount)',
+          type: 'string',
+        },
+        {
+          name: 'serves',
+          title: 'Serves (people)',
+          type: 'string',
+        },
+        {
+          name: 'cookingTime',
+          title: 'Cooking Time',
+          type: 'string',
+        },
+        {
+          name: 'ingredients',
+          title: 'Ingredients',
+          type: 'array',
+          of: [{ type: SchemaTypes.RecipeIngredient }],
+        },
+      ],
+    },
+    {
       name: 'content',
       title: 'Content',
       type: 'array',
       of: [
         { type: 'block' },
+        { type: 'image' },
         { type: SchemaTypes.RecipeStep },
       ],
     },
@@ -69,7 +99,7 @@ export default {
   preview: {
     select: {
       title: 'title',
-      author: 'author.name',
+      author: 'author.who.name',
       media: 'mainImage',
     },
     prepare(selection) {
@@ -78,3 +108,5 @@ export default {
     },
   },
 };
+
+export default Recipe;

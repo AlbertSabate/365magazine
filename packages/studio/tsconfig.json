@@ -1,4 +1,5 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["./node_modules/@sanity/base/types/**/*.ts", "./**/*.ts", "./**/*.tsx"]
+  "include": ["./node_modules/@sanity/base/types/**/*.ts", "./**/*.ts", "./**/*.tsx"],
+  "moduleResolution": "node"
 }
