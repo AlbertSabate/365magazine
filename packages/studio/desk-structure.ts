@@ -3,7 +3,7 @@ import { MdSettings } from 'react-icons/md';
 import SchemaTypes from './schemas/types';
 
 const hiddenDocumentTypes = [SchemaTypes.SiteConfig, SchemaTypes.LandingConfig];
-// const articleDocumentTypes = [SchemaTypes.Post, SchemaTypes.Recipe];
+const articleDocumentTypes = [SchemaTypes.Post, SchemaTypes.Recipe];
 
 export default () => S.list().id('site').items([
   S.listItem()
@@ -24,5 +24,8 @@ export default () => S.list().id('site').items([
     ),
   S.divider(),
   ...S.documentTypeListItems()
-    .filter((t) => !hiddenDocumentTypes.includes(t.getId())),
+    .filter((t) => articleDocumentTypes.includes(t.getId())),
+  S.divider(),
+  ...S.documentTypeListItems()
+    .filter((t) => !(hiddenDocumentTypes.concat(articleDocumentTypes)).includes(t.getId())),
 ]);
