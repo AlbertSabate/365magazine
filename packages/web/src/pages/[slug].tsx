@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { WithRouterProps } from 'next/dist/client/with-router';
 import { withRouter } from 'next/router';
-import React, { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { Box, Flex, Heading, Image } from 'theme-ui';
 import { Block, BlockGroup } from '../components/block';
 import Layout from '../components/layout';
@@ -116,19 +116,19 @@ const Post: FC<WithRouterProps> = ({ router, ...props }) => {
               }}
             >
               <Heading
-                as='h1'
-                variant='h1'
+                as="h1"
+                variant="h1"
               >
                 {post.title}
               </Heading>
               <Heading
-                as='h2'
-                variant='h3'
+                as="h2"
+                variant="h3"
               >
                 {post.tagline}
               </Heading>
               {isMainImagePortrait && firstBlock && (
-                <Block content={firstBlock} variant='post-intro' />
+                <Block content={firstBlock} variant="post-intro" />
               )}
             </Box>
           </Flex>

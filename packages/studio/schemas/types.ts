@@ -8,6 +8,8 @@ enum SchemaTypes {
   RecipeIngredient = 'recipeIngredient',
   RecipeStep = 'recipeStep',
   RecipeStepContent = 'recipeStepContent',
+  SiteConfig = 'siteConfig',
+  LandingConfig = 'landingConfig',
 }
 
 export default SchemaTypes;
