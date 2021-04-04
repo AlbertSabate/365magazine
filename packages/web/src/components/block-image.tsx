@@ -1,7 +1,7 @@
 import imageUrlBuilder from '@sanity/image-url';
 import { FC } from 'react';
 import { Image } from 'theme-ui';
-import { SANITY_PROJECT } from '../lib/with-apollo';
+import { SANITY_PROJECT } from '../lib/apollo';
 import { BlockImageContent } from '../schema/block';
 
 

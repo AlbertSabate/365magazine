@@ -16,7 +16,7 @@ const theme: AppTheme = {
   fontSizes: [13, 15, 18, 22, 24, 28, 32, 36, 48],
   colors,
   fonts: {
-    body: '"Montserrat", sans-serif',
+    body: '"Radley", serif',
     heading: '"Montserrat", sans-serif',
     display: '"Playfair Display", serif',
   },

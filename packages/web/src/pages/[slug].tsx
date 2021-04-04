@@ -1,4 +1,5 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql } from '@apollo/client';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { WithRouterProps } from 'next/dist/client/with-router';
 import { withRouter } from 'next/router';
 import { FC, useCallback, useState } from 'react';
@@ -7,13 +8,13 @@ import BlockGroup from '../components/block-group';
 import BlockText from '../components/block-text';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import withApollo from '../lib/with-apollo';
+import client from '../lib/apollo';
 import { BlockContent, isBlockText } from '../schema/block';
-import { RootQuery } from '../schema/root';
+import { Post, Recipe, RootQuery } from '../schema/root';
 
 
 const postSlugQuery = gql`
-  query Post($slug: String) {
+  query GetPostBySlug($slug: String) {
     allPost(
       where: {
         slug: {
@@ -49,20 +50,125 @@ const postSlugQuery = gql`
   }
 `;
 
-const Post: FC<WithRouterProps> = ({ router, ...props }) => {
-  const { data, loading, error } = useQuery<RootQuery>(postSlugQuery, {
+const postsListQuery = gql`
+  query Posts {
+    allPost {
+      _id
+      _type
+      slug {
+        current
+      }
+      title
+    }
+  }
+`;
+
+const recipesListQuery = gql`
+  query Recipes {
+    allRecipe {
+      _id
+      _type
+      slug {
+        current
+      }
+      title
+    }
+  }
+`;
+
+async function listPosts() {
+  const { data, error } = await client.query<RootQuery>({
+    query: postsListQuery,
+  });
+
+  if (error) {
+    console.error('error listing posts', error);
+    return [];
+  }
+  if (!data) {
+    console.error('empty list posts response');
+    return [];
+  }
+
+  return data.allPost;
+}
+
+async function listRecipes() {
+  const { data, error } = await client.query<RootQuery>({
+    query: recipesListQuery,
+  });
+
+  if (error) {
+    console.error('error listing posts', error);
+    return [];
+  }
+  if (!data) {
+    console.error('empty list posts response');
+    return [];
+  }
+
+  return data.allRecipe;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  console.debug('run getStaticPaths');
+
+  const [posts, recipes] = await Promise.all([
+    listPosts(),
+    listRecipes(),
+  ]);
+
+  const allArticles = [...posts, ...recipes];
+  const allPaths: string[] = [];
+
+  allArticles.forEach((a) => {
+    const path = a.slug?.current;
+    if (path) {
+      allPaths.push(`/${path}`);
+    } else {
+      console.error(`article ${a._id} missing slug`);
+    }
+  });
+
+  return {
+    paths: allPaths,
+    fallback: true,
+  };
+};
+
+type PostInitialProps = {
+  slug: string;
+  post: Post | Recipe;
+};
+
+export const getStaticProps: GetStaticProps<PostInitialProps> = async ({ params }) => {
+  const { data, error } = await client.query<RootQuery>({
+    query: postSlugQuery,
     variables: {
-      slug: router.query.slug,
+      slug: params.slug,
     },
   });
 
-  console.log(loading, data);
   const [post] = data?.allPost || [];
-
-  if (!loading && !post) {
-    router.replace('/404').catch(console.error);
+  if (!post || error) {
+    return {
+      notFound: true,
+    };
   }
 
+  return {
+    props: {
+      slug: params.slug as string,
+      post,
+    },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every second
+    revalidate: 60, // In seconds
+  };
+};
+
+const Article: FC<WithRouterProps & PostInitialProps> = ({ slug, post, router, ...props }) => {
   const [mainImageLoaded, setMainImageLoaded] = useState(false);
   const [mainImageDimensions, setMainImageDimensions] = useState<[number, number]>([0, 0]);
   const isMainImagePortrait = mainImageDimensions[0] > mainImageDimensions[1];
@@ -74,10 +180,15 @@ const Post: FC<WithRouterProps> = ({ router, ...props }) => {
     }
   }, [mainImageLoaded]);
 
+  // when the article has not been pre-rendered at build time, we will try to fetch it dynamically on the server
+  // by running getStaticProps and showing fallback page here
+  if (router.isFallback) {
+    // todo: implement loading placeholder for the dynamic article
+    return <div>loading........</div>;
+  }
+
   const content = (post?.contentRaw || []) as BlockContent[];
   const [firstBlock, ...restBlocks] = content;
-
-  console.log(post?.mainImage.asset.url);
 
   return (
     <Layout stickyHeader>
@@ -146,4 +257,4 @@ const Post: FC<WithRouterProps> = ({ router, ...props }) => {
   );
 };
 
-export default withApollo({})(withRouter(Post));
+export default withRouter(Article);

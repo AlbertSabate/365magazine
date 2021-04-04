@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { BlockContent, getBlockType, isBlockImage, isBlockRecipeStep, isBlockText } from '../schema/block';
+import { BlockContent, isBlockImage, isBlockRecipeStep, isBlockText } from '../schema/block';
 import BlockImage from './block-image';
 import BlockRecipeStep from './block-recipe-step';
 import BlockText from './block-text';
@@ -19,7 +19,8 @@ const BlockGroup: FC<{ blocks: Array<BlockContent> }> = ({ blocks }) => (
         return <BlockText content={b} key={b._key} />;
       }
 
-      console.warn('unhandled block type', getBlockType(b));
+      // @ts-ignore <-- this is a fallback in case we haven't considered a case in our types
+      console.warn('unhandled block type', b._type);
       return null;
     })}
   </>

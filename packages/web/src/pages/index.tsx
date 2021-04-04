@@ -4,8 +4,6 @@ import React, { FC, useCallback, useState } from 'react';
 import { Box, Button, Flex, Text } from 'theme-ui';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import withApollo from '../lib/with-apollo';
-import { BlockContent } from '../schema/block';
 import { Post, RootQuery } from '../schema/root';
 
 
@@ -76,7 +74,7 @@ export const allPostsQuery = gql`
 `;
 
 export const listPostsQuery = gql`
-  query AllPosts {
+  query ListPosts {
     allPost {
       _id
       _createdAt
@@ -258,4 +256,4 @@ const IndexPage: FC = (props) => {
   );
 };
 
-export default withApollo({})(IndexPage);
+export default IndexPage;

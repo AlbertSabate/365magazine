@@ -12,16 +12,16 @@
     "@apollo/client": "^3.3.13",
     "@apollo/react-ssr": "^4.0.0",
     "@emotion/core": "<11",
+    "@fontsource/montserrat": "^4.2.2",
+    "@fontsource/playfair-display": "^4.2.2",
+    "@fontsource/radley": "^4.2.2",
     "@sanity/image-url": "^0.140.22",
-    "cross-fetch": "^3.1.0",
     "graphql": "^15.5.0",
     "next": "^10.0.8",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
-    "theme-ui": "^0.3.5",
-    "typeface-montserrat": "^1.1.13",
-    "typeface-playfair-display": "^1.1.4"
+    "theme-ui": "^0.3.5"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.2",

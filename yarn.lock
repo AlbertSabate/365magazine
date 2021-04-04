@@ -1170,6 +1170,21 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/montserrat@^4.2.2":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-4.2.2.tgz#a1ad54b9302d6b840618fa1294fb4aec98e2b673"
+  integrity sha512-HnlV9Xim2mYa56Bz/UIO5r26Rq/DJWlYdMWTql+TE6n3yYMe8YV6dTwPzTbkr35IsyDq6cWy0rPert9MWyA2yA==
+
+"@fontsource/playfair-display@^4.2.2":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/playfair-display/-/playfair-display-4.2.2.tgz#a5792daaa48b8aa708d2711804248d4011d12283"
+  integrity sha512-Vx4oLVIPINMohHlTA50st2U1Ia+GHjR0CNJ3Fp1B1UBRyhuOF4H67ZXo8iSaqB5Qy073iVUSzsccGUoNSHfQhg==
+
+"@fontsource/radley@^4.2.2":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/radley/-/radley-4.2.2.tgz#b0b73a9c404143a1cd47711cbb7af6de5eca86f9"
+  integrity sha512-+8lEdji9poYtfkDqSMp6o69YDhY1M25tHOT6Wo0LWmmbaun+pCgDrNQCiBYZkYyLu9t3eERMeR1/un9xItva/A==
+
 "@graphql-codegen/cli@1.21.2":
   version "1.21.2"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-1.21.2.tgz#2b65acff441f6cbae24bb816790a074264b58f86"
@@ -4610,7 +4625,7 @@ cross-fetch@3.0.6:
   dependencies:
     node-fetch "2.6.1"
 
-cross-fetch@^3.0.4, cross-fetch@^3.0.6, cross-fetch@^3.1.0:
+cross-fetch@^3.0.4, cross-fetch@^3.0.6:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.1.tgz#a7ed5a9201d46223d805c5e9ecdc23ea600219eb"
   integrity sha512-eIF+IHQpRzoGd/0zPrwQmHwDC90mdvjk+hcbYhKoaRrEk4GEIDqdjs/MljmdPPoHTQudbmWS+f0hZsEpFaEvWw==
@@ -12721,16 +12736,6 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
-
-typeface-montserrat@^1.1.13:
-  version "1.1.13"
-  resolved "https://registry.yarnpkg.com/typeface-montserrat/-/typeface-montserrat-1.1.13.tgz#2a16729c174dd1a8c3fec05a851b7725412606cc"
-  integrity sha512-Pklkyj0e+K+6I/t0M6JBDBphpfJkF1k+3qd8qDnp9aVtCC7oGBQWTAcL6+5eArfGe7h73uPwyal73hEkf9YCUA==
-
-typeface-playfair-display@^1.1.4:
-  version "1.1.13"
-  resolved "https://registry.yarnpkg.com/typeface-playfair-display/-/typeface-playfair-display-1.1.13.tgz#7f7cef9870622a6f6bd86971ea65c50b67dbf4ae"
-  integrity sha512-aOAo7NQDbdNEbBCku7i+54l5oeuttHEoa8/qJXDvPUfTIpz+PvpTDq+LeIhhh1H1RwhxurokEpIa+tYqIzZRSA==
 
 typescript@^4.2.3:
   version "4.2.3"

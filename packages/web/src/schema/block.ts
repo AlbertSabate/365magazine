@@ -25,7 +25,7 @@ export type Mark = (
 );
 
 export interface BlockTextContent {
-  type: 'block';
+  _type: 'block';
   _key: string;
   style?: BlockStyle;
   level?: number;
@@ -51,13 +51,6 @@ export type BlockContent = BlockImageContent | BlockTextContent | BlockRecipeSte
 export const isBlockImage = (block?: BlockContent): block is BlockImageContent => block
   && (block as BlockImageContent)._type === 'image';
 export const isBlockText = (block?: BlockContent): block is BlockTextContent => block
-  && (block as BlockTextContent).type === 'block';
+  && (block as BlockTextContent)._type === 'block';
 export const isBlockRecipeStep = (block?: BlockContent): block is BlockRecipeStepContent => block
   && (block as BlockRecipeStepContent)._type === 'recipeStep';
-
-export function getBlockType(b: BlockContent) {
-  if (isBlockText(b)) {
-    return b.type;
-  }
-  return b._type;
-}
