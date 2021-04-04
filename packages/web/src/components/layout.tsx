@@ -1,5 +1,5 @@
 import { Global } from '@emotion/core';
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { Box, ThemeProvider } from 'theme-ui';
 import theme from '../theme';
 import Header from './header';

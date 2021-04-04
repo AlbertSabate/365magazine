@@ -27,3 +27,6 @@ rules:
   no-multiple-empty-lines:
     - error
     - max: 2
+  react/react-in-jsx-scope: off
+  no-console: off
+  no-underscore-dangle: off

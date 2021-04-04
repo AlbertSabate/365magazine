@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading,no-underscore-dangle */
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Heading, Text } from 'theme-ui';
 import { BlockTextContent, HeadingTag } from '../schema/block';
 

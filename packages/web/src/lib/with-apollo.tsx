@@ -1,14 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading, max-len, global-require */
-import { ApolloProvider } from '@apollo/react-hooks';
-import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
-import { ApolloClient } from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
+import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { NextPage, NextPageContext } from 'next';
 import App from 'next/app';
 import { AppContextType } from 'next/dist/next-server/lib/utils';
 import Head from 'next/head';
 import { Router } from 'next/router';
-import React from 'react';
 import { SanityProjectDetails } from '../types/sanity.types';
 
 
@@ -26,8 +22,8 @@ export const SANITY_PROJECT: SanityProjectDetails = {
 const SANITY_BASE_URL = `https://${SANITY_PROJECT_ID}.${SANITY_USE_CDN ? 'apicdn' : 'api'}.sanity.io`;
 
 
-type ApolloClientCache = {};
-type ApolloClientState = {};
+type ApolloClientCache = Record<string, unknown>;
+type ApolloClientState = NormalizedCacheObject & Record<string, unknown>;
 
 type ApolloContext = {
   apolloClient: ApolloClient<ApolloClientCache>;
@@ -38,19 +34,20 @@ type CustomPageContext = NextPageContext & ApolloContext;
 type CustomAppContext = AppContextType<Router> & { ctx: CustomPageContext };
 type CustomContext = CustomPageContext | CustomAppContext;
 
-const isAppContext = (ctx?: CustomContext): ctx is CustomAppContext => ctx?.hasOwnProperty('ctx');
+const isAppContext = (ctx?: CustomContext): ctx is CustomAppContext => !!(ctx as CustomAppContext)?.ctx;
 
 
 // On the client, we store the Apollo Client in the following variable.
 // This prevents the client from reinitializing between page transitions.
-let globalApolloClient = null;
+let globalApolloClient: ApolloClient<ApolloClientCache> | null = null;
 
 
 const createApolloClient = (initialState?: NormalizedCacheObject, ctx?: CustomContext) => new ApolloClient({
   ssrMode: !!ctx,
   link: new HttpLink({
     uri: `${SANITY_BASE_URL}/v1/graphql/${SANITY_DATASET}/${SANITY_TAG}`,
-    fetch: ctx ? require('cross-fetch') : fetch,
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    fetch: ctx ? require('cross-fetch') as typeof fetch : fetch,
     headers: {
       authorization: `Bearer ${SANITY_TOKEN}`,
     },
@@ -66,7 +63,7 @@ const createApolloClient = (initialState?: NormalizedCacheObject, ctx?: CustomCo
  * @param {NextPageContext} ctx
  * @returns {any}
  */
-const initApolloClient = (initialState?: NormalizedCacheObject, ctx?: CustomContext) => {
+const initApolloClient = (initialState?: NormalizedCacheObject, ctx?: CustomContext): ApolloClient<ApolloClientCache> => {
   const isServer = typeof window === 'undefined';
 
   if (isServer) {
@@ -94,6 +91,7 @@ const initOnContext = (ctx: CustomContext) => {
   // Otherwise, the component would have to call initApollo() again but this
   // time without the context. Once that happens, the following code will make sure we send
   // the prop as `null` to the browser.
+  // @ts-ignore
   apolloClient.toJSON = () => null;
 
   // Add apolloClient to NextPageContext.
@@ -108,15 +106,14 @@ const initOnContext = (ctx: CustomContext) => {
   return ctx;
 };
 
+type WithApolloProps = {
+  apolloClient: ApolloClient<ApolloClientCache>;
+  apolloState: ApolloClientState;
+};
 
 const withApollo = ({ ssr = false }) => (PageComponent: NextPage) => {
-  const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
-    let client;
-    if (apolloClient) {
-      client = apolloClient;
-    } else {
-      client = initApolloClient(apolloState);
-    }
+  const WithApollo = ({ apolloClient, apolloState, ...pageProps }: WithApolloProps) => {
+    const client = apolloClient || initApolloClient(apolloState);
 
     return (
       <ApolloProvider client={client}>

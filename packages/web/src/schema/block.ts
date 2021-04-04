@@ -48,9 +48,12 @@ export interface BlockRecipeStepContent {
 
 export type BlockContent = BlockImageContent | BlockTextContent | BlockRecipeStepContent;
 
-export const isBlockImage = (block: BlockContent): block is BlockImageContent => (block as BlockImageContent)._type === 'image';
-export const isBlockText = (block: BlockContent): block is BlockTextContent => (block as BlockTextContent).type === 'block';
-export const isBlockRecipeStep = (block: BlockContent): block is BlockRecipeStepContent => (block as BlockRecipeStepContent)._type === 'recipeStep';
+export const isBlockImage = (block?: BlockContent): block is BlockImageContent => block
+  && (block as BlockImageContent)._type === 'image';
+export const isBlockText = (block?: BlockContent): block is BlockTextContent => block
+  && (block as BlockTextContent).type === 'block';
+export const isBlockRecipeStep = (block?: BlockContent): block is BlockRecipeStepContent => block
+  && (block as BlockRecipeStepContent)._type === 'recipeStep';
 
 export function getBlockType(b: BlockContent) {
   if (isBlockText(b)) {

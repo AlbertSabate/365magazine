@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import { gql, useQuery } from '@apollo/client';
 import { WithRouterProps } from 'next/dist/client/with-router';
 import { withRouter } from 'next/router';
 import { FC, useCallback, useState } from 'react';
@@ -9,6 +8,8 @@ import BlockText from '../components/block-text';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import withApollo from '../lib/with-apollo';
+import { BlockContent, isBlockText } from '../schema/block';
+import { RootQuery } from '../schema/root';
 
 
 const postSlugQuery = gql`
@@ -49,7 +50,7 @@ const postSlugQuery = gql`
 `;
 
 const Post: FC<WithRouterProps> = ({ router, ...props }) => {
-  const { data, loading, error } = useQuery(postSlugQuery, {
+  const { data, loading, error } = useQuery<RootQuery>(postSlugQuery, {
     variables: {
       slug: router.query.slug,
     },
@@ -73,7 +74,8 @@ const Post: FC<WithRouterProps> = ({ router, ...props }) => {
     }
   }, [mainImageLoaded]);
 
-  const [firstBlock, ...restBlocks] = post?.contentRaw || [];
+  const content = (post?.contentRaw || []) as BlockContent[];
+  const [firstBlock, ...restBlocks] = content;
 
   console.log(post?.mainImage.asset.url);
 
@@ -117,27 +119,26 @@ const Post: FC<WithRouterProps> = ({ router, ...props }) => {
               }}
             >
               <Heading
-                as="h1"
-                variant="h1"
+                as='h1'
+                variant='h1'
               >
                 {post.title}
               </Heading>
               <Heading
-                as="h2"
-                variant="h3"
+                as='h2'
+                variant='h3'
               >
                 {post.tagline}
               </Heading>
-              {isMainImagePortrait && firstBlock && (
-                <BlockText content={firstBlock} variant="post-intro" />
+              {isMainImagePortrait && isBlockText(firstBlock) && (
+                <BlockText content={firstBlock} variant='post-intro' />
               )}
             </Box>
           </Flex>
 
-
           <BlockGroup
             key={post._id}
-            blocks={isMainImagePortrait ? restBlocks : post.contentRaw}
+            blocks={isMainImagePortrait ? restBlocks : content}
           />
         </Box>
       )}

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 const ResetCss: FC = () => (
   <style
