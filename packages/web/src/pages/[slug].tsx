@@ -4,7 +4,8 @@ import { WithRouterProps } from 'next/dist/client/with-router';
 import { withRouter } from 'next/router';
 import { FC, useCallback, useState } from 'react';
 import { Box, Flex, Heading, Image } from 'theme-ui';
-import { Block, BlockGroup } from '../components/block';
+import BlockGroup from '../components/block-group';
+import BlockText from '../components/block-text';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import withApollo from '../lib/with-apollo';
@@ -128,7 +129,7 @@ const Post: FC<WithRouterProps> = ({ router, ...props }) => {
                 {post.tagline}
               </Heading>
               {isMainImagePortrait && firstBlock && (
-                <Block content={firstBlock} variant="post-intro" />
+                <BlockText content={firstBlock} variant="post-intro" />
               )}
             </Box>
           </Flex>

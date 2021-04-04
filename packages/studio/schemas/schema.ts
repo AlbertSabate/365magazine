@@ -2,7 +2,6 @@
 import createSchema from 'part:@sanity/base/schema-creator';
 // @ts-ignore
 import schemaTypes from 'all:part:@sanity/base/schema-type';
-import LandingConfig from './landing-config';
 
 /* eslint-disable import/extensions */
 // @ts-ignore
@@ -15,8 +14,10 @@ import Post from './post';
 import Author from './author';
 import AuthorLink from './author-link';
 import Recipe from './recipe';
+import RecipeInfo from './recipe-info';
 import RecipeIngredient from './recipe-ingredient';
 import RecipeStepContent from './recipe-step-content';
+import LandingConfig from './landing-config';
 import SiteConfig from './site-config';
 import Tag from './tag';
 
@@ -34,6 +35,7 @@ export default createSchema({
     // other objects
     AuthorLink,
     BlockContent,
+    RecipeInfo,
     RecipeStep,
     RecipeStepContent,
     RecipeIngredient,

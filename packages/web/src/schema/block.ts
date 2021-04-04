@@ -10,22 +10,23 @@ export type BlockStyle = HeadingTag | (
   | 'quote'
 );
 
-export interface BlockImage {
+export interface BlockImageContent {
+  _type: 'image';
+  _key: string;
   asset: {
     _ref: string;
     _type: 'reference';
   };
-  _key: string;
-  _type: 'image';
 }
 
 export type Mark = (
   | 'strong'
+  | 'em'
 );
 
-export interface BlockText {
-  _key: string;
+export interface BlockTextContent {
   type: 'block';
+  _key: string;
   style?: BlockStyle;
   level?: number;
   listItem?: 'bullet';
@@ -38,6 +39,22 @@ export interface BlockText {
   }>;
 }
 
-export type BlockContent = BlockImage | BlockText;
+export interface BlockRecipeStepContent {
+  _type: 'recipeStep',
+  _key: string;
+  content: Array<BlockTextContent>;
+  step: number;
+}
 
-export const isBlockImage = (block: BlockContent): block is BlockImage => !!(block as BlockImage).asset;
+export type BlockContent = BlockImageContent | BlockTextContent | BlockRecipeStepContent;
+
+export const isBlockImage = (block: BlockContent): block is BlockImageContent => (block as BlockImageContent)._type === 'image';
+export const isBlockText = (block: BlockContent): block is BlockTextContent => (block as BlockTextContent).type === 'block';
+export const isBlockRecipeStep = (block: BlockContent): block is BlockRecipeStepContent => (block as BlockRecipeStepContent)._type === 'recipeStep';
+
+export function getBlockType(b: BlockContent) {
+  if (isBlockText(b)) {
+    return b.type;
+  }
+  return b._type;
+}

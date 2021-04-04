@@ -20,6 +20,10 @@ interface Document {
 
 union BlockOrImage = Block | Image
 
+union BlockOrImageOrRecipeStep = Block | Image | RecipeStep
+
+union PostOrRecipe = Post | Recipe
+
 type Author implements Document {
   "Date the document was created"
   _createdAt: DateTime
@@ -34,8 +38,18 @@ type Author implements Document {
   _updatedAt: DateTime
   bioRaw: JSON
   image: Image
+  instagram: String
   name: String
   slug: Slug
+  title: String
+  website: String
+}
+
+type AuthorLink {
+  _key: String
+  _type: String
+  addFeature: Boolean
+  who: Author
 }
 
 type Block {
@@ -84,6 +98,21 @@ type Image {
   hotspot: SanityImageHotspot
 }
 
+type LandingConfig implements Document {
+  "Date the document was created"
+  _createdAt: DateTime
+  "Document ID"
+  _id: ID
+  _key: String
+  "Current document revision"
+  _rev: String
+  "Document type"
+  _type: String
+  "Date the document was last modified"
+  _updatedAt: DateTime
+  mainFeature: PostOrRecipe
+}
+
 type Post implements Document {
   "Date the document was created"
   _createdAt: DateTime
@@ -107,6 +136,54 @@ type Post implements Document {
   title: String
 }
 
+type Recipe implements Document {
+  "Date the document was created"
+  _createdAt: DateTime
+  "Document ID"
+  _id: ID
+  _key: String
+  "Current document revision"
+  _rev: String
+  "Document type"
+  _type: String
+  "Date the document was last modified"
+  _updatedAt: DateTime
+  author: AuthorLink
+  categories: [Category]
+  contentRaw: JSON
+  mainImage: Image
+  publishedAt: DateTime
+  recipeInfo: RecipeInfo
+  slug: Slug
+  tagline: String
+  tags: [Tag]
+  title: String
+}
+
+type RecipeInfo {
+  _key: String
+  _type: String
+  cookingTime: String
+  ingredients: [RecipeIngredient]
+  makes: String
+  serves: String
+}
+
+type RecipeIngredient {
+  _key: String
+  _type: String
+  amount: String
+  ingredient: String
+  note: String
+}
+
+type RecipeStep {
+  _key: String
+  _type: String
+  contentRaw: JSON
+  step: Float
+}
+
 type RootQuery {
   Author(
     "Author document ID"
@@ -120,10 +197,18 @@ type RootQuery {
     "Document document ID"
     id: ID!
   ): Document
+  LandingConfig(
+    "LandingConfig document ID"
+    id: ID!
+  ): LandingConfig
   Post(
     "Post document ID"
     id: ID!
   ): Post
+  Recipe(
+    "Recipe document ID"
+    id: ID!
+  ): Recipe
   SanityFileAsset(
     "SanityFileAsset document ID"
     id: ID!
@@ -132,6 +217,10 @@ type RootQuery {
     "SanityImageAsset document ID"
     id: ID!
   ): SanityImageAsset
+  SiteConfig(
+    "SiteConfig document ID"
+    id: ID!
+  ): SiteConfig
   Tag(
     "Tag document ID"
     id: ID!
@@ -160,6 +249,14 @@ type RootQuery {
     sort: [DocumentSorting!],
     where: DocumentFilter
   ): [Document!]!
+  allLandingConfig(
+    "Max documents to return"
+    limit: Int,
+    "Offset at which to start returning documents from"
+    offset: Int,
+    sort: [LandingConfigSorting!],
+    where: LandingConfigFilter
+  ): [LandingConfig!]!
   allPost(
     "Max documents to return"
     limit: Int,
@@ -168,6 +265,14 @@ type RootQuery {
     sort: [PostSorting!],
     where: PostFilter
   ): [Post!]!
+  allRecipe(
+    "Max documents to return"
+    limit: Int,
+    "Offset at which to start returning documents from"
+    offset: Int,
+    sort: [RecipeSorting!],
+    where: RecipeFilter
+  ): [Recipe!]!
   allSanityFileAsset(
     "Max documents to return"
     limit: Int,
@@ -184,6 +289,14 @@ type RootQuery {
     sort: [SanityImageAssetSorting!],
     where: SanityImageAssetFilter
   ): [SanityImageAsset!]!
+  allSiteConfig(
+    "Max documents to return"
+    limit: Int,
+    "Offset at which to start returning documents from"
+    offset: Int,
+    sort: [SiteConfigSorting!],
+    where: SiteConfigFilter
+  ): [SiteConfig!]!
   allTag(
     "Max documents to return"
     limit: Int,
@@ -316,6 +429,22 @@ type SanityImagePaletteSwatch {
   title: String
 }
 
+type SiteConfig implements Document {
+  "Date the document was created"
+  _createdAt: DateTime
+  "Document ID"
+  _id: ID
+  _key: String
+  "Current document revision"
+  _rev: String
+  "Document type"
+  _type: String
+  "Date the document was last modified"
+  _updatedAt: DateTime
+  description: String
+  title: String
+}
+
 type Slug {
   _key: String
   _type: String
@@ -362,8 +491,24 @@ input AuthorFilter {
   _type: StringFilter
   _updatedAt: DatetimeFilter
   image: ImageFilter
+  instagram: StringFilter
   name: StringFilter
   slug: SlugFilter
+  title: StringFilter
+  website: StringFilter
+}
+
+input AuthorLinkFilter {
+  _key: StringFilter
+  _type: StringFilter
+  addFeature: BooleanFilter
+  who: AuthorFilter
+}
+
+input AuthorLinkSorting {
+  _key: SortOrder
+  _type: SortOrder
+  addFeature: SortOrder
 }
 
 input AuthorSorting {
@@ -374,8 +519,11 @@ input AuthorSorting {
   _type: SortOrder
   _updatedAt: SortOrder
   image: ImageSorting
+  instagram: SortOrder
   name: SortOrder
   slug: SlugSorting
+  title: SortOrder
+  website: SortOrder
 }
 
 input BooleanFilter {
@@ -540,6 +688,26 @@ input IntFilter {
   neq: Int
 }
 
+input LandingConfigFilter {
+  "Apply filters on document level"
+  _: Sanity_DocumentFilter
+  _createdAt: DatetimeFilter
+  _id: IDFilter
+  _key: StringFilter
+  _rev: StringFilter
+  _type: StringFilter
+  _updatedAt: DatetimeFilter
+}
+
+input LandingConfigSorting {
+  _createdAt: SortOrder
+  _id: SortOrder
+  _key: SortOrder
+  _rev: SortOrder
+  _type: SortOrder
+  _updatedAt: SortOrder
+}
+
 input PostFilter {
   "Apply filters on document level"
   _: Sanity_DocumentFilter
@@ -569,6 +737,84 @@ input PostSorting {
   slug: SlugSorting
   tagline: SortOrder
   title: SortOrder
+}
+
+input RecipeFilter {
+  "Apply filters on document level"
+  _: Sanity_DocumentFilter
+  _createdAt: DatetimeFilter
+  _id: IDFilter
+  _key: StringFilter
+  _rev: StringFilter
+  _type: StringFilter
+  _updatedAt: DatetimeFilter
+  author: AuthorLinkFilter
+  mainImage: ImageFilter
+  publishedAt: DatetimeFilter
+  recipeInfo: RecipeInfoFilter
+  slug: SlugFilter
+  tagline: StringFilter
+  title: StringFilter
+}
+
+input RecipeInfoFilter {
+  _key: StringFilter
+  _type: StringFilter
+  cookingTime: StringFilter
+  makes: StringFilter
+  serves: StringFilter
+}
+
+input RecipeInfoSorting {
+  _key: SortOrder
+  _type: SortOrder
+  cookingTime: SortOrder
+  makes: SortOrder
+  serves: SortOrder
+}
+
+input RecipeIngredientFilter {
+  _key: StringFilter
+  _type: StringFilter
+  amount: StringFilter
+  ingredient: StringFilter
+  note: StringFilter
+}
+
+input RecipeIngredientSorting {
+  _key: SortOrder
+  _type: SortOrder
+  amount: SortOrder
+  ingredient: SortOrder
+  note: SortOrder
+}
+
+input RecipeSorting {
+  _createdAt: SortOrder
+  _id: SortOrder
+  _key: SortOrder
+  _rev: SortOrder
+  _type: SortOrder
+  _updatedAt: SortOrder
+  author: AuthorLinkSorting
+  mainImage: ImageSorting
+  publishedAt: SortOrder
+  recipeInfo: RecipeInfoSorting
+  slug: SlugSorting
+  tagline: SortOrder
+  title: SortOrder
+}
+
+input RecipeStepFilter {
+  _key: StringFilter
+  _type: StringFilter
+  step: FloatFilter
+}
+
+input RecipeStepSorting {
+  _key: SortOrder
+  _type: SortOrder
+  step: SortOrder
 }
 
 input SanityAssetSourceDataFilter {
@@ -798,6 +1044,30 @@ input Sanity_DocumentFilter {
   is_draft: Boolean
   "All documents referencing the given document ID."
   references: ID
+}
+
+input SiteConfigFilter {
+  "Apply filters on document level"
+  _: Sanity_DocumentFilter
+  _createdAt: DatetimeFilter
+  _id: IDFilter
+  _key: StringFilter
+  _rev: StringFilter
+  _type: StringFilter
+  _updatedAt: DatetimeFilter
+  description: StringFilter
+  title: StringFilter
+}
+
+input SiteConfigSorting {
+  _createdAt: SortOrder
+  _id: SortOrder
+  _key: SortOrder
+  _rev: SortOrder
+  _type: SortOrder
+  _updatedAt: SortOrder
+  description: SortOrder
+  title: SortOrder
 }
 
 input SlugFilter {

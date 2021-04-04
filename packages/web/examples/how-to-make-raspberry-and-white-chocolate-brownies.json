@@ -1,0 +1,428 @@
+{
+  "data": {
+    "allRecipe": [
+      {
+        "_id": "6934716e-e67c-45b3-b5ea-36fcc9dfa069",
+        "_key": null,
+        "_type": "recipe",
+        "author": {
+          "addFeature": true,
+          "who": {
+            "bioRaw": null,
+            "instagram": "@lottielovesbaking",
+            "name": "LottieLovesBaking",
+            "slug": {
+              "current": "author/lottielovesbaking"
+            },
+            "title": null,
+            "website": "http://www.lottielovesbaking.com/"
+          }
+        },
+        "categories": [
+          {
+            "_id": "d5ee68a9-9568-4a5c-920e-92d9e7c1fc94",
+            "description": "Eating out and gastronomizing",
+            "title": "Food & Drink"
+          }
+        ],
+        "contentRaw": [
+          {
+            "_key": "5bd980942461",
+            "_type": "image",
+            "asset": {
+              "_ref": "image-0329ed17f2ec3d1d5c6906e3f3a1d536cd7d8ce9-1000x667-jpg",
+              "_type": "reference"
+            }
+          },
+          {
+            "_key": "17c081f8c382",
+            "_type": "recipeStep",
+            "content": [
+              {
+                "_key": "380c4897d887",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "f7ef075f721d",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Pre-heat the oven to 180˚C."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "step": 1
+          },
+          {
+            "_key": "a16c568bd014",
+            "_type": "recipeStep",
+            "content": [
+              {
+                "_key": "46437ab889ac",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "c76c79927c3d",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Grease and line a 23cm/9inch square baking tin."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "step": 2
+          },
+          {
+            "_key": "fa3fa5faf5f8",
+            "_type": "recipeStep",
+            "content": [
+              {
+                "_key": "a1e2da193325",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "bd0648d05725",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "In a large bowl whisk the eggs, vanilla extract and both sugars until well combined."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "step": 3
+          },
+          {
+            "_key": "5d61000bd7f0",
+            "_type": "image",
+            "asset": {
+              "_ref": "image-1455a170d347600865d7d8e8d2dc0d9fa84ef410-1000x667-jpg",
+              "_type": "reference"
+            }
+          },
+          {
+            "_key": "53128d7cfeb5",
+            "_type": "recipeStep",
+            "content": [
+              {
+                "_key": "72f4b9adcc6d",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "44f02c8997a5",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Melt the butter and 150g of the white chocolate together in the microwave using 10-second bursts. Alternatively, melt over a bain-marie."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "step": 4
+          },
+          {
+            "_key": "fb813349d139",
+            "_type": "recipeStep",
+            "content": [
+              {
+                "_key": "4eb1d9dc4a3d",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "e31ad675c6cd",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Whisk in the butter and white chocolate mixture into the eggs and sugar until combined."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "step": 5
+          },
+          {
+            "_key": "ee2a07ccf0f0",
+            "_type": "image",
+            "asset": {
+              "_ref": "image-ed03a9f316cda2b30b728112fc8c3f024b4cf6e0-1000x667-jpg",
+              "_type": "reference"
+            }
+          },
+          {
+            "_key": "3c1558ea3dfd",
+            "_type": "recipeStep",
+            "content": [
+              {
+                "_key": "80e626fd3724",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "b31c9cb71703",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Mix in the flour and baking powder."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "step": 6
+          },
+          {
+            "_key": "9eb5e6516f72",
+            "_type": "image",
+            "asset": {
+              "_ref": "image-9f4a9de19ee20bb75aba6d7c1873fd477b003da3-1000x667-jpg",
+              "_type": "reference"
+            }
+          },
+          {
+            "_key": "c59b5978b412",
+            "_type": "recipeStep",
+            "content": [
+              {
+                "_key": "c4311ec161b5",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "f0e0d9bb0499",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Finally, fold in the raspberries and remaining chocolate (100g) using a spatula."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "step": 7
+          },
+          {
+            "_key": "6c4633c2e2bc",
+            "_type": "image",
+            "asset": {
+              "_ref": "image-a0c4908cdf41182ca212ce6de9ce51fd6c933173-1000x667-jpg",
+              "_type": "reference"
+            }
+          },
+          {
+            "_key": "47fabbc2b4ba",
+            "_type": "recipeStep",
+            "content": [
+              {
+                "_key": "0a5590a7de95",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "ffc1e526913a",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Pour the batter into the pre-prepared tin and bake for about 40-50 minutes."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "step": 8
+          },
+          {
+            "_key": "13c4951afc3d",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "baeaa28dc213",
+                "_type": "span",
+                "marks": [],
+                "text": "If they start to brown too quickly top with some foil. The trick with these is to take them out at "
+              },
+              {
+                "_key": "b50133b8fa6f",
+                "_type": "span",
+                "marks": [
+                  "em"
+                ],
+                "text": "just"
+              },
+              {
+                "_key": "d6c5d6890f30",
+                "_type": "span",
+                "marks": [],
+                "text": " the right moment."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "c77d9fe7c780",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "30728ae95d46",
+                "_type": "span",
+                "marks": [],
+                "text": "They should be firm-ish (but not runny) as they will carry on cooking in the tin as they cool."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "0c98ef682883",
+            "_type": "image",
+            "asset": {
+              "_ref": "image-9394eb69a1a5cf897d2ef3091dab74e3fc62433b-1000x667-jpg",
+              "_type": "reference"
+            }
+          },
+          {
+            "_key": "39d2a5f63734",
+            "_type": "recipeStep",
+            "content": [
+              {
+                "_key": "a9f12860c256",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "e5dcf74d9626",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Leave to cool completely in the tin before cutting into small-ish slices (they are super sweet!)."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "step": 9
+          },
+          {
+            "_key": "52dd4f372ac0",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "593bd66be86b",
+                "_type": "span",
+                "marks": [],
+                "text": "To get extra-neat slices, place in the fridge for a couple of hours before slicing."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "6268e9377585",
+            "_type": "image",
+            "asset": {
+              "_ref": "image-d169a5b4306033f03d467bf464cf6bc4a1d6fdde-1000x667-jpg",
+              "_type": "reference"
+            }
+          }
+        ],
+        "mainImage": {
+          "asset": {
+            "_id": "image-8d18137e8f69e876c659a1fdf991beb552a9d731-1000x667-jpg",
+            "assetId": "8d18137e8f69e876c659a1fdf991beb552a9d731",
+            "description": null,
+            "extension": "jpg",
+            "label": null,
+            "metadata": {
+              "dimensions": {
+                "aspectRatio": 1.4992503748125936,
+                "height": 667,
+                "width": 1000
+              },
+              "hasAlpha": false,
+              "isOpaque": true,
+              "location": null,
+              "lqip": "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAANABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAYDBQf/xAAkEAACAgIBAgcBAAAAAAAAAAABAgMEAAURBiESIjEyUWFxgf/EABcBAAMBAAAAAAAAAAAAAAAAAAECAwX/xAAcEQACAQUBAAAAAAAAAAAAAAABAwACBBESITH/2gAMAwEAAhEDEQA/AJuvOkLe/YWaVpY1hQ8oV9f7ivS6Zk0FB9kirYkXhpYyeEzStnZePUzFDwW7E/WJWygkh0c0zWJJEsMoMTe1fzNJ9vTvsB2KlhAAq8iFs9xZN2RuYoA3mCI/YYZfXKlOxN42pwggAdh8YYKVMAxmXFwsc1n/2Q=="
+            },
+            "mimeType": "image/jpeg",
+            "originalFilename": "chocolate-blondies-main.jpeg",
+            "path": "images/n4kphzu5/dev/8d18137e8f69e876c659a1fdf991beb552a9d731-1000x667.jpg",
+            "sha1hash": "8d18137e8f69e876c659a1fdf991beb552a9d731",
+            "size": 483456,
+            "source": null,
+            "title": null,
+            "url": "https://cdn.sanity.io/images/n4kphzu5/dev/8d18137e8f69e876c659a1fdf991beb552a9d731-1000x667.jpg"
+          },
+          "crop": null,
+          "hotspot": null
+        },
+        "publishedAt": "2021-02-28T16:00:00.000Z",
+        "recipeInfo": {
+          "cookingTime": null,
+          "ingredients": [
+            {
+              "amount": "150g",
+              "ingredient": "Salted Butter",
+              "note": "Plus a little extra for greasing."
+            },
+            {
+              "amount": "250g",
+              "ingredient": "White Chocolate",
+              "note": "Chopped into chunks (150g will be melted and mixed into the batter, the remaining 100g will be left whole and folded in at the end)."
+            },
+            {
+              "amount": "2",
+              "ingredient": "Eggs",
+              "note": null
+            },
+            {
+              "amount": "150g",
+              "ingredient": "Caster Sugar",
+              "note": null
+            },
+            {
+              "amount": "150g",
+              "ingredient": "Soft Light Brown Sugar",
+              "note": null
+            },
+            {
+              "amount": "1 tsp",
+              "ingredient": "Vanilla Extract",
+              "note": null
+            },
+            {
+              "amount": "1/2 tsp",
+              "ingredient": "Baking Powder",
+              "note": null
+            },
+            {
+              "amount": "140g",
+              "ingredient": "Plain Flour",
+              "note": null
+            },
+            {
+              "amount": "100g",
+              "ingredient": "Raspberries",
+              "note": "Fresh or frozen."
+            }
+          ],
+          "makes": "16 squares",
+          "serves": null
+        },
+        "slug": {
+          "current": "how-to-make-raspberry-and-white-chocolate-brownies"
+        },
+        "tagline": "Packed with sweet white chocolate and tart raspberries, these blondies make the perfect mid-afternoon pick-me-up. Or, whip up a batch for an extra-special Mother’s Day treat.",
+        "tags": [
+          {
+            "_id": "158e6c76-d883-4121-ab09-262ed2c39e93",
+            "title": "Baking"
+          }
+        ],
+        "title": "How to make Raspberry & White Chocolate Brownies"
+      }
+    ]
+  }
+}

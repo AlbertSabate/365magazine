@@ -1,20 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading,no-underscore-dangle */
 import React, { FC } from 'react';
-import { Text, Heading, Image } from 'theme-ui';
-import { SANITY_PROJECT } from '../lib/with-apollo';
-import { BlockContent, HeadingTag, isBlockImage } from '../schema/block';
-import imageUrlBuilder from '@sanity/image-url';
+import { Heading, Text } from 'theme-ui';
+import { BlockTextContent, HeadingTag } from '../schema/block';
 
 
-const builder = imageUrlBuilder(SANITY_PROJECT);
-
-export const Block: FC<{ content: BlockContent; variant?: string }> = ({ content, variant, ...props }) => {
-  if (isBlockImage(content)) {
-    return (
-      <Image src={builder.image(content.asset).url()} />
-    );
-  }
-
+const BlockText: FC<{ content: BlockTextContent; variant?: string }> = ({ content, variant, ...props }) => {
   const El: FC = (() => {
     // if (content.listItem) {
     //   return (
@@ -54,7 +44,7 @@ export const Block: FC<{ content: BlockContent; variant?: string }> = ({ content
     <El>
       {content.children.map((c) => (
         <Text
-          as='span'
+          as={c.marks.includes('em') ? 'em' : 'span'}
           key={c._key}
           sx={{
             fontWeight: c.marks.includes('strong') ? 'bold' : undefined,
@@ -67,8 +57,4 @@ export const Block: FC<{ content: BlockContent; variant?: string }> = ({ content
   );
 };
 
-export const BlockGroup: FC<{ blocks: Array<BlockContent> }> = ({ blocks }) => (
-  <>
-    {blocks.map((b) => <Block content={b} key={b._key} />)}
-  </>
-);
+export default BlockText;

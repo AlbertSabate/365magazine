@@ -1,0 +1,301 @@
+{
+  "data": {
+    "allPost": [
+      {
+        "_id": "f7511712-8da1-4e2d-b9a6-fec8c9a2e1bb",
+        "title": "Strawberry & Honey Muffins",
+        "tagline": "Super easy and delicious",
+        "contentRaw": [
+          {
+            "_key": "6a2e0b5b4337",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "6a2e0b5b43370",
+                "_type": "span",
+                "marks": [],
+                "text": "Looking for a little baking inspiration? These super easy Strawberry & Honey Muffins should satisfy your sweet tooth cravings well. Don’t forget to support British Farmers and make the most of our incredible strawberry season this summer."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "6ebbc4292743",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "6ebbc42927430",
+                "_type": "span",
+                "marks": [],
+                "text": "Ingredients"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "43614befea75",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "43614befea750",
+                "_type": "span",
+                "marks": [],
+                "text": "2 x tbspns strawberry jam"
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "3d09f2dd6868",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "3d09f2dd68680",
+                "_type": "span",
+                "marks": [],
+                "text": "3 x tbspns honey"
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "a274a749ab49",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "a274a749ab490",
+                "_type": "span",
+                "marks": [],
+                "text": "400g self raising flour"
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "f887738fdc25",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "f887738fdc250",
+                "_type": "span",
+                "marks": [],
+                "text": "250ml buttermilk"
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "d1d1a6a7d3a1",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "d1d1a6a7d3a10",
+                "_type": "span",
+                "marks": [],
+                "text": "225g strawberries"
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "dbb437facf2d",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "dbb437facf2d0",
+                "_type": "span",
+                "marks": [],
+                "text": "175g caster sugar"
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "1cf1fe4f498d",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "1cf1fe4f498d0",
+                "_type": "span",
+                "marks": [],
+                "text": "2 eggs"
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "7ce294b91812",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "7ce294b918120",
+                "_type": "span",
+                "marks": [],
+                "text": "100g butter"
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "7703f251d7e7",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "7703f251d7e70",
+                "_type": "span",
+                "marks": [],
+                "text": "1 x tspn bicarbonate soda"
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "95d27e66486d",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "95d27e66486d0",
+                "_type": "span",
+                "marks": [],
+                "text": "Method"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "072860bfe4c0",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "072860bfe4c00",
+                "_type": "span",
+                "marks": [],
+                "text": "Chop strawberries into small chunks."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "20fa9f8ea81c",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "20fa9f8ea81c0",
+                "_type": "span",
+                "marks": [],
+                "text": "Add all of the dry ingredients into a large mixing bowl & mix together."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "294164e959d8",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "294164e959d80",
+                "_type": "span",
+                "marks": [],
+                "text": "Melt the butter and mix into a large jug with the milk, honey and eggs."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "9900de27175a",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "9900de27175a0",
+                "_type": "span",
+                "marks": [],
+                "text": "Slowly fold the liquid mixture into the dry mixture."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "3ec1cd7aad58",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "3ec1cd7aad580",
+                "_type": "span",
+                "marks": [],
+                "text": "Add some extra milk if you think it needs it."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "5d676790d709",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "5d676790d7090",
+                "_type": "span",
+                "marks": [],
+                "text": "Gently fold in the chopped strawberries and jam."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "mainImage": {
+          "asset": {
+            "_id": "image-b3ebf23cbda38c7c386aa7356262f74e67cf7c3e-667x1000-jpg",
+            "label": null,
+            "title": null,
+            "description": null,
+            "size": 170742,
+            "path": "images/n4kphzu5/dev/b3ebf23cbda38c7c386aa7356262f74e67cf7c3e-667x1000.jpg",
+            "url": "https://cdn.sanity.io/images/n4kphzu5/dev/b3ebf23cbda38c7c386aa7356262f74e67cf7c3e-667x1000.jpg",
+            "metadata": {
+              "dimensions": {
+                "height": 1000,
+                "width": 667,
+                "aspectRatio": 0.667
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
