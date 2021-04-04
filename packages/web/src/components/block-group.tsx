@@ -10,10 +10,10 @@ const BlockGroup: FC<{ blocks: Array<BlockContent> }> = ({ blocks }) => (
     {blocks.map((b) => {
       // using if-statements here as the type guards don't agree with switch-statements
       if (isBlockRecipeStep(b)) {
-        return <BlockRecipeStep content={b} />;
+        return <BlockRecipeStep content={b} key={b._key} />;
       }
       if (isBlockImage(b)) {
-        return <BlockImage content={b} />;
+        return <BlockImage content={b} key={b._key} />;
       }
       if (isBlockText(b)) {
         return <BlockText content={b} key={b._key} />;

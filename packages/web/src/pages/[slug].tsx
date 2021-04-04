@@ -50,6 +50,43 @@ const postSlugQuery = gql`
   }
 `;
 
+const recipeSlugQuery = gql`
+  query GetRecipeBySlug($slug: String) {
+    allRecipe(
+      where: {
+        slug: {
+          current: {
+            eq: $slug
+          }
+        }
+      }
+    ) {
+      _id
+      title
+      tagline
+      contentRaw
+      mainImage {
+        asset {
+          _id
+          label
+          title
+          description
+          size
+          path
+          url
+          metadata {
+            dimensions {
+              height
+              width
+              aspectRatio
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 const postsListQuery = gql`
   query Posts {
     allPost {
@@ -136,21 +173,66 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-type PostInitialProps = {
-  slug: string;
-  post: Post | Recipe;
-};
+type Article = Post | Recipe;
 
-export const getStaticProps: GetStaticProps<PostInitialProps> = async ({ params }) => {
+async function getPostBySlug(slug: string): Promise<Article | null> {
   const { data, error } = await client.query<RootQuery>({
     query: postSlugQuery,
     variables: {
-      slug: params.slug,
+      slug,
     },
   });
 
+  if (error) {
+    console.error(error);
+  }
+
   const [post] = data?.allPost || [];
   if (!post || error) {
+    return null;
+  }
+
+  return post;
+}
+
+async function getRecipeBySlug(slug: string): Promise<Article | null> {
+  const { data, error } = await client.query<RootQuery>({
+    query: recipeSlugQuery,
+    variables: {
+      slug,
+    },
+  });
+
+  if (error) {
+    console.error(error);
+  }
+
+  const [recipe] = data?.allRecipe || [];
+  if (!recipe || error) {
+    return null;
+  }
+
+  return recipe;
+}
+
+type PostInitialProps = {
+  slug: string;
+  article: Post | Recipe;
+};
+
+export const getStaticProps: GetStaticProps<PostInitialProps> = async ({ params }) => {
+  if (Array.isArray(params.slug)) {
+    throw Error('slug is array');
+  }
+
+  const slug = params.slug.startsWith('/') ? params.slug.substr(1) : params.slug;
+
+  let article = await getPostBySlug(slug);
+  if (!article) {
+    article = await getRecipeBySlug(slug);
+  }
+
+  if (!article) {
     return {
       notFound: true,
     };
@@ -158,8 +240,8 @@ export const getStaticProps: GetStaticProps<PostInitialProps> = async ({ params 
 
   return {
     props: {
-      slug: params.slug as string,
-      post,
+      slug,
+      article,
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
@@ -168,7 +250,7 @@ export const getStaticProps: GetStaticProps<PostInitialProps> = async ({ params 
   };
 };
 
-const Article: FC<WithRouterProps & PostInitialProps> = ({ slug, post, router, ...props }) => {
+const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({ slug, article, router, ...props }) => {
   const [mainImageLoaded, setMainImageLoaded] = useState(false);
   const [mainImageDimensions, setMainImageDimensions] = useState<[number, number]>([0, 0]);
   const isMainImagePortrait = mainImageDimensions[0] > mainImageDimensions[1];
@@ -187,13 +269,13 @@ const Article: FC<WithRouterProps & PostInitialProps> = ({ slug, post, router, .
     return <div>loading........</div>;
   }
 
-  const content = (post?.contentRaw || []) as BlockContent[];
+  const content = (article?.contentRaw || []) as BlockContent[];
   const [firstBlock, ...restBlocks] = content;
 
   return (
     <Layout stickyHeader>
-      <SEO title={post?.title} />
-      {post && (
+      <SEO title={article?.title} />
+      {article && (
         <Box
           px={3}
           py={4}
@@ -205,7 +287,7 @@ const Article: FC<WithRouterProps & PostInitialProps> = ({ slug, post, router, .
               flexWrap: 'wrap',
             }}
           >
-            {post.mainImage && (
+            {article.mainImage && (
               <Box
                 mr={isMainImagePortrait ? 4 : '0px'}
                 sx={{
@@ -213,7 +295,7 @@ const Article: FC<WithRouterProps & PostInitialProps> = ({ slug, post, router, .
                 }}
               >
                 <Image
-                  src={post.mainImage.asset.url}
+                  src={article.mainImage.asset.url}
                   ref={mainImageRef}
                   onLoad={() => setMainImageLoaded(true)}
                   sx={{
@@ -233,13 +315,13 @@ const Article: FC<WithRouterProps & PostInitialProps> = ({ slug, post, router, .
                 as='h1'
                 variant='h1'
               >
-                {post.title}
+                {article.title}
               </Heading>
               <Heading
                 as='h2'
                 variant='h3'
               >
-                {post.tagline}
+                {article.tagline}
               </Heading>
               {isMainImagePortrait && isBlockText(firstBlock) && (
                 <BlockText content={firstBlock} variant='post-intro' />
@@ -248,7 +330,7 @@ const Article: FC<WithRouterProps & PostInitialProps> = ({ slug, post, router, .
           </Flex>
 
           <BlockGroup
-            key={post._id}
+            key={article._id}
             blocks={isMainImagePortrait ? restBlocks : content}
           />
         </Box>
@@ -257,4 +339,4 @@ const Article: FC<WithRouterProps & PostInitialProps> = ({ slug, post, router, .
   );
 };
 
-export default withRouter(Article);
+export default withRouter(ArticlePage);

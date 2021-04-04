@@ -14,7 +14,7 @@ const BlockRecipeStep: FC<{ content: BlockRecipeStepContent }> = ({ content: { s
       {step}
     </Box>
     <Box>
-      {content.map((b) => <BlockText content={b} />)}
+      {content.map((b) => <BlockText content={b} key={b._key} />)}
     </Box>
   </Flex>
 );
