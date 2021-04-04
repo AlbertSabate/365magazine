@@ -6,7 +6,7 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import withApollo from '../lib/with-apollo';
 import { BlockContent } from '../schema/block';
-import { Post } from '../schema/root';
+import { Post, RootQuery } from '../schema/root';
 
 
 export const allPostsQuery = gql`
@@ -136,19 +136,7 @@ export const listPostsQuery = gql`
 `;
 
 
-type QueryPost = Omit<Post, 'contentRaw'> & {
-  contentRaw: Array<BlockContent>;
-};
-
-type QueryResponse = {
-  allPost: Array<QueryPost>;
-};
-
-type PostPreviewProps = {
-  post: QueryPost;
-};
-
-const PostPreview: FC<PostPreviewProps> = ({ post }) => {
+const PostPreview: FC<{ post: Post }> = ({ post }) => {
   const PANEL_HEIGHT = 200;
   const PANEL_WIDTH = 280;
 
@@ -249,7 +237,7 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 };
 
 const IndexPage: FC = (props) => {
-  const { data, loading, error } = useQuery<QueryResponse>(listPostsQuery);
+  const { data, loading, error } = useQuery<RootQuery>(listPostsQuery);
   console.log(loading, data);
 
   return (
