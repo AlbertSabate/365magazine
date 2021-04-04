@@ -1,6 +1,5 @@
 extends:
   - airbnb-typescript
-  - plugin:@typescript-eslint/eslint-plugin
   - plugin:@typescript-eslint/eslint-recommended
   - plugin:@typescript-eslint/recommended
   - plugin:@typescript-eslint/recommended-requiring-type-checking
@@ -8,8 +7,11 @@ extends:
 
 parser: '@typescript-eslint/parser'
 
+plugins:
+  - '@typescript-eslint/eslint-plugin'
+
 parserOptions:
-  project: ./tsconfig.json
+  project: src/tsconfig.json
 
 rules:
   max-len:
@@ -22,3 +24,6 @@ rules:
   jsx-quotes:
     - error
     - prefer-single
+  no-multiple-empty-lines:
+    - error
+    - max: 2
