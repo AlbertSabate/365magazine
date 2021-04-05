@@ -4,6 +4,8 @@ import { WithRouterProps } from 'next/dist/client/with-router';
 import { withRouter } from 'next/router';
 import { FC, useCallback, useState } from 'react';
 import { Box, Flex, Heading, Image } from 'theme-ui';
+import ArticleRecipeInfo from '../components/article-recipe-info';
+import ArticleRecipeIngredients from '../components/article-recipe-ingredients';
 import ArticleSplashLandscape from '../components/article-splash-landscape';
 import ArticleSplashPortrait from '../components/article-splash-portrait';
 import BlockGroup from '../components/block-group';
@@ -12,6 +14,7 @@ import BlockText from '../components/block-text';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import client from '../lib/apollo';
+import { isRecipeArticle } from '../schema/article';
 import { BlockContent, isBlockText } from '../schema/block';
 import { Post, Recipe, RootQuery } from '../schema/root';
 import { ARTICLE_GUTTER, ARTICLE_WIDTH } from '../theme';
@@ -29,6 +32,7 @@ const postSlugQuery = gql`
       }
     ) {
       _id
+      _type
       title
       tagline
       contentRaw
@@ -66,6 +70,7 @@ const recipeSlugQuery = gql`
       }
     ) {
       _id
+      _type
       title
       tagline
       contentRaw
@@ -86,6 +91,16 @@ const recipeSlugQuery = gql`
             }
           }
         }
+      }
+      recipeInfo {
+        cookingTime
+        ingredients {
+          amount
+          ingredient
+          note
+        }
+        makes
+        serves
       }
     }
   }
@@ -256,8 +271,6 @@ export const getStaticProps: GetStaticProps<PostInitialProps> = async ({ params 
 };
 
 const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({ slug, article, router, ...props }) => {
-  const isMainImagePortrait = article.mainImage.asset.metadata.dimensions.aspectRatio < 1;
-
   // when the article has not been pre-rendered at build time, we will try to fetch it dynamically on the server
   // by running getStaticProps and showing fallback page here
   if (router.isFallback) {
@@ -265,8 +278,10 @@ const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({ slug, article, ro
     return <div>loading........</div>;
   }
 
+  const isMainImagePortrait = article.mainImage.asset.metadata.dimensions.aspectRatio < 1;
+
   const content = (article?.contentRaw || []) as BlockContent[];
-  const [firstBlock, ...restBlocks] = content;
+  const [, ...restBlocks] = content;
 
   return (
     <Layout stickyHeader>
@@ -278,11 +293,39 @@ const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({ slug, article, ro
           {isMainImagePortrait
             ? <ArticleSplashPortrait article={article} />
             : <ArticleSplashLandscape article={article} />}
-          <BlockGroup
+          <Box
             mx='auto'
-            key={article._id}
-            blocks={isMainImagePortrait ? restBlocks : content}
-          />
+            sx={{
+              maxWidth: ARTICLE_WIDTH,
+            }}
+          >
+            {isRecipeArticle(article) && article.recipeInfo && (
+              <>
+                <Box
+                  mx={ARTICLE_GUTTER}
+                  mb={6}
+                >
+                  <ArticleRecipeInfo
+                    info={article.recipeInfo}
+                  />
+                </Box>
+                {article.recipeInfo.ingredients.length && (
+                  <Box
+                    mx={ARTICLE_GUTTER}
+                    mb={6}
+                  >
+                    <ArticleRecipeIngredients
+                      ingredients={article.recipeInfo.ingredients}
+                    />
+                  </Box>
+                )}
+              </>
+            )}
+            <BlockGroup
+              key={article._id}
+              blocks={restBlocks}
+            />
+          </Box>
         </Box>
       )}
     </Layout>

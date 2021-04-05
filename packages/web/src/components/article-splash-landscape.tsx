@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { Box, Heading, Image } from 'theme-ui';
+import { Article } from '../schema/article';
 import { BlockContent, isBlockText } from '../schema/block';
-import { Post, Recipe } from '../schema/root';
 import { ARTICLE_GUTTER, ARTICLE_WIDTH } from '../theme';
 import BlockText from './block-text';
 
 
 type ArticleSplashProps = {
-  article: Post | Recipe;
+  article: Article;
 };
 
 const ArticleSplashLandscape: FC<ArticleSplashProps> = ({ article, children }) => {

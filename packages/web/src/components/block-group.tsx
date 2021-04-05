@@ -24,9 +24,6 @@ const BlockGroup: FC<BlockGroupProps> = ({ blocks, ...props }) => (
             key={b._key}
             px={ARTICLE_GUTTER}
             my={3}
-            sx={{
-              maxWidth: `${ARTICLE_WIDTH}px`,
-            }}
             {...props}
           />
         );
@@ -47,9 +44,6 @@ const BlockGroup: FC<BlockGroupProps> = ({ blocks, ...props }) => (
             content={b}
             key={b._key}
             px={ARTICLE_GUTTER}
-            sx={{
-              maxWidth: `${ARTICLE_WIDTH}px`,
-            }}
             {...props}
           />
         );
