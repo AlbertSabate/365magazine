@@ -11,7 +11,7 @@ type AppTheme = Theme & {
   lineHeights: { [K in FontsNames]: CSS.Property.LineHeight<string | 0 | number> };
 };
 
-export const ARTICLE_GUTTER = 3;
+export const ARTICLE_GUTTER = 2;
 export const ARTICLE_WIDTH = 680;
 
 const theme: AppTheme = {
@@ -21,7 +21,7 @@ const theme: AppTheme = {
     md: 19,
     lg: 22,
     xl: 32,
-    xxl: 38,
+    xxl: 42,
   },
   colors,
   fonts: {
@@ -47,7 +47,7 @@ const theme: AppTheme = {
       margin: '-4px 8px 0 -4px',
     },
     'post-intro': {
-      fontFamily: 'heading',
+      fontFamily: 'body',
       fontSize: 'lg',
       lineHeight: 'display',
     },
@@ -66,7 +66,7 @@ const theme: AppTheme = {
       lineHeight: 'body',
     },
     p: {
-      marginBottom: 1,
+      marginBottom: 3,
       fontSize: 'md',
       lineHeight: 'body',
     },

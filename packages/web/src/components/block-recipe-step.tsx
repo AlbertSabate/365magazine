@@ -30,6 +30,7 @@ function padStepNumber(step: number): number {
 
 const BlockRecipeStep: FC<BlockRecipeStepProps> = ({ content: { step, content }, sx, ...props }) => (
   <Flex
+    id={`step-${step}`}
     sx={{
       ...sx,
       flexDirection: 'row',

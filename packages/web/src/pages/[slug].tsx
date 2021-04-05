@@ -4,6 +4,8 @@ import { WithRouterProps } from 'next/dist/client/with-router';
 import { withRouter } from 'next/router';
 import { FC, useCallback, useState } from 'react';
 import { Box, Flex, Heading, Image } from 'theme-ui';
+import ArticleSplashLandscape from '../components/article-splash-landscape';
+import ArticleSplashPortrait from '../components/article-splash-portrait';
 import BlockGroup from '../components/block-group';
 import BlockRecipeStep from '../components/block-recipe-step';
 import BlockText from '../components/block-text';
@@ -254,16 +256,7 @@ export const getStaticProps: GetStaticProps<PostInitialProps> = async ({ params 
 };
 
 const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({ slug, article, router, ...props }) => {
-  const [mainImageLoaded, setMainImageLoaded] = useState(false);
-  const [mainImageDimensions, setMainImageDimensions] = useState<[number, number]>([0, 0]);
-  const isMainImagePortrait = mainImageDimensions[0] > mainImageDimensions[1];
-
-  const mainImageRef = useCallback((node) => {
-    if (node) {
-      const { height, width } = node.getBoundingClientRect();
-      setMainImageDimensions([height, width]);
-    }
-  }, [mainImageLoaded]);
+  const isMainImagePortrait = article.mainImage.asset.metadata.dimensions.aspectRatio < 1;
 
   // when the article has not been pre-rendered at build time, we will try to fetch it dynamically on the server
   // by running getStaticProps and showing fallback page here
@@ -282,76 +275,9 @@ const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({ slug, article, ro
         <Box
           py={6}
         >
-
-          {/* Article Splash ---> */}
-          <Flex
-            mx='auto'
-            mb={3}
-            px={ARTICLE_GUTTER}
-            sx={{
-              flexDirection: isMainImagePortrait ? 'row' : 'column',
-              flexWrap: 'wrap',
-              maxWidth: '874px',
-              justifyContent: 'center',
-            }}
-          >
-            {article.mainImage && (
-              <Box
-                mx={2}
-                mb={6}
-                sx={{
-                  flex: '0 0 auto',
-                }}
-              >
-                <Image
-                  src={article.mainImage.asset.url}
-                  ref={mainImageRef}
-                  onLoad={() => setMainImageLoaded(true)}
-                  sx={{
-                    maxHeight: isMainImagePortrait ? '50vh' : undefined,
-                    marginBottom: !isMainImagePortrait && 4,
-                  }}
-                />
-              </Box>
-            )}
-            <Flex
-              // mb={4}
-              mx='auto'
-              px={ARTICLE_GUTTER}
-              pb='7%'
-              sx={{
-                flex: isMainImagePortrait ? '1 0 360px' : '0 0 auto',
-                maxWidth: `${ARTICLE_WIDTH}px`,
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-              }}
-            >
-              <Heading
-                as='h1'
-                variant='h1'
-                mt={2}
-              >
-                {article.title}
-              </Heading>
-              <Heading
-                as='h2'
-                variant='h3'
-                mb={5}
-              >
-                {article.tagline}
-              </Heading>
-              {isMainImagePortrait && isBlockText(firstBlock) && (
-                <BlockText
-                  content={firstBlock}
-                  variant='post-intro'
-                  dropCap
-                />
-              )}
-            </Flex>
-          </Flex>
-          {/* <--- Article Splash */}
-
+          {isMainImagePortrait
+            ? <ArticleSplashPortrait article={article} />
+            : <ArticleSplashLandscape article={article} />}
           <BlockGroup
             mx='auto'
             key={article._id}
