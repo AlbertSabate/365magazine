@@ -69,9 +69,7 @@ const ArticleRecipeIngredients: FC<ArticleRecipeIngredientsProps> = ({ ingredien
     >
       Ingredients
     </Heading>
-    <Box
-      ml='-22px'
-    >
+    <Box>
       {ingredients.map((i) => <IngredientRow {...i} />)}
     </Box>
   </>
