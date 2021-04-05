@@ -5,13 +5,14 @@ import { withRouter } from 'next/router';
 import { FC, useCallback, useState } from 'react';
 import { Box, Flex, Heading, Image } from 'theme-ui';
 import BlockGroup from '../components/block-group';
+import BlockRecipeStep from '../components/block-recipe-step';
 import BlockText from '../components/block-text';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import client from '../lib/apollo';
 import { BlockContent, isBlockText } from '../schema/block';
 import { Post, Recipe, RootQuery } from '../schema/root';
-import { ARTICLE_GUTTER } from '../theme';
+import { ARTICLE_GUTTER, ARTICLE_WIDTH } from '../theme';
 
 
 const postSlugQuery = gql`
@@ -279,18 +280,25 @@ const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({ slug, article, ro
       <SEO title={article?.title} />
       {article && (
         <Box
-          py={4}
+          py={6}
         >
+
+          {/* Article Splash ---> */}
           <Flex
+            mx='auto'
             mb={3}
+            px={ARTICLE_GUTTER}
             sx={{
               flexDirection: isMainImagePortrait ? 'row' : 'column',
               flexWrap: 'wrap',
+              maxWidth: '874px',
+              justifyContent: 'center',
             }}
           >
             {article.mainImage && (
               <Box
-                mr={isMainImagePortrait ? 4 : '0px'}
+                mx={2}
+                mb={6}
                 sx={{
                   flex: '0 0 auto',
                 }}
@@ -306,22 +314,30 @@ const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({ slug, article, ro
                 />
               </Box>
             )}
-            <Box
-              mb={4}
-              mx={ARTICLE_GUTTER}
+            <Flex
+              // mb={4}
+              mx='auto'
+              px={ARTICLE_GUTTER}
+              pb='7%'
               sx={{
-                flex: isMainImagePortrait ? '1 0 480px' : '0 0 auto',
+                flex: isMainImagePortrait ? '1 0 360px' : '0 0 auto',
+                maxWidth: `${ARTICLE_WIDTH}px`,
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'flex-start',
               }}
             >
               <Heading
                 as='h1'
                 variant='h1'
+                mt={2}
               >
                 {article.title}
               </Heading>
               <Heading
                 as='h2'
                 variant='h3'
+                mb={5}
               >
                 {article.tagline}
               </Heading>
@@ -332,10 +348,12 @@ const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({ slug, article, ro
                   dropCap
                 />
               )}
-            </Box>
+            </Flex>
           </Flex>
+          {/* <--- Article Splash */}
 
           <BlockGroup
+            mx='auto'
             key={article._id}
             blocks={isMainImagePortrait ? restBlocks : content}
           />

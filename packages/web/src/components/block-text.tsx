@@ -14,6 +14,10 @@ type BlockTextProps = SpaceProps & {
 };
 
 const BlockText: FC<BlockTextProps> = ({ content, variant, sx, dropCap, as = 'p', ...props }) => {
+  const styles: SxStyleProp = {
+    ...sx,
+  };
+
   const El: FC = (() => {
     // if (content.listItem) {
     //   return (
@@ -30,7 +34,8 @@ const BlockText: FC<BlockTextProps> = ({ content, variant, sx, dropCap, as = 'p'
           <Heading
             as={content.style as HeadingTag}
             variant={content.style}
-            sx={sx}
+            sx={styles}
+            mx='auto'
             {...props}
           >
             {children}
@@ -42,7 +47,7 @@ const BlockText: FC<BlockTextProps> = ({ content, variant, sx, dropCap, as = 'p'
           <Text
             as={as}
             variant={variant || 'p'}
-            sx={sx}
+            sx={styles}
             {...props}
           >
             {children}

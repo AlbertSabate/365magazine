@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading,no-underscore-dangle */
+/* eslint-disable react/jsx-props-no-spreading */
 import { FC } from 'react';
 import type { SpaceProps } from 'styled-system';
 import { Box, Flex, SxStyleProp, Text } from 'theme-ui';
@@ -30,7 +30,6 @@ function padStepNumber(step: number): number {
 
 const BlockRecipeStep: FC<BlockRecipeStepProps> = ({ content: { step, content }, sx, ...props }) => (
   <Flex
-    my={2}
     sx={{
       ...sx,
       flexDirection: 'row',
