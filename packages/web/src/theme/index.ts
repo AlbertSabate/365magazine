@@ -17,7 +17,7 @@ const theme: AppTheme = {
   space: [4, 9, 15, 22, 28, 34, 48],
   fontSizes: {
     sm: 13,
-    md: 16,
+    md: 18,
     lg: 22,
     xl: 32,
     xxl: 38,
@@ -66,6 +66,10 @@ const theme: AppTheme = {
     },
     p: {
       marginBottom: 1,
+      fontSize: 'md',
+      lineHeight: 'body',
+    },
+    li: {
       fontSize: 'md',
       lineHeight: 'body',
     },

@@ -149,8 +149,6 @@ async function listRecipes() {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  console.debug('run getStaticPaths');
-
   const [posts, recipes] = await Promise.all([
     listPosts(),
     listRecipes(),
@@ -160,6 +158,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const allPaths: string[] = [];
 
   allArticles.forEach((a) => {
+    if (a._id.startsWith('drafts')) {
+      return;
+    }
     const path = a.slug?.current;
     if (path) {
       allPaths.push(`/${path}`);

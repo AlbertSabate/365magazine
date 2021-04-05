@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading,no-underscore-dangle */
-import { FC } from 'react';
+import { ElementType, FC } from 'react';
 import type { SpaceProps } from 'styled-system';
 import { Heading, SxStyleProp, Text } from 'theme-ui';
 import { BlockTextContent, HeadingTag } from '../schema/block';
@@ -10,9 +10,10 @@ type BlockTextProps = SpaceProps & {
   variant?: string;
   sx?: SxStyleProp;
   dropCap?: boolean;
+  as?: ElementType;
 };
 
-const BlockText: FC<BlockTextProps> = ({ content, variant, sx, dropCap, ...props }) => {
+const BlockText: FC<BlockTextProps> = ({ content, variant, sx, dropCap, as = 'p', ...props }) => {
   const El: FC = (() => {
     // if (content.listItem) {
     //   return (
@@ -39,7 +40,7 @@ const BlockText: FC<BlockTextProps> = ({ content, variant, sx, dropCap, ...props
       default:
         return ({ children }) => (
           <Text
-            as='p'
+            as={as}
             variant={variant || 'p'}
             sx={sx}
             {...props}
