@@ -1,10 +1,18 @@
 /* eslint-disable react/jsx-props-no-spreading,no-underscore-dangle */
 import { FC } from 'react';
-import { Heading, Text } from 'theme-ui';
+import type { SpaceProps } from 'styled-system';
+import { Heading, SxStyleProp, Text } from 'theme-ui';
 import { BlockTextContent, HeadingTag } from '../schema/block';
 
 
-const BlockText: FC<{ content: BlockTextContent; variant?: string }> = ({ content, variant, ...props }) => {
+type BlockTextProps = SpaceProps & {
+  content: BlockTextContent;
+  variant?: string;
+  sx?: SxStyleProp;
+  dropCap?: boolean;
+};
+
+const BlockText: FC<BlockTextProps> = ({ content, variant, sx, dropCap, ...props }) => {
   const El: FC = (() => {
     // if (content.listItem) {
     //   return (
@@ -21,6 +29,7 @@ const BlockText: FC<{ content: BlockTextContent; variant?: string }> = ({ conten
           <Heading
             as={content.style as HeadingTag}
             variant={content.style}
+            sx={sx}
             {...props}
           >
             {children}
@@ -32,6 +41,7 @@ const BlockText: FC<{ content: BlockTextContent; variant?: string }> = ({ conten
           <Text
             as='p'
             variant={variant || 'p'}
+            sx={sx}
             {...props}
           >
             {children}
@@ -40,15 +50,38 @@ const BlockText: FC<{ content: BlockTextContent; variant?: string }> = ({ conten
     }
   })();
 
+  const formatWithDropCap = () => {
+    const [firstPart, ...otherParts] = content.children;
+    const firstLetter = firstPart.text.substr(0, 1);
+    const restFirstPart = firstPart.text.substr(1);
+
+    const remappedFirstPart = {
+      ...firstPart,
+      text: restFirstPart,
+    };
+
+    const dropCapPart = {
+      _key: firstPart._key.concat('-initial'),
+      _type: 'drop-cap',
+      marks: [],
+      text: firstLetter,
+    };
+
+    return [dropCapPart, remappedFirstPart, ...otherParts];
+  };
+
+  const renderContent = dropCap ? formatWithDropCap() : content.children;
+
   return (
     <El>
-      {content.children.map((c) => (
+      {renderContent.map((c) => (
         <Text
           as={c.marks.includes('em') ? 'em' : 'span'}
           key={c._key}
           sx={{
             fontWeight: c.marks.includes('strong') ? 'bold' : undefined,
           }}
+          variant={c._type === 'drop-cap' ? 'drop-cap' : undefined}
         >
           {c.text}
         </Text>

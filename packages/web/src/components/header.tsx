@@ -1,5 +1,5 @@
 import { FC, forwardRef } from 'react';
-import { Box, Flex, Heading, Link, Text } from 'theme-ui';
+import { Box, Flex, Heading, Link, Text, ThemeProvider } from 'theme-ui';
 
 
 const LEFT_NAV_ITEMS = [
@@ -69,6 +69,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ sticky, scrollingDown,
       top: scrollingDown ? `${-headerHeight}px` : '0px',
       transition: 'top .3s ease',
       width: '100%',
+      overflow: 'visible',
     }}
   >
     <Flex

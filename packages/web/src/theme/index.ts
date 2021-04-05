@@ -11,9 +11,17 @@ type AppTheme = Theme & {
   lineHeights: { [K in FontsNames]: CSS.Property.LineHeight<string | 0 | number> };
 };
 
+export const ARTICLE_GUTTER = 3;
+
 const theme: AppTheme = {
   space: [4, 9, 15, 22, 28, 34, 48],
-  fontSizes: [13, 15, 18, 22, 24, 28, 32, 36, 48],
+  fontSizes: {
+    sm: 13,
+    md: 16,
+    lg: 22,
+    xl: 32,
+    xxl: 38,
+  },
   colors,
   fonts: {
     body: '"Radley", serif',
@@ -31,9 +39,15 @@ const theme: AppTheme = {
     display: 1.5,
   },
   text: {
+    'drop-cap': {
+      float: 'left',
+      fontSize: '64px',
+      lineHeight: '70px',
+      margin: '-4px 8px 0 -4px',
+    },
     'post-intro': {
-      fontFamily: 'body',
-      fontSize: 2,
+      fontFamily: 'heading',
+      fontSize: 'lg',
       lineHeight: 'display',
     },
     'nav-logo': {
@@ -47,19 +61,19 @@ const theme: AppTheme = {
     nav: {
       fontFamily: 'heading',
       fontWeight: 'heading',
-      fontSize: 2,
+      fontSize: 'md',
       lineHeight: 'body',
     },
     p: {
       marginBottom: 1,
-      fontSize: 1,
+      fontSize: 'md',
       lineHeight: 'body',
     },
     h1: {
-      fontFamily: 'body',
+      fontFamily: 'heading',
       fontWeight: 'body',
       lineHeight: 'heading',
-      fontSize: 8,
+      fontSize: 'xxl',
       textTransform: 'uppercase',
       marginBottom: 3,
     },
@@ -67,13 +81,13 @@ const theme: AppTheme = {
       fontFamily: 'heading',
       fontWeight: 'heading',
       lineHeight: 'heading',
-      fontSize: 6,
+      fontSize: 'xl',
     },
     h3: {
       fontFamily: 'display',
       fontWeight: 'heading',
       lineHeight: 'heading',
-      fontSize: 5,
+      fontSize: 'lg',
       marginTop: 4,
       marginBottom: 2,
     },
@@ -81,7 +95,7 @@ const theme: AppTheme = {
       fontFamily: 'heading',
       fontWeight: 'heading',
       lineHeight: 'heading',
-      fontSize: 2,
+      fontSize: 'md',
       marginTop: 3,
       marginBottom: 1,
     },

@@ -29,6 +29,7 @@
     "@graphql-codegen/typescript-react-apollo": "2.2.2",
     "@types/react": "^17.0.3",
     "@types/react-helmet": "^6.0.0",
+    "@types/styled-system": "^5.1.11",
     "@types/theme-ui": "^0.3.4",
     "csstype": "^3.0.7",
     "eslint-config-airbnb": "^18.2.0",

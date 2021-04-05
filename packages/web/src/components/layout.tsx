@@ -60,7 +60,7 @@ const Layout: FC<LayoutProps> = ({ children, stickyHeader }) => {
           styles={(t: typeof theme) => ({
             body: {
               fontFamily: t.fonts.body,
-              fontSize: t.fontSizes[1] as number,
+              fontSize: 'md',
               fontWeight: t.fontWeights.body,
               lineHeight: t.lineHeights.body,
               '*': {

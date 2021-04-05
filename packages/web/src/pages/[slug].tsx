@@ -11,6 +11,7 @@ import SEO from '../components/seo';
 import client from '../lib/apollo';
 import { BlockContent, isBlockText } from '../schema/block';
 import { Post, Recipe, RootQuery } from '../schema/root';
+import { ARTICLE_GUTTER } from '../theme';
 
 
 const postSlugQuery = gql`
@@ -277,7 +278,6 @@ const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({ slug, article, ro
       <SEO title={article?.title} />
       {article && (
         <Box
-          px={3}
           py={4}
         >
           <Flex
@@ -307,6 +307,7 @@ const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({ slug, article, ro
             )}
             <Box
               mb={4}
+              mx={ARTICLE_GUTTER}
               sx={{
                 flex: isMainImagePortrait ? '1 0 480px' : '0 0 auto',
               }}
@@ -324,7 +325,11 @@ const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({ slug, article, ro
                 {article.tagline}
               </Heading>
               {isMainImagePortrait && isBlockText(firstBlock) && (
-                <BlockText content={firstBlock} variant='post-intro' />
+                <BlockText
+                  content={firstBlock}
+                  variant='post-intro'
+                  dropCap
+                />
               )}
             </Box>
           </Flex>
