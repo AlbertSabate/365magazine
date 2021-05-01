@@ -70,7 +70,7 @@ const ArticleRecipeIngredients: FC<ArticleRecipeIngredientsProps> = ({ ingredien
       Ingredients
     </Heading>
     <Box>
-      {ingredients.map((i) => <IngredientRow {...i} />)}
+      {ingredients.map((i) => <IngredientRow {...i} key={i._key} />)}
     </Box>
   </>
 );

@@ -391,12 +391,20 @@ export type Post = Document & {
   title?: Maybe<Scalars['String']>;
   tagline?: Maybe<Scalars['String']>;
   slug?: Maybe<Slug>;
-  author?: Maybe<Author>;
+  author?: Maybe<AuthorLink>;
   mainImage?: Maybe<Image>;
   categories?: Maybe<Array<Maybe<Category>>>;
   tags?: Maybe<Array<Maybe<Tag>>>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   contentRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type AuthorLink = {
+  __typename?: 'AuthorLink';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  who?: Maybe<Author>;
+  addFeature?: Maybe<Scalars['Boolean']>;
 };
 
 export type Recipe = Document & {
@@ -422,14 +430,6 @@ export type Recipe = Document & {
   publishedAt?: Maybe<Scalars['DateTime']>;
   recipeInfo?: Maybe<RecipeInfo>;
   contentRaw?: Maybe<Scalars['JSON']>;
-};
-
-export type AuthorLink = {
-  __typename?: 'AuthorLink';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  who?: Maybe<Author>;
-  addFeature?: Maybe<Scalars['Boolean']>;
 };
 
 export type RecipeInfo = {
@@ -821,9 +821,16 @@ export type PostFilter = {
   title?: Maybe<StringFilter>;
   tagline?: Maybe<StringFilter>;
   slug?: Maybe<SlugFilter>;
-  author?: Maybe<AuthorFilter>;
+  author?: Maybe<AuthorLinkFilter>;
   mainImage?: Maybe<ImageFilter>;
   publishedAt?: Maybe<DatetimeFilter>;
+};
+
+export type AuthorLinkFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  who?: Maybe<AuthorFilter>;
+  addFeature?: Maybe<BooleanFilter>;
 };
 
 export type PostSorting = {
@@ -856,13 +863,6 @@ export type RecipeFilter = {
   mainImage?: Maybe<ImageFilter>;
   publishedAt?: Maybe<DatetimeFilter>;
   recipeInfo?: Maybe<RecipeInfoFilter>;
-};
-
-export type AuthorLinkFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  who?: Maybe<AuthorFilter>;
-  addFeature?: Maybe<BooleanFilter>;
 };
 
 export type RecipeInfoFilter = {

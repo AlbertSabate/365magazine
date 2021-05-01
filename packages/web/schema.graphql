@@ -125,7 +125,7 @@ type Post implements Document {
   _type: String
   "Date the document was last modified"
   _updatedAt: DateTime
-  author: Author
+  author: AuthorLink
   categories: [Category]
   contentRaw: JSON
   mainImage: Image
@@ -717,7 +717,7 @@ input PostFilter {
   _rev: StringFilter
   _type: StringFilter
   _updatedAt: DatetimeFilter
-  author: AuthorFilter
+  author: AuthorLinkFilter
   mainImage: ImageFilter
   publishedAt: DatetimeFilter
   slug: SlugFilter

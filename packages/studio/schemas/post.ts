@@ -30,7 +30,7 @@ const Post = {
       name: 'author',
       title: 'Author',
       type: 'reference',
-      to: { type: SchemaTypes.Author },
+      to: { type: SchemaTypes.AuthorLink },
     },
     {
       name: 'mainImage',

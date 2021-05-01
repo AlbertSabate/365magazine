@@ -1,140 +1,14 @@
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import Link from 'next/link';
 import React, { FC, useCallback, useState } from 'react';
 import { Box, Button, Flex, Text } from 'theme-ui';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import { Post, RootQuery } from '../schema/root';
+import Queries from '../schema/queries';
+import { Post, Recipe, RootQuery } from '../schema/root';
 
 
-export const allPostsQuery = gql`
-  query AllPosts {
-    allPost {
-      _id
-      _type
-      _createdAt
-      _updatedAt
-      _rev
-      _key
-      title
-      tagline
-      slug {
-        __typename
-        _key
-        _type
-        current
-      }
-      author {
-        __typename
-        _id
-        _type
-        _createdAt
-        _updatedAt
-        _rev
-        _key
-        name
-        slug {
-          __typename
-          _key
-          _type
-          current
-        }
-        image {
-          __typename
-          _key
-          _type
-        }
-        bioRaw
-      }
-      mainImage {
-        __typename
-        _key
-        _type
-      }
-      categories {
-        __typename
-        _id
-        _type
-        _createdAt
-        _updatedAt
-        _rev
-        _key
-        title
-        description
-      }
-      tags {
-        _id
-        title
-        description
-      }
-      publishedAt
-      contentRaw
-    }
-  }
-`;
-
-export const listPostsQuery = gql`
-  query ListPosts {
-    allPost {
-      _id
-      _createdAt
-      _updatedAt
-      title
-      tagline
-      slug {
-        current
-      }
-      author {
-        _id
-        _createdAt
-        _updatedAt
-        name
-        slug {
-          current
-        }
-        image {
-          _key
-        }
-        bioRaw
-      }
-      mainImage {
-        _key
-      }
-      categories {
-        _id
-        title
-        description
-      }
-      tags {
-        _id
-        title
-        description
-      }
-      publishedAt
-      mainImage {
-        asset {
-          _id
-          label
-          title
-          description
-          size
-          path
-          url
-          metadata {
-            dimensions {
-              height
-              width
-              aspectRatio
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-
-const PostPreview: FC<{ post: Post }> = ({ post }) => {
+const PostPreview: FC<{ post: Post | Recipe }> = ({ post }) => {
   const PANEL_HEIGHT = 200;
   const PANEL_WIDTH = 280;
 
@@ -235,8 +109,10 @@ const PostPreview: FC<{ post: Post }> = ({ post }) => {
 };
 
 const IndexPage: FC = (props) => {
-  const { data, loading, error } = useQuery<RootQuery>(listPostsQuery);
-  console.log(loading, data);
+  const { data: categoriesData } = useQuery<RootQuery>(Queries.listCategories);
+  const { data: authorsData } = useQuery<RootQuery>(Queries.listAuthors);
+  const { data: postsData } = useQuery<RootQuery>(Queries.listPosts);
+  const { data: recipesData } = useQuery<RootQuery>(Queries.listRecipes);
 
   return (
     <Layout>
@@ -248,8 +124,11 @@ const IndexPage: FC = (props) => {
           justifyContent: 'flex-start',
         }}
       >
-        {data && data.allPost.map((p) => (
-          <PostPreview key={p._id} post={p} />
+        {(postsData?.allPost || []).map((p) => (
+          <PostPreview key={p._key || p._id} post={p} />
+        ))}
+        {(recipesData?.allRecipe || []).map((p) => (
+          <PostPreview key={p._key || p._id} post={p} />
         ))}
       </Flex>
     </Layout>

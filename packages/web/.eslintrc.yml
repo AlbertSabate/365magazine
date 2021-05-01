@@ -13,6 +13,9 @@ plugins:
 parserOptions:
   project: src/tsconfig.json
 
+ignorePatterns:
+  - 'src/schema/root.tsx'
+
 rules:
   max-len:
     - error
