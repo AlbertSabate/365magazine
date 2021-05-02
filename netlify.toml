@@ -1,4 +1,3 @@
 [build]
-  base = "packages/web/"
-  command = "npm run build"
-  publish = "public"
+  command = "yarn workspace @365/web build"
+  publish = "packages/web/public"
