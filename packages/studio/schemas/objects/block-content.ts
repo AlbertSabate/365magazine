@@ -1,4 +1,4 @@
-import SchemaTypes from './types';
+import SchemaTypes from '../types';
 
 export const SimpleMarks = {
   // Decorators usually describe a single property – e.g. a typographic

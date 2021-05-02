@@ -1,5 +1,5 @@
 import { SimpleBlock } from './block-content';
-import SchemaTypes from './types';
+import SchemaTypes from '../types';
 
 const ImageSimple = {
   name: SchemaTypes.ImageSimple,

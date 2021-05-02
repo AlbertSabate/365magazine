@@ -1,6 +1,6 @@
 import { MdPerson } from 'react-icons/md';
-import { SimpleBlock } from './block-content';
-import SchemaTypes from './types';
+import { SimpleBlock } from '../objects/block-content';
+import SchemaTypes from '../types';
 
 const Author = {
   name: SchemaTypes.Author,

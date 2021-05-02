@@ -1,11 +1,11 @@
-import { ImPriceTag } from 'react-icons/im';
-import SchemaTypes from './types';
+import { MdFolder } from 'react-icons/md';
+import SchemaTypes from '../types';
 
-const Tag = {
-  name: SchemaTypes.Tag,
-  title: 'Tag',
+const BlockContent = {
+  name: SchemaTypes.Category,
+  title: 'Category',
   type: 'document',
-  icon: ImPriceTag,
+  icon: MdFolder,
   fields: [
     {
       name: 'title',
@@ -20,4 +20,4 @@ const Tag = {
   ],
 };
 
-export default Tag;
+export default BlockContent;

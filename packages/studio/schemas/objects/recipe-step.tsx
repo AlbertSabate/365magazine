@@ -1,5 +1,5 @@
 import React from 'react';
-import SchemaTypes from './types';
+import SchemaTypes from '../types';
 
 const StepPreview = ({ step }) => (
   <div style={{

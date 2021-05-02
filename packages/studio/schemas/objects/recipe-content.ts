@@ -1,5 +1,5 @@
 import BlockContent from './block-content';
-import SchemaTypes from './types';
+import SchemaTypes from '../types';
 
 const RecipeContent = {
   ...BlockContent,

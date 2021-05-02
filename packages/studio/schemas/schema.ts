@@ -5,23 +5,23 @@ import schemaTypes from 'all:part:@sanity/base/schema-type';
 
 /* eslint-disable import/extensions */
 // @ts-ignore
-import RecipeStep from './recipe-step.tsx';
+import RecipeStep from './objects/recipe-step.tsx';
 /* eslint-enable import/extensions */
 
-import BlockContent from './block-content';
-import Category from './category';
-import Post from './post';
-import Author from './author';
-import AuthorLink from './author-link';
-import Recipe from './recipe';
-import RecipeInfo from './recipe-info';
-import RecipeIngredient from './recipe-ingredient';
-import RecipeStepContent from './recipe-step-content';
-import RecipeContent from './recipe-content';
+import BlockContent from './objects/block-content';
+import Category from './documents/category';
+import Post from './documents/post';
+import Author from './documents/author';
+import AuthorLink from './objects/author-link';
+import Recipe from './documents/recipe';
+import RecipeInfo from './objects/recipe-info';
+import RecipeIngredient from './objects/recipe-ingredient';
+import RecipeStepContent from './objects/recipe-step-content';
+import RecipeContent from './objects/recipe-content';
 import LandingConfig from './landing-config';
 import SiteConfig from './site-config';
-import Tag from './tag';
-import ImageSimple from './image-simple';
+import Tag from './documents/tag';
+import ImageSimple from './objects/image-simple';
 
 export default createSchema({
   name: 'default',

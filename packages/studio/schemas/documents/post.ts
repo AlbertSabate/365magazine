@@ -1,5 +1,5 @@
 import { MdDescription } from 'react-icons/md';
-import SchemaTypes from './types';
+import SchemaTypes from '../types';
 
 const Post = {
   name: SchemaTypes.Post,

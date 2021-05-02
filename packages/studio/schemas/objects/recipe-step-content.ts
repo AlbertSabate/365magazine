@@ -1,4 +1,4 @@
-import SchemaTypes from './types';
+import SchemaTypes from '../types';
 
 const RecipeStepContent = {
   name: SchemaTypes.RecipeStepContent,

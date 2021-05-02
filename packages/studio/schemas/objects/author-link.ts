@@ -1,4 +1,4 @@
-import SchemaTypes from './types';
+import SchemaTypes from '../types';
 
 const AuthorLink = {
   name: SchemaTypes.AuthorLink,

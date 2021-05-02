@@ -1,4 +1,4 @@
-import SchemaTypes from './types';
+import SchemaTypes from '../types';
 
 const RecipeInfo = {
   name: SchemaTypes.RecipeInfo,
