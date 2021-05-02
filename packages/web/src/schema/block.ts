@@ -17,6 +17,7 @@ export interface BlockImageContent {
     _ref: string;
     _type: 'reference';
   };
+  caption?: Array<BlockTextContent>;
 }
 
 export type Mark = (
@@ -24,19 +25,29 @@ export type Mark = (
   | 'em'
 );
 
+export interface MarkDefLink {
+  _key: string;
+  _type: 'link';
+  href: string;
+}
+
+export interface BlockTextContentChildren {
+  _key: string;
+  _type: string;
+  marks: Mark[];
+  text: string;
+}
+
 export interface BlockTextContent {
   _type: 'block';
   _key: string;
   style?: BlockStyle;
   level?: number;
   listItem?: 'bullet';
-  markDefs: Array<string>;
-  children: Array<{
-    _key: string;
-    _type: string;
-    marks: Mark[];
-    text: string;
-  }>;
+  markDefs: Array<(
+    | MarkDefLink
+  )>;
+  children: Array<BlockTextContentChildren>;
 }
 
 export interface BlockRecipeStepContent {

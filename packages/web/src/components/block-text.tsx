@@ -2,7 +2,7 @@
 import { ElementType, FC } from 'react';
 import type { SpaceProps } from 'styled-system';
 import { Heading, SxStyleProp, Text } from 'theme-ui';
-import { BlockTextContent, HeadingTag } from '../schema/block';
+import { BlockTextContent, BlockTextContentChildren, HeadingTag, MarkDefLink } from '../schema/block';
 
 
 type BlockTextProps = SpaceProps & {
@@ -13,86 +13,106 @@ type BlockTextProps = SpaceProps & {
   as?: ElementType;
 };
 
-const BlockText: FC<BlockTextProps> = ({ content, variant, sx, dropCap, as = 'p', ...props }) => {
+function formatWithDropCap(children: Array<BlockTextContentChildren>) {
+  const [firstPart, ...otherParts] = children;
+  const firstLetter = firstPart.text.substr(0, 1);
+  const restFirstPart = firstPart.text.substr(1);
+
+  const remappedFirstPart = {
+    ...firstPart,
+    text: restFirstPart,
+  };
+
+  const dropCapPart = {
+    _key: firstPart._key.concat('-initial'),
+    _type: 'drop-cap',
+    marks: [],
+    text: firstLetter,
+  };
+
+  return [dropCapPart, remappedFirstPart, ...otherParts];
+}
+
+const WithLink: FC<{ linkDef?: MarkDefLink }> = ({ children, linkDef }) => (
+  linkDef
+    ? (
+      <a href={linkDef.href}>{children}</a>
+    )
+    : (
+      <>{children}</>
+    )
+);
+
+const BlockTextElement: FC<BlockTextProps> = ({ content, sx, as = 'p', variant, children, ...props }) => {
   const styles: SxStyleProp = {
     ...sx,
   };
 
-  const El: FC = (() => {
-    // if (content.listItem) {
-    //   return (
-    //
-    //   )
-    // }
+  // if (content.listItem) {
+  //   return (
+  //
+  //   )
+  // }
 
-    switch (content.style) {
-      case 'h1':
-      case 'h2':
-      case 'h3':
-      case 'h4':
-        return ({ children }) => (
-          <Heading
-            as={content.style as HeadingTag}
-            variant={content.style}
-            sx={styles}
-            mx='auto'
-            {...props}
-          >
-            {children}
-          </Heading>
-        );
-      case 'normal':
-      default:
-        return ({ children }) => (
-          <Text
-            as={as}
-            variant={variant || 'p'}
-            sx={styles}
-            {...props}
-          >
-            {children}
-          </Text>
-        );
-    }
-  })();
+  switch (content.style) {
+    case 'h1':
+    case 'h2':
+    case 'h3':
+    case 'h4':
+      return (
+        <Heading
+          as={content.style}
+          variant={content.style}
+          sx={styles}
+          mx='auto'
+          {...props}
+        >
+          {children}
+        </Heading>
+      );
+    case 'normal':
+    default:
+      return (
+        <Text
+          as={as}
+          variant={variant || 'p'}
+          sx={styles}
+          {...props}
+        >
+          {children}
+        </Text>
+      );
+  }
+};
 
-  const formatWithDropCap = () => {
-    const [firstPart, ...otherParts] = content.children;
-    const firstLetter = firstPart.text.substr(0, 1);
-    const restFirstPart = firstPart.text.substr(1);
-
-    const remappedFirstPart = {
-      ...firstPart,
-      text: restFirstPart,
-    };
-
-    const dropCapPart = {
-      _key: firstPart._key.concat('-initial'),
-      _type: 'drop-cap',
-      marks: [],
-      text: firstLetter,
-    };
-
-    return [dropCapPart, remappedFirstPart, ...otherParts];
-  };
-
-  const renderContent = dropCap ? formatWithDropCap() : content.children;
+const BlockText: FC<BlockTextProps> = (props) => {
+  const { content, dropCap } = props;
+  const renderContent = dropCap ? formatWithDropCap(content.children) : content.children;
 
   return (
-    <El>
-      {renderContent.map((c) => (
-        <Text
-          as={c.marks.includes('em') ? 'em' : 'span'}
-          key={c._key}
-          sx={{
-            fontWeight: c.marks.includes('strong') ? 'bold' : undefined,
-          }}
-          variant={c._type === 'drop-cap' ? 'drop-cap' : undefined}
-        >
-          {c.text}
-        </Text>
-      ))}
-    </El>
+    <BlockTextElement {...props}>
+      {renderContent.map((c) => {
+        const customMarks = c.marks.filter((m) => !['em'].includes(m));
+        const markDefs = customMarks
+          .map((k) => content.markDefs.find(({ _key }) => _key === k))
+          .filter((d) => !!d);
+
+        return (
+          <Text
+            as={c.marks.includes('em') ? 'em' : 'span'}
+            key={c._key}
+            sx={{
+              fontWeight: c.marks.includes('strong') ? 'bold' : undefined,
+            }}
+            variant={c._type === 'drop-cap' ? 'drop-cap' : undefined}
+          >
+            <WithLink linkDef={markDefs.find((d) => d._type === 'link')}>
+              {c.text}
+            </WithLink>
+          </Text>
+        );
+      })}
+    </BlockTextElement>
   );
 };
 
