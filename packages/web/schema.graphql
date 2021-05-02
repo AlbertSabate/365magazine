@@ -341,6 +341,7 @@ type SanityFileAsset implements Document {
   _type: String
   "Date the document was last modified"
   _updatedAt: DateTime
+  altText: String
   assetId: String
   description: String
   extension: String
@@ -367,6 +368,7 @@ type SanityImageAsset implements Document {
   _type: String
   "Date the document was last modified"
   _updatedAt: DateTime
+  altText: String
   assetId: String
   description: String
   extension: String
@@ -871,6 +873,7 @@ input SanityFileAssetFilter {
   _rev: StringFilter
   _type: StringFilter
   _updatedAt: DatetimeFilter
+  altText: StringFilter
   assetId: StringFilter
   description: StringFilter
   extension: StringFilter
@@ -892,6 +895,7 @@ input SanityFileAssetSorting {
   _rev: SortOrder
   _type: SortOrder
   _updatedAt: SortOrder
+  altText: SortOrder
   assetId: SortOrder
   description: SortOrder
   extension: SortOrder
@@ -915,6 +919,7 @@ input SanityImageAssetFilter {
   _rev: StringFilter
   _type: StringFilter
   _updatedAt: DatetimeFilter
+  altText: StringFilter
   assetId: StringFilter
   description: StringFilter
   extension: StringFilter
@@ -937,6 +942,7 @@ input SanityImageAssetSorting {
   _rev: SortOrder
   _type: SortOrder
   _updatedAt: SortOrder
+  altText: SortOrder
   assetId: SortOrder
   description: SortOrder
   extension: SortOrder

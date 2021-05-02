@@ -10,15 +10,577 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  Date: any;
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
-  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
-  Date: any;
 };
 
 
+
+export type Author = Document & {
+  __typename?: 'Author';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  instagram?: Maybe<Scalars['String']>;
+  website?: Maybe<Scalars['String']>;
+  slug?: Maybe<Slug>;
+  image?: Maybe<ImageSimple>;
+  bioRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type AuthorFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  instagram?: Maybe<StringFilter>;
+  website?: Maybe<StringFilter>;
+  slug?: Maybe<SlugFilter>;
+  image?: Maybe<ImageSimpleFilter>;
+};
+
+export type AuthorLink = {
+  __typename?: 'AuthorLink';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  who?: Maybe<Author>;
+  addFeature?: Maybe<Scalars['Boolean']>;
+};
+
+export type AuthorLinkFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  who?: Maybe<AuthorFilter>;
+  addFeature?: Maybe<BooleanFilter>;
+};
+
+export type AuthorLinkSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  addFeature?: Maybe<SortOrder>;
+};
+
+export type AuthorSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  name?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  instagram?: Maybe<SortOrder>;
+  website?: Maybe<SortOrder>;
+  slug?: Maybe<SlugSorting>;
+  image?: Maybe<ImageSimpleSorting>;
+};
+
+export type Block = {
+  __typename?: 'Block';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  children?: Maybe<Array<Maybe<Span>>>;
+  style?: Maybe<Scalars['String']>;
+  list?: Maybe<Scalars['String']>;
+};
+
+export type BlockOrImageSimple = Block | ImageSimple;
+
+export type BlockOrImageSimpleOrRecipeStep = Block | ImageSimple | RecipeStep;
+
+export type BooleanFilter = {
+  /** Checks if the value is equal to the given input. */
+  eq?: Maybe<Scalars['Boolean']>;
+  /** Checks if the value is not equal to the given input. */
+  neq?: Maybe<Scalars['Boolean']>;
+};
+
+export type Category = Document & {
+  __typename?: 'Category';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+};
+
+export type CategoryFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
+};
+
+export type CategorySorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+};
+
+
+export type DateFilter = {
+  /** Checks if the value is equal to the given input. */
+  eq?: Maybe<Scalars['Date']>;
+  /** Checks if the value is not equal to the given input. */
+  neq?: Maybe<Scalars['Date']>;
+  /** Checks if the value is greater than the given input. */
+  gt?: Maybe<Scalars['Date']>;
+  /** Checks if the value is greater than or equal to the given input. */
+  gte?: Maybe<Scalars['Date']>;
+  /** Checks if the value is lesser than the given input. */
+  lt?: Maybe<Scalars['Date']>;
+  /** Checks if the value is lesser than or equal to the given input. */
+  lte?: Maybe<Scalars['Date']>;
+};
+
+
+export type DatetimeFilter = {
+  /** Checks if the value is equal to the given input. */
+  eq?: Maybe<Scalars['DateTime']>;
+  /** Checks if the value is not equal to the given input. */
+  neq?: Maybe<Scalars['DateTime']>;
+  /** Checks if the value is greater than the given input. */
+  gt?: Maybe<Scalars['DateTime']>;
+  /** Checks if the value is greater than or equal to the given input. */
+  gte?: Maybe<Scalars['DateTime']>;
+  /** Checks if the value is lesser than the given input. */
+  lt?: Maybe<Scalars['DateTime']>;
+  /** Checks if the value is lesser than or equal to the given input. */
+  lte?: Maybe<Scalars['DateTime']>;
+};
+
+/** A Sanity document */
+export type Document = {
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+};
+
+export type DocumentFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+};
+
+export type DocumentSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+};
+
+export type File = {
+  __typename?: 'File';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  asset?: Maybe<SanityFileAsset>;
+};
+
+export type FileFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  asset?: Maybe<SanityFileAssetFilter>;
+};
+
+export type FileSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+};
+
+export type FloatFilter = {
+  /** Checks if the value is equal to the given input. */
+  eq?: Maybe<Scalars['Float']>;
+  /** Checks if the value is not equal to the given input. */
+  neq?: Maybe<Scalars['Float']>;
+  /** Checks if the value is greater than the given input. */
+  gt?: Maybe<Scalars['Float']>;
+  /** Checks if the value is greater than or equal to the given input. */
+  gte?: Maybe<Scalars['Float']>;
+  /** Checks if the value is lesser than the given input. */
+  lt?: Maybe<Scalars['Float']>;
+  /** Checks if the value is lesser than or equal to the given input. */
+  lte?: Maybe<Scalars['Float']>;
+};
+
+export type Geopoint = {
+  __typename?: 'Geopoint';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  lat?: Maybe<Scalars['Float']>;
+  lng?: Maybe<Scalars['Float']>;
+  alt?: Maybe<Scalars['Float']>;
+};
+
+export type GeopointFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  lat?: Maybe<FloatFilter>;
+  lng?: Maybe<FloatFilter>;
+  alt?: Maybe<FloatFilter>;
+};
+
+export type GeopointSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  lat?: Maybe<SortOrder>;
+  lng?: Maybe<SortOrder>;
+  alt?: Maybe<SortOrder>;
+};
+
+export type IdFilter = {
+  /** Checks if the value is equal to the given input. */
+  eq?: Maybe<Scalars['ID']>;
+  /** Checks if the value is not equal to the given input. */
+  neq?: Maybe<Scalars['ID']>;
+  /** Checks if the value matches the given word/words. */
+  matches?: Maybe<Scalars['ID']>;
+  in?: Maybe<Array<Scalars['ID']>>;
+  nin?: Maybe<Array<Scalars['ID']>>;
+};
+
+export type Image = {
+  __typename?: 'Image';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  asset?: Maybe<SanityImageAsset>;
+  hotspot?: Maybe<SanityImageHotspot>;
+  crop?: Maybe<SanityImageCrop>;
+};
+
+export type ImageFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  asset?: Maybe<SanityImageAssetFilter>;
+  hotspot?: Maybe<SanityImageHotspotFilter>;
+  crop?: Maybe<SanityImageCropFilter>;
+};
+
+export type ImageSimple = {
+  __typename?: 'ImageSimple';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  asset?: Maybe<SanityImageAsset>;
+  hotspot?: Maybe<SanityImageHotspot>;
+  crop?: Maybe<SanityImageCrop>;
+  captionRaw?: Maybe<Scalars['JSON']>;
+  /** Important for SEO and accessibility. */
+  alt?: Maybe<Scalars['String']>;
+};
+
+export type ImageSimpleFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  asset?: Maybe<SanityImageAssetFilter>;
+  hotspot?: Maybe<SanityImageHotspotFilter>;
+  crop?: Maybe<SanityImageCropFilter>;
+  alt?: Maybe<StringFilter>;
+};
+
+export type ImageSimpleSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  hotspot?: Maybe<SanityImageHotspotSorting>;
+  crop?: Maybe<SanityImageCropSorting>;
+  alt?: Maybe<SortOrder>;
+};
+
+export type ImageSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  hotspot?: Maybe<SanityImageHotspotSorting>;
+  crop?: Maybe<SanityImageCropSorting>;
+};
+
+export type IntFilter = {
+  /** Checks if the value is equal to the given input. */
+  eq?: Maybe<Scalars['Int']>;
+  /** Checks if the value is not equal to the given input. */
+  neq?: Maybe<Scalars['Int']>;
+  /** Checks if the value is greater than the given input. */
+  gt?: Maybe<Scalars['Int']>;
+  /** Checks if the value is greater than or equal to the given input. */
+  gte?: Maybe<Scalars['Int']>;
+  /** Checks if the value is lesser than the given input. */
+  lt?: Maybe<Scalars['Int']>;
+  /** Checks if the value is lesser than or equal to the given input. */
+  lte?: Maybe<Scalars['Int']>;
+};
+
+
+export type LandingConfig = Document & {
+  __typename?: 'LandingConfig';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  mainFeature?: Maybe<PostOrRecipe>;
+};
+
+export type LandingConfigFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+};
+
+export type LandingConfigSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+};
+
+export type Post = Document & {
+  __typename?: 'Post';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  tagline?: Maybe<Scalars['String']>;
+  slug?: Maybe<Slug>;
+  author?: Maybe<AuthorLink>;
+  mainImage?: Maybe<ImageSimple>;
+  categories?: Maybe<Array<Maybe<Category>>>;
+  tags?: Maybe<Array<Maybe<Tag>>>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  contentRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type PostFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  tagline?: Maybe<StringFilter>;
+  slug?: Maybe<SlugFilter>;
+  author?: Maybe<AuthorLinkFilter>;
+  mainImage?: Maybe<ImageSimpleFilter>;
+  publishedAt?: Maybe<DatetimeFilter>;
+};
+
+export type PostOrRecipe = Post | Recipe;
+
+export type PostSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  tagline?: Maybe<SortOrder>;
+  slug?: Maybe<SlugSorting>;
+  author?: Maybe<AuthorLinkSorting>;
+  mainImage?: Maybe<ImageSimpleSorting>;
+  publishedAt?: Maybe<SortOrder>;
+};
+
+export type Recipe = Document & {
+  __typename?: 'Recipe';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  tagline?: Maybe<Scalars['String']>;
+  slug?: Maybe<Slug>;
+  author?: Maybe<AuthorLink>;
+  mainImage?: Maybe<ImageSimple>;
+  categories?: Maybe<Array<Maybe<Category>>>;
+  tags?: Maybe<Array<Maybe<Tag>>>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  recipeInfo?: Maybe<RecipeInfo>;
+  contentRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type RecipeFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  tagline?: Maybe<StringFilter>;
+  slug?: Maybe<SlugFilter>;
+  author?: Maybe<AuthorLinkFilter>;
+  mainImage?: Maybe<ImageSimpleFilter>;
+  publishedAt?: Maybe<DatetimeFilter>;
+  recipeInfo?: Maybe<RecipeInfoFilter>;
+};
+
+export type RecipeInfo = {
+  __typename?: 'RecipeInfo';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  makes?: Maybe<Scalars['String']>;
+  serves?: Maybe<Scalars['String']>;
+  cookingTime?: Maybe<Scalars['String']>;
+  ingredients?: Maybe<Array<Maybe<RecipeIngredient>>>;
+};
+
+export type RecipeInfoFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  makes?: Maybe<StringFilter>;
+  serves?: Maybe<StringFilter>;
+  cookingTime?: Maybe<StringFilter>;
+};
+
+export type RecipeInfoSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  makes?: Maybe<SortOrder>;
+  serves?: Maybe<SortOrder>;
+  cookingTime?: Maybe<SortOrder>;
+};
+
+export type RecipeIngredient = {
+  __typename?: 'RecipeIngredient';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  amount?: Maybe<Scalars['String']>;
+  ingredient?: Maybe<Scalars['String']>;
+  note?: Maybe<Scalars['String']>;
+};
+
+export type RecipeIngredientFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  amount?: Maybe<StringFilter>;
+  ingredient?: Maybe<StringFilter>;
+  note?: Maybe<StringFilter>;
+};
+
+export type RecipeIngredientSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  amount?: Maybe<SortOrder>;
+  ingredient?: Maybe<SortOrder>;
+  note?: Maybe<SortOrder>;
+};
+
+export type RecipeSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  tagline?: Maybe<SortOrder>;
+  slug?: Maybe<SlugSorting>;
+  author?: Maybe<AuthorLinkSorting>;
+  mainImage?: Maybe<ImageSimpleSorting>;
+  publishedAt?: Maybe<SortOrder>;
+  recipeInfo?: Maybe<RecipeInfoSorting>;
+};
+
+export type RecipeStep = {
+  __typename?: 'RecipeStep';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  step?: Maybe<Scalars['Float']>;
+  contentRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type RecipeStepFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  step?: Maybe<FloatFilter>;
+};
+
+export type RecipeStepSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  step?: Maybe<SortOrder>;
+};
 
 export type RootQuery = {
   __typename?: 'RootQuery';
@@ -174,144 +736,6 @@ export type RootQueryAllDocumentArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
-export type Author = Document & {
-  __typename?: 'Author';
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  _key?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  instagram?: Maybe<Scalars['String']>;
-  website?: Maybe<Scalars['String']>;
-  slug?: Maybe<Slug>;
-  image?: Maybe<ImageSimple>;
-  bioRaw?: Maybe<Scalars['JSON']>;
-};
-
-/** A Sanity document */
-export type Document = {
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-};
-
-
-export type Slug = {
-  __typename?: 'Slug';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  current?: Maybe<Scalars['String']>;
-};
-
-export type ImageSimple = {
-  __typename?: 'ImageSimple';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  captionRaw?: Maybe<Scalars['JSON']>;
-  /** Important for SEO and accessibility. */
-  alt?: Maybe<Scalars['String']>;
-  asset?: Maybe<SanityImageAsset>;
-  hotspot?: Maybe<SanityImageHotspot>;
-  crop?: Maybe<SanityImageCrop>;
-};
-
-
-export type SanityImageAsset = Document & {
-  __typename?: 'SanityImageAsset';
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  _key?: Maybe<Scalars['String']>;
-  originalFilename?: Maybe<Scalars['String']>;
-  label?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  sha1hash?: Maybe<Scalars['String']>;
-  extension?: Maybe<Scalars['String']>;
-  mimeType?: Maybe<Scalars['String']>;
-  size?: Maybe<Scalars['Float']>;
-  assetId?: Maybe<Scalars['String']>;
-  path?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
-  metadata?: Maybe<SanityImageMetadata>;
-  source?: Maybe<SanityAssetSourceData>;
-};
-
-export type SanityImageMetadata = {
-  __typename?: 'SanityImageMetadata';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  location?: Maybe<Geopoint>;
-  dimensions?: Maybe<SanityImageDimensions>;
-  palette?: Maybe<SanityImagePalette>;
-  lqip?: Maybe<Scalars['String']>;
-  hasAlpha?: Maybe<Scalars['Boolean']>;
-  isOpaque?: Maybe<Scalars['Boolean']>;
-};
-
-export type Geopoint = {
-  __typename?: 'Geopoint';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  lat?: Maybe<Scalars['Float']>;
-  lng?: Maybe<Scalars['Float']>;
-  alt?: Maybe<Scalars['Float']>;
-};
-
-export type SanityImageDimensions = {
-  __typename?: 'SanityImageDimensions';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  height?: Maybe<Scalars['Float']>;
-  width?: Maybe<Scalars['Float']>;
-  aspectRatio?: Maybe<Scalars['Float']>;
-};
-
-export type SanityImagePalette = {
-  __typename?: 'SanityImagePalette';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  darkMuted?: Maybe<SanityImagePaletteSwatch>;
-  lightVibrant?: Maybe<SanityImagePaletteSwatch>;
-  darkVibrant?: Maybe<SanityImagePaletteSwatch>;
-  vibrant?: Maybe<SanityImagePaletteSwatch>;
-  dominant?: Maybe<SanityImagePaletteSwatch>;
-  lightMuted?: Maybe<SanityImagePaletteSwatch>;
-  muted?: Maybe<SanityImagePaletteSwatch>;
-};
-
-export type SanityImagePaletteSwatch = {
-  __typename?: 'SanityImagePaletteSwatch';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  background?: Maybe<Scalars['String']>;
-  foreground?: Maybe<Scalars['String']>;
-  population?: Maybe<Scalars['Float']>;
-  title?: Maybe<Scalars['String']>;
-};
-
 export type SanityAssetSourceData = {
   __typename?: 'SanityAssetSourceData';
   _key?: Maybe<Scalars['String']>;
@@ -324,170 +748,21 @@ export type SanityAssetSourceData = {
   url?: Maybe<Scalars['String']>;
 };
 
-export type SanityImageHotspot = {
-  __typename?: 'SanityImageHotspot';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  x?: Maybe<Scalars['Float']>;
-  y?: Maybe<Scalars['Float']>;
-  height?: Maybe<Scalars['Float']>;
-  width?: Maybe<Scalars['Float']>;
+export type SanityAssetSourceDataFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
+  id?: Maybe<StringFilter>;
+  url?: Maybe<StringFilter>;
 };
 
-export type SanityImageCrop = {
-  __typename?: 'SanityImageCrop';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  top?: Maybe<Scalars['Float']>;
-  bottom?: Maybe<Scalars['Float']>;
-  left?: Maybe<Scalars['Float']>;
-  right?: Maybe<Scalars['Float']>;
+export type SanityAssetSourceDataSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  name?: Maybe<SortOrder>;
+  id?: Maybe<SortOrder>;
+  url?: Maybe<SortOrder>;
 };
-
-export type Category = Document & {
-  __typename?: 'Category';
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  _key?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-};
-
-export type Tag = Document & {
-  __typename?: 'Tag';
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  _key?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-};
-
-export type Post = Document & {
-  __typename?: 'Post';
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  _key?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  tagline?: Maybe<Scalars['String']>;
-  slug?: Maybe<Slug>;
-  author?: Maybe<AuthorLink>;
-  mainImage?: Maybe<ImageSimple>;
-  categories?: Maybe<Array<Maybe<Category>>>;
-  tags?: Maybe<Array<Maybe<Tag>>>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
-  contentRaw?: Maybe<Scalars['JSON']>;
-};
-
-export type AuthorLink = {
-  __typename?: 'AuthorLink';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  who?: Maybe<Author>;
-  addFeature?: Maybe<Scalars['Boolean']>;
-};
-
-export type Recipe = Document & {
-  __typename?: 'Recipe';
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  _key?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  tagline?: Maybe<Scalars['String']>;
-  slug?: Maybe<Slug>;
-  author?: Maybe<AuthorLink>;
-  mainImage?: Maybe<ImageSimple>;
-  categories?: Maybe<Array<Maybe<Category>>>;
-  tags?: Maybe<Array<Maybe<Tag>>>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
-  recipeInfo?: Maybe<RecipeInfo>;
-  contentRaw?: Maybe<Scalars['JSON']>;
-};
-
-export type RecipeInfo = {
-  __typename?: 'RecipeInfo';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  makes?: Maybe<Scalars['String']>;
-  serves?: Maybe<Scalars['String']>;
-  cookingTime?: Maybe<Scalars['String']>;
-  ingredients?: Maybe<Array<Maybe<RecipeIngredient>>>;
-};
-
-export type RecipeIngredient = {
-  __typename?: 'RecipeIngredient';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  amount?: Maybe<Scalars['String']>;
-  ingredient?: Maybe<Scalars['String']>;
-  note?: Maybe<Scalars['String']>;
-};
-
-export type SiteConfig = Document & {
-  __typename?: 'SiteConfig';
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  _key?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-};
-
-export type LandingConfig = Document & {
-  __typename?: 'LandingConfig';
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  _key?: Maybe<Scalars['String']>;
-  mainFeature?: Maybe<PostOrRecipe>;
-};
-
-export type PostOrRecipe = Post | Recipe;
 
 export type SanityFileAsset = Document & {
   __typename?: 'SanityFileAsset';
@@ -506,6 +781,7 @@ export type SanityFileAsset = Document & {
   label?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
+  altText?: Maybe<Scalars['String']>;
   sha1hash?: Maybe<Scalars['String']>;
   extension?: Maybe<Scalars['String']>;
   mimeType?: Maybe<Scalars['String']>;
@@ -516,7 +792,7 @@ export type SanityFileAsset = Document & {
   source?: Maybe<SanityAssetSourceData>;
 };
 
-export type AuthorFilter = {
+export type SanityFileAssetFilter = {
   /** Apply filters on document level */
   _?: Maybe<Sanity_DocumentFilter>;
   _id?: Maybe<IdFilter>;
@@ -525,71 +801,70 @@ export type AuthorFilter = {
   _updatedAt?: Maybe<DatetimeFilter>;
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
-  name?: Maybe<StringFilter>;
+  originalFilename?: Maybe<StringFilter>;
+  label?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
-  instagram?: Maybe<StringFilter>;
-  website?: Maybe<StringFilter>;
-  slug?: Maybe<SlugFilter>;
-  image?: Maybe<ImageSimpleFilter>;
+  description?: Maybe<StringFilter>;
+  altText?: Maybe<StringFilter>;
+  sha1hash?: Maybe<StringFilter>;
+  extension?: Maybe<StringFilter>;
+  mimeType?: Maybe<StringFilter>;
+  size?: Maybe<FloatFilter>;
+  assetId?: Maybe<StringFilter>;
+  path?: Maybe<StringFilter>;
+  url?: Maybe<StringFilter>;
+  source?: Maybe<SanityAssetSourceDataFilter>;
 };
 
-export type Sanity_DocumentFilter = {
-  /** All documents referencing the given document ID. */
-  references?: Maybe<Scalars['ID']>;
-  /** All documents that are drafts. */
-  is_draft?: Maybe<Scalars['Boolean']>;
+export type SanityFileAssetSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  originalFilename?: Maybe<SortOrder>;
+  label?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+  altText?: Maybe<SortOrder>;
+  sha1hash?: Maybe<SortOrder>;
+  extension?: Maybe<SortOrder>;
+  mimeType?: Maybe<SortOrder>;
+  size?: Maybe<SortOrder>;
+  assetId?: Maybe<SortOrder>;
+  path?: Maybe<SortOrder>;
+  url?: Maybe<SortOrder>;
+  source?: Maybe<SanityAssetSourceDataSorting>;
 };
 
-export type IdFilter = {
-  /** Checks if the value is equal to the given input. */
-  eq?: Maybe<Scalars['ID']>;
-  /** Checks if the value is not equal to the given input. */
-  neq?: Maybe<Scalars['ID']>;
-  /** Checks if the value matches the given word/words. */
-  matches?: Maybe<Scalars['ID']>;
-  in?: Maybe<Array<Scalars['ID']>>;
-  nin?: Maybe<Array<Scalars['ID']>>;
-};
-
-export type StringFilter = {
-  /** Checks if the value is equal to the given input. */
-  eq?: Maybe<Scalars['String']>;
-  /** Checks if the value is not equal to the given input. */
-  neq?: Maybe<Scalars['String']>;
-  /** Checks if the value matches the given word/words. */
-  matches?: Maybe<Scalars['String']>;
-  in?: Maybe<Array<Scalars['String']>>;
-  nin?: Maybe<Array<Scalars['String']>>;
-};
-
-export type DatetimeFilter = {
-  /** Checks if the value is equal to the given input. */
-  eq?: Maybe<Scalars['DateTime']>;
-  /** Checks if the value is not equal to the given input. */
-  neq?: Maybe<Scalars['DateTime']>;
-  /** Checks if the value is greater than the given input. */
-  gt?: Maybe<Scalars['DateTime']>;
-  /** Checks if the value is greater than or equal to the given input. */
-  gte?: Maybe<Scalars['DateTime']>;
-  /** Checks if the value is lesser than the given input. */
-  lt?: Maybe<Scalars['DateTime']>;
-  /** Checks if the value is lesser than or equal to the given input. */
-  lte?: Maybe<Scalars['DateTime']>;
-};
-
-export type SlugFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  current?: Maybe<StringFilter>;
-};
-
-export type ImageSimpleFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  alt?: Maybe<StringFilter>;
-  asset?: Maybe<SanityImageAssetFilter>;
-  hotspot?: Maybe<SanityImageHotspotFilter>;
-  crop?: Maybe<SanityImageCropFilter>;
+export type SanityImageAsset = Document & {
+  __typename?: 'SanityImageAsset';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  originalFilename?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  altText?: Maybe<Scalars['String']>;
+  sha1hash?: Maybe<Scalars['String']>;
+  extension?: Maybe<Scalars['String']>;
+  mimeType?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['Float']>;
+  assetId?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+  metadata?: Maybe<SanityImageMetadata>;
+  source?: Maybe<SanityAssetSourceData>;
 };
 
 export type SanityImageAssetFilter = {
@@ -605,6 +880,7 @@ export type SanityImageAssetFilter = {
   label?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
   description?: Maybe<StringFilter>;
+  altText?: Maybe<StringFilter>;
   sha1hash?: Maybe<StringFilter>;
   extension?: Maybe<StringFilter>;
   mimeType?: Maybe<StringFilter>;
@@ -616,19 +892,120 @@ export type SanityImageAssetFilter = {
   source?: Maybe<SanityAssetSourceDataFilter>;
 };
 
-export type FloatFilter = {
-  /** Checks if the value is equal to the given input. */
-  eq?: Maybe<Scalars['Float']>;
-  /** Checks if the value is not equal to the given input. */
-  neq?: Maybe<Scalars['Float']>;
-  /** Checks if the value is greater than the given input. */
-  gt?: Maybe<Scalars['Float']>;
-  /** Checks if the value is greater than or equal to the given input. */
-  gte?: Maybe<Scalars['Float']>;
-  /** Checks if the value is lesser than the given input. */
-  lt?: Maybe<Scalars['Float']>;
-  /** Checks if the value is lesser than or equal to the given input. */
-  lte?: Maybe<Scalars['Float']>;
+export type SanityImageAssetSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  originalFilename?: Maybe<SortOrder>;
+  label?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+  altText?: Maybe<SortOrder>;
+  sha1hash?: Maybe<SortOrder>;
+  extension?: Maybe<SortOrder>;
+  mimeType?: Maybe<SortOrder>;
+  size?: Maybe<SortOrder>;
+  assetId?: Maybe<SortOrder>;
+  path?: Maybe<SortOrder>;
+  url?: Maybe<SortOrder>;
+  metadata?: Maybe<SanityImageMetadataSorting>;
+  source?: Maybe<SanityAssetSourceDataSorting>;
+};
+
+export type SanityImageCrop = {
+  __typename?: 'SanityImageCrop';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  top?: Maybe<Scalars['Float']>;
+  bottom?: Maybe<Scalars['Float']>;
+  left?: Maybe<Scalars['Float']>;
+  right?: Maybe<Scalars['Float']>;
+};
+
+export type SanityImageCropFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  top?: Maybe<FloatFilter>;
+  bottom?: Maybe<FloatFilter>;
+  left?: Maybe<FloatFilter>;
+  right?: Maybe<FloatFilter>;
+};
+
+export type SanityImageCropSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  top?: Maybe<SortOrder>;
+  bottom?: Maybe<SortOrder>;
+  left?: Maybe<SortOrder>;
+  right?: Maybe<SortOrder>;
+};
+
+export type SanityImageDimensions = {
+  __typename?: 'SanityImageDimensions';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  height?: Maybe<Scalars['Float']>;
+  width?: Maybe<Scalars['Float']>;
+  aspectRatio?: Maybe<Scalars['Float']>;
+};
+
+export type SanityImageDimensionsFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  height?: Maybe<FloatFilter>;
+  width?: Maybe<FloatFilter>;
+  aspectRatio?: Maybe<FloatFilter>;
+};
+
+export type SanityImageDimensionsSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  height?: Maybe<SortOrder>;
+  width?: Maybe<SortOrder>;
+  aspectRatio?: Maybe<SortOrder>;
+};
+
+export type SanityImageHotspot = {
+  __typename?: 'SanityImageHotspot';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  x?: Maybe<Scalars['Float']>;
+  y?: Maybe<Scalars['Float']>;
+  height?: Maybe<Scalars['Float']>;
+  width?: Maybe<Scalars['Float']>;
+};
+
+export type SanityImageHotspotFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  x?: Maybe<FloatFilter>;
+  y?: Maybe<FloatFilter>;
+  height?: Maybe<FloatFilter>;
+  width?: Maybe<FloatFilter>;
+};
+
+export type SanityImageHotspotSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  x?: Maybe<SortOrder>;
+  y?: Maybe<SortOrder>;
+  height?: Maybe<SortOrder>;
+  width?: Maybe<SortOrder>;
+};
+
+export type SanityImageMetadata = {
+  __typename?: 'SanityImageMetadata';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  location?: Maybe<Geopoint>;
+  dimensions?: Maybe<SanityImageDimensions>;
+  palette?: Maybe<SanityImagePalette>;
+  lqip?: Maybe<Scalars['String']>;
+  hasAlpha?: Maybe<Scalars['Boolean']>;
+  isOpaque?: Maybe<Scalars['Boolean']>;
 };
 
 export type SanityImageMetadataFilter = {
@@ -642,20 +1019,28 @@ export type SanityImageMetadataFilter = {
   isOpaque?: Maybe<BooleanFilter>;
 };
 
-export type GeopointFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  lat?: Maybe<FloatFilter>;
-  lng?: Maybe<FloatFilter>;
-  alt?: Maybe<FloatFilter>;
+export type SanityImageMetadataSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  location?: Maybe<GeopointSorting>;
+  dimensions?: Maybe<SanityImageDimensionsSorting>;
+  palette?: Maybe<SanityImagePaletteSorting>;
+  lqip?: Maybe<SortOrder>;
+  hasAlpha?: Maybe<SortOrder>;
+  isOpaque?: Maybe<SortOrder>;
 };
 
-export type SanityImageDimensionsFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  height?: Maybe<FloatFilter>;
-  width?: Maybe<FloatFilter>;
-  aspectRatio?: Maybe<FloatFilter>;
+export type SanityImagePalette = {
+  __typename?: 'SanityImagePalette';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  darkMuted?: Maybe<SanityImagePaletteSwatch>;
+  lightVibrant?: Maybe<SanityImagePaletteSwatch>;
+  darkVibrant?: Maybe<SanityImagePaletteSwatch>;
+  vibrant?: Maybe<SanityImagePaletteSwatch>;
+  dominant?: Maybe<SanityImagePaletteSwatch>;
+  lightMuted?: Maybe<SanityImagePaletteSwatch>;
+  muted?: Maybe<SanityImagePaletteSwatch>;
 };
 
 export type SanityImagePaletteFilter = {
@@ -670,6 +1055,28 @@ export type SanityImagePaletteFilter = {
   muted?: Maybe<SanityImagePaletteSwatchFilter>;
 };
 
+export type SanityImagePaletteSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  darkMuted?: Maybe<SanityImagePaletteSwatchSorting>;
+  lightVibrant?: Maybe<SanityImagePaletteSwatchSorting>;
+  darkVibrant?: Maybe<SanityImagePaletteSwatchSorting>;
+  vibrant?: Maybe<SanityImagePaletteSwatchSorting>;
+  dominant?: Maybe<SanityImagePaletteSwatchSorting>;
+  lightMuted?: Maybe<SanityImagePaletteSwatchSorting>;
+  muted?: Maybe<SanityImagePaletteSwatchSorting>;
+};
+
+export type SanityImagePaletteSwatch = {
+  __typename?: 'SanityImagePaletteSwatch';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  background?: Maybe<Scalars['String']>;
+  foreground?: Maybe<Scalars['String']>;
+  population?: Maybe<Scalars['Float']>;
+  title?: Maybe<Scalars['String']>;
+};
+
 export type SanityImagePaletteSwatchFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
@@ -679,234 +1086,37 @@ export type SanityImagePaletteSwatchFilter = {
   title?: Maybe<StringFilter>;
 };
 
-export type BooleanFilter = {
-  /** Checks if the value is equal to the given input. */
-  eq?: Maybe<Scalars['Boolean']>;
-  /** Checks if the value is not equal to the given input. */
-  neq?: Maybe<Scalars['Boolean']>;
-};
-
-export type SanityAssetSourceDataFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  name?: Maybe<StringFilter>;
-  id?: Maybe<StringFilter>;
-  url?: Maybe<StringFilter>;
-};
-
-export type SanityImageHotspotFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  x?: Maybe<FloatFilter>;
-  y?: Maybe<FloatFilter>;
-  height?: Maybe<FloatFilter>;
-  width?: Maybe<FloatFilter>;
-};
-
-export type SanityImageCropFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  top?: Maybe<FloatFilter>;
-  bottom?: Maybe<FloatFilter>;
-  left?: Maybe<FloatFilter>;
-  right?: Maybe<FloatFilter>;
-};
-
-export type AuthorSorting = {
-  _id?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  _createdAt?: Maybe<SortOrder>;
-  _updatedAt?: Maybe<SortOrder>;
-  _rev?: Maybe<SortOrder>;
+export type SanityImagePaletteSwatchSorting = {
   _key?: Maybe<SortOrder>;
-  name?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  background?: Maybe<SortOrder>;
+  foreground?: Maybe<SortOrder>;
+  population?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
-  instagram?: Maybe<SortOrder>;
-  website?: Maybe<SortOrder>;
-  slug?: Maybe<SlugSorting>;
-  image?: Maybe<ImageSimpleSorting>;
 };
 
-export enum SortOrder {
-  /** Sorts on the value in ascending order. */
-  Asc = 'ASC',
-  /** Sorts on the value in descending order. */
-  Desc = 'DESC'
-}
-
-export type SlugSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  current?: Maybe<SortOrder>;
+export type Sanity_DocumentFilter = {
+  /** All documents referencing the given document ID. */
+  references?: Maybe<Scalars['ID']>;
+  /** All documents that are drafts. */
+  is_draft?: Maybe<Scalars['Boolean']>;
 };
 
-export type ImageSimpleSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  alt?: Maybe<SortOrder>;
-  hotspot?: Maybe<SanityImageHotspotSorting>;
-  crop?: Maybe<SanityImageCropSorting>;
-};
-
-export type SanityImageHotspotSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  x?: Maybe<SortOrder>;
-  y?: Maybe<SortOrder>;
-  height?: Maybe<SortOrder>;
-  width?: Maybe<SortOrder>;
-};
-
-export type SanityImageCropSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  top?: Maybe<SortOrder>;
-  bottom?: Maybe<SortOrder>;
-  left?: Maybe<SortOrder>;
-  right?: Maybe<SortOrder>;
-};
-
-export type CategoryFilter = {
-  /** Apply filters on document level */
-  _?: Maybe<Sanity_DocumentFilter>;
-  _id?: Maybe<IdFilter>;
-  _type?: Maybe<StringFilter>;
-  _createdAt?: Maybe<DatetimeFilter>;
-  _updatedAt?: Maybe<DatetimeFilter>;
-  _rev?: Maybe<StringFilter>;
-  _key?: Maybe<StringFilter>;
-  title?: Maybe<StringFilter>;
-  description?: Maybe<StringFilter>;
-};
-
-export type CategorySorting = {
-  _id?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  _createdAt?: Maybe<SortOrder>;
-  _updatedAt?: Maybe<SortOrder>;
-  _rev?: Maybe<SortOrder>;
-  _key?: Maybe<SortOrder>;
-  title?: Maybe<SortOrder>;
-  description?: Maybe<SortOrder>;
-};
-
-export type TagFilter = {
-  /** Apply filters on document level */
-  _?: Maybe<Sanity_DocumentFilter>;
-  _id?: Maybe<IdFilter>;
-  _type?: Maybe<StringFilter>;
-  _createdAt?: Maybe<DatetimeFilter>;
-  _updatedAt?: Maybe<DatetimeFilter>;
-  _rev?: Maybe<StringFilter>;
-  _key?: Maybe<StringFilter>;
-  title?: Maybe<StringFilter>;
-  description?: Maybe<StringFilter>;
-};
-
-export type TagSorting = {
-  _id?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  _createdAt?: Maybe<SortOrder>;
-  _updatedAt?: Maybe<SortOrder>;
-  _rev?: Maybe<SortOrder>;
-  _key?: Maybe<SortOrder>;
-  title?: Maybe<SortOrder>;
-  description?: Maybe<SortOrder>;
-};
-
-export type PostFilter = {
-  /** Apply filters on document level */
-  _?: Maybe<Sanity_DocumentFilter>;
-  _id?: Maybe<IdFilter>;
-  _type?: Maybe<StringFilter>;
-  _createdAt?: Maybe<DatetimeFilter>;
-  _updatedAt?: Maybe<DatetimeFilter>;
-  _rev?: Maybe<StringFilter>;
-  _key?: Maybe<StringFilter>;
-  title?: Maybe<StringFilter>;
-  tagline?: Maybe<StringFilter>;
-  slug?: Maybe<SlugFilter>;
-  author?: Maybe<AuthorLinkFilter>;
-  mainImage?: Maybe<ImageSimpleFilter>;
-  publishedAt?: Maybe<DatetimeFilter>;
-};
-
-export type AuthorLinkFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  who?: Maybe<AuthorFilter>;
-  addFeature?: Maybe<BooleanFilter>;
-};
-
-export type PostSorting = {
-  _id?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  _createdAt?: Maybe<SortOrder>;
-  _updatedAt?: Maybe<SortOrder>;
-  _rev?: Maybe<SortOrder>;
-  _key?: Maybe<SortOrder>;
-  title?: Maybe<SortOrder>;
-  tagline?: Maybe<SortOrder>;
-  slug?: Maybe<SlugSorting>;
-  author?: Maybe<AuthorLinkSorting>;
-  mainImage?: Maybe<ImageSimpleSorting>;
-  publishedAt?: Maybe<SortOrder>;
-};
-
-export type AuthorLinkSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  addFeature?: Maybe<SortOrder>;
-};
-
-export type RecipeFilter = {
-  /** Apply filters on document level */
-  _?: Maybe<Sanity_DocumentFilter>;
-  _id?: Maybe<IdFilter>;
-  _type?: Maybe<StringFilter>;
-  _createdAt?: Maybe<DatetimeFilter>;
-  _updatedAt?: Maybe<DatetimeFilter>;
-  _rev?: Maybe<StringFilter>;
-  _key?: Maybe<StringFilter>;
-  title?: Maybe<StringFilter>;
-  tagline?: Maybe<StringFilter>;
-  slug?: Maybe<SlugFilter>;
-  author?: Maybe<AuthorLinkFilter>;
-  mainImage?: Maybe<ImageSimpleFilter>;
-  publishedAt?: Maybe<DatetimeFilter>;
-  recipeInfo?: Maybe<RecipeInfoFilter>;
-};
-
-export type RecipeInfoFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  makes?: Maybe<StringFilter>;
-  serves?: Maybe<StringFilter>;
-  cookingTime?: Maybe<StringFilter>;
-};
-
-export type RecipeSorting = {
-  _id?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  _createdAt?: Maybe<SortOrder>;
-  _updatedAt?: Maybe<SortOrder>;
-  _rev?: Maybe<SortOrder>;
-  _key?: Maybe<SortOrder>;
-  title?: Maybe<SortOrder>;
-  tagline?: Maybe<SortOrder>;
-  slug?: Maybe<SlugSorting>;
-  author?: Maybe<AuthorLinkSorting>;
-  mainImage?: Maybe<ImageSimpleSorting>;
-  publishedAt?: Maybe<SortOrder>;
-  recipeInfo?: Maybe<RecipeInfoSorting>;
-};
-
-export type RecipeInfoSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  makes?: Maybe<SortOrder>;
-  serves?: Maybe<SortOrder>;
-  cookingTime?: Maybe<SortOrder>;
+export type SiteConfig = Document & {
+  __typename?: 'SiteConfig';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
 };
 
 export type SiteConfigFilter = {
@@ -933,176 +1143,31 @@ export type SiteConfigSorting = {
   description?: Maybe<SortOrder>;
 };
 
-export type LandingConfigFilter = {
-  /** Apply filters on document level */
-  _?: Maybe<Sanity_DocumentFilter>;
-  _id?: Maybe<IdFilter>;
-  _type?: Maybe<StringFilter>;
-  _createdAt?: Maybe<DatetimeFilter>;
-  _updatedAt?: Maybe<DatetimeFilter>;
-  _rev?: Maybe<StringFilter>;
-  _key?: Maybe<StringFilter>;
-};
-
-export type LandingConfigSorting = {
-  _id?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  _createdAt?: Maybe<SortOrder>;
-  _updatedAt?: Maybe<SortOrder>;
-  _rev?: Maybe<SortOrder>;
-  _key?: Maybe<SortOrder>;
-};
-
-export type SanityImageAssetSorting = {
-  _id?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  _createdAt?: Maybe<SortOrder>;
-  _updatedAt?: Maybe<SortOrder>;
-  _rev?: Maybe<SortOrder>;
-  _key?: Maybe<SortOrder>;
-  originalFilename?: Maybe<SortOrder>;
-  label?: Maybe<SortOrder>;
-  title?: Maybe<SortOrder>;
-  description?: Maybe<SortOrder>;
-  sha1hash?: Maybe<SortOrder>;
-  extension?: Maybe<SortOrder>;
-  mimeType?: Maybe<SortOrder>;
-  size?: Maybe<SortOrder>;
-  assetId?: Maybe<SortOrder>;
-  path?: Maybe<SortOrder>;
-  url?: Maybe<SortOrder>;
-  metadata?: Maybe<SanityImageMetadataSorting>;
-  source?: Maybe<SanityAssetSourceDataSorting>;
-};
-
-export type SanityImageMetadataSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  location?: Maybe<GeopointSorting>;
-  dimensions?: Maybe<SanityImageDimensionsSorting>;
-  palette?: Maybe<SanityImagePaletteSorting>;
-  lqip?: Maybe<SortOrder>;
-  hasAlpha?: Maybe<SortOrder>;
-  isOpaque?: Maybe<SortOrder>;
-};
-
-export type GeopointSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  lat?: Maybe<SortOrder>;
-  lng?: Maybe<SortOrder>;
-  alt?: Maybe<SortOrder>;
-};
-
-export type SanityImageDimensionsSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  height?: Maybe<SortOrder>;
-  width?: Maybe<SortOrder>;
-  aspectRatio?: Maybe<SortOrder>;
-};
-
-export type SanityImagePaletteSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  darkMuted?: Maybe<SanityImagePaletteSwatchSorting>;
-  lightVibrant?: Maybe<SanityImagePaletteSwatchSorting>;
-  darkVibrant?: Maybe<SanityImagePaletteSwatchSorting>;
-  vibrant?: Maybe<SanityImagePaletteSwatchSorting>;
-  dominant?: Maybe<SanityImagePaletteSwatchSorting>;
-  lightMuted?: Maybe<SanityImagePaletteSwatchSorting>;
-  muted?: Maybe<SanityImagePaletteSwatchSorting>;
-};
-
-export type SanityImagePaletteSwatchSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  background?: Maybe<SortOrder>;
-  foreground?: Maybe<SortOrder>;
-  population?: Maybe<SortOrder>;
-  title?: Maybe<SortOrder>;
-};
-
-export type SanityAssetSourceDataSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  name?: Maybe<SortOrder>;
-  id?: Maybe<SortOrder>;
-  url?: Maybe<SortOrder>;
-};
-
-export type SanityFileAssetFilter = {
-  /** Apply filters on document level */
-  _?: Maybe<Sanity_DocumentFilter>;
-  _id?: Maybe<IdFilter>;
-  _type?: Maybe<StringFilter>;
-  _createdAt?: Maybe<DatetimeFilter>;
-  _updatedAt?: Maybe<DatetimeFilter>;
-  _rev?: Maybe<StringFilter>;
-  _key?: Maybe<StringFilter>;
-  originalFilename?: Maybe<StringFilter>;
-  label?: Maybe<StringFilter>;
-  title?: Maybe<StringFilter>;
-  description?: Maybe<StringFilter>;
-  sha1hash?: Maybe<StringFilter>;
-  extension?: Maybe<StringFilter>;
-  mimeType?: Maybe<StringFilter>;
-  size?: Maybe<FloatFilter>;
-  assetId?: Maybe<StringFilter>;
-  path?: Maybe<StringFilter>;
-  url?: Maybe<StringFilter>;
-  source?: Maybe<SanityAssetSourceDataFilter>;
-};
-
-export type SanityFileAssetSorting = {
-  _id?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  _createdAt?: Maybe<SortOrder>;
-  _updatedAt?: Maybe<SortOrder>;
-  _rev?: Maybe<SortOrder>;
-  _key?: Maybe<SortOrder>;
-  originalFilename?: Maybe<SortOrder>;
-  label?: Maybe<SortOrder>;
-  title?: Maybe<SortOrder>;
-  description?: Maybe<SortOrder>;
-  sha1hash?: Maybe<SortOrder>;
-  extension?: Maybe<SortOrder>;
-  mimeType?: Maybe<SortOrder>;
-  size?: Maybe<SortOrder>;
-  assetId?: Maybe<SortOrder>;
-  path?: Maybe<SortOrder>;
-  url?: Maybe<SortOrder>;
-  source?: Maybe<SanityAssetSourceDataSorting>;
-};
-
-export type DocumentFilter = {
-  /** Apply filters on document level */
-  _?: Maybe<Sanity_DocumentFilter>;
-  _id?: Maybe<IdFilter>;
-  _type?: Maybe<StringFilter>;
-  _createdAt?: Maybe<DatetimeFilter>;
-  _updatedAt?: Maybe<DatetimeFilter>;
-  _rev?: Maybe<StringFilter>;
-};
-
-export type DocumentSorting = {
-  _id?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  _createdAt?: Maybe<SortOrder>;
-  _updatedAt?: Maybe<SortOrder>;
-  _rev?: Maybe<SortOrder>;
-};
-
-export type BlockOrImageSimple = Block | ImageSimple;
-
-export type Block = {
-  __typename?: 'Block';
+export type Slug = {
+  __typename?: 'Slug';
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
-  children?: Maybe<Array<Maybe<Span>>>;
-  style?: Maybe<Scalars['String']>;
-  list?: Maybe<Scalars['String']>;
+  current?: Maybe<Scalars['String']>;
 };
+
+export type SlugFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  current?: Maybe<StringFilter>;
+};
+
+export type SlugSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  current?: Maybe<SortOrder>;
+};
+
+export enum SortOrder {
+  /** Sorts on the value in ascending order. */
+  Asc = 'ASC',
+  /** Sorts on the value in descending order. */
+  Desc = 'DESC'
+}
 
 export type Span = {
   __typename?: 'Span';
@@ -1112,113 +1177,54 @@ export type Span = {
   text?: Maybe<Scalars['String']>;
 };
 
-export type BlockOrImageSimpleOrRecipeStep = Block | ImageSimple | RecipeStep;
-
-export type RecipeStep = {
-  __typename?: 'RecipeStep';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  step?: Maybe<Scalars['Float']>;
-  contentRaw?: Maybe<Scalars['JSON']>;
-};
-
-export type Image = {
-  __typename?: 'Image';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  asset?: Maybe<SanityImageAsset>;
-  hotspot?: Maybe<SanityImageHotspot>;
-  crop?: Maybe<SanityImageCrop>;
-};
-
-export type File = {
-  __typename?: 'File';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  asset?: Maybe<SanityFileAsset>;
-};
-
-export type IntFilter = {
+export type StringFilter = {
   /** Checks if the value is equal to the given input. */
-  eq?: Maybe<Scalars['Int']>;
+  eq?: Maybe<Scalars['String']>;
   /** Checks if the value is not equal to the given input. */
-  neq?: Maybe<Scalars['Int']>;
-  /** Checks if the value is greater than the given input. */
-  gt?: Maybe<Scalars['Int']>;
-  /** Checks if the value is greater than or equal to the given input. */
-  gte?: Maybe<Scalars['Int']>;
-  /** Checks if the value is lesser than the given input. */
-  lt?: Maybe<Scalars['Int']>;
-  /** Checks if the value is lesser than or equal to the given input. */
-  lte?: Maybe<Scalars['Int']>;
+  neq?: Maybe<Scalars['String']>;
+  /** Checks if the value matches the given word/words. */
+  matches?: Maybe<Scalars['String']>;
+  in?: Maybe<Array<Scalars['String']>>;
+  nin?: Maybe<Array<Scalars['String']>>;
 };
 
-export type DateFilter = {
-  /** Checks if the value is equal to the given input. */
-  eq?: Maybe<Scalars['Date']>;
-  /** Checks if the value is not equal to the given input. */
-  neq?: Maybe<Scalars['Date']>;
-  /** Checks if the value is greater than the given input. */
-  gt?: Maybe<Scalars['Date']>;
-  /** Checks if the value is greater than or equal to the given input. */
-  gte?: Maybe<Scalars['Date']>;
-  /** Checks if the value is lesser than the given input. */
-  lt?: Maybe<Scalars['Date']>;
-  /** Checks if the value is lesser than or equal to the given input. */
-  lte?: Maybe<Scalars['Date']>;
+export type Tag = Document & {
+  __typename?: 'Tag';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
 };
 
-
-export type ImageFilter = {
-  _key?: Maybe<StringFilter>;
+export type TagFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
   _type?: Maybe<StringFilter>;
-  asset?: Maybe<SanityImageAssetFilter>;
-  hotspot?: Maybe<SanityImageHotspotFilter>;
-  crop?: Maybe<SanityImageCropFilter>;
-};
-
-export type FileFilter = {
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  asset?: Maybe<SanityFileAssetFilter>;
+  title?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
 };
 
-export type RecipeStepFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  step?: Maybe<FloatFilter>;
-};
-
-export type RecipeIngredientFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  amount?: Maybe<StringFilter>;
-  ingredient?: Maybe<StringFilter>;
-  note?: Maybe<StringFilter>;
-};
-
-export type ImageSorting = {
-  _key?: Maybe<SortOrder>;
+export type TagSorting = {
+  _id?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
-  hotspot?: Maybe<SanityImageHotspotSorting>;
-  crop?: Maybe<SanityImageCropSorting>;
-};
-
-export type FileSorting = {
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-};
-
-export type RecipeStepSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  step?: Maybe<SortOrder>;
-};
-
-export type RecipeIngredientSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  amount?: Maybe<SortOrder>;
-  ingredient?: Maybe<SortOrder>;
-  note?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
 };
