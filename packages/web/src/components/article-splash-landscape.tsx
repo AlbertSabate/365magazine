@@ -55,15 +55,15 @@ const ArticleSplashLandscape: FC<ArticleSplashProps> = ({ article, children }) =
           >
             {article.tagline}
           </Heading>
+          {isBlockText(firstBlock) && (
+            <BlockText
+              content={firstBlock}
+              variant='post-intro'
+              dropCap
+            />
+          )}
         </Box>
       </Box>
-      {isBlockText(firstBlock) && (
-        <BlockText
-          content={firstBlock}
-          variant='post-intro'
-          dropCap
-        />
-      )}
     </>
   );
 };

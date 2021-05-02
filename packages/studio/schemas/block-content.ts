@@ -1,3 +1,35 @@
+import SchemaTypes from './types';
+
+export const SimpleMarks = {
+  // Decorators usually describe a single property – e.g. a typographic
+  // preference or highlighting by editors.
+  decorators: [{ title: 'Strong', value: 'strong' }, { title: 'Emphasis', value: 'em' }],
+  // Annotations can be any object structure – e.g. a link or a footnote.
+  annotations: [
+    {
+      title: 'URL',
+      name: 'link',
+      type: 'object',
+      fields: [
+        {
+          title: 'URL',
+          name: 'href',
+          type: 'url',
+        },
+      ],
+    },
+  ],
+};
+
+export const SimpleBlock = {
+  title: 'Block',
+  type: 'block',
+  styles: [{ title: 'Normal', value: 'normal' }],
+  lists: [],
+  // Marks let you mark up inline text in the block editor.
+  marks: SimpleMarks,
+};
+
 /**
  * This is the schema definition for the rich text fields used for
  * for this blog studio. When you import it in schemas.js it can be
@@ -10,12 +42,11 @@
  */
 const BlockContent = {
   title: 'Block Content',
-  name: 'blockContent',
+  name: SchemaTypes.BlockContent,
   type: 'array',
   of: [
     {
-      title: 'Block',
-      type: 'block',
+      ...SimpleBlock,
       // Styles let you set what your user can mark up blocks with. These
       // correspond with HTML tags, but you can set any title or value
       // you want and decide how you want to deal with it where you want to
@@ -29,34 +60,9 @@ const BlockContent = {
         { title: 'Quote', value: 'blockquote' },
       ],
       lists: [{ title: 'Bullet', value: 'bullet' }],
-      // Marks let you mark up inline text in the block editor.
-      marks: {
-        // Decorators usually describe a single property – e.g. a typographic
-        // preference or highlighting by editors.
-        decorators: [{ title: 'Strong', value: 'strong' }, { title: 'Emphasis', value: 'em' }],
-        // Annotations can be any object structure – e.g. a link or a footnote.
-        annotations: [
-          {
-            title: 'URL',
-            name: 'link',
-            type: 'object',
-            fields: [
-              {
-                title: 'URL',
-                name: 'href',
-                type: 'url',
-              },
-            ],
-          },
-        ],
-      },
     },
-    // You can add additional types here. Note that you can't use
-    // primitive types such as 'string' and 'number' in the same array
-    // as a block type.
     {
-      type: 'image',
-      options: { hotspot: true },
+      type: SchemaTypes.ImageSimple,
     },
   ],
 };

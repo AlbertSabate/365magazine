@@ -18,9 +18,9 @@ interface Document {
   _updatedAt: DateTime
 }
 
-union BlockOrImage = Block | Image
+union BlockOrImageSimple = Block | ImageSimple
 
-union BlockOrImageOrRecipeStep = Block | Image | RecipeStep
+union BlockOrImageSimpleOrRecipeStep = Block | ImageSimple | RecipeStep
 
 union PostOrRecipe = Post | Recipe
 
@@ -37,7 +37,7 @@ type Author implements Document {
   "Date the document was last modified"
   _updatedAt: DateTime
   bioRaw: JSON
-  image: Image
+  image: ImageSimple
   instagram: String
   name: String
   slug: Slug
@@ -98,6 +98,17 @@ type Image {
   hotspot: SanityImageHotspot
 }
 
+type ImageSimple {
+  _key: String
+  _type: String
+  "Important for SEO and accessibility."
+  alt: String
+  asset: SanityImageAsset
+  captionRaw: JSON
+  crop: SanityImageCrop
+  hotspot: SanityImageHotspot
+}
+
 type LandingConfig implements Document {
   "Date the document was created"
   _createdAt: DateTime
@@ -128,7 +139,7 @@ type Post implements Document {
   author: AuthorLink
   categories: [Category]
   contentRaw: JSON
-  mainImage: Image
+  mainImage: ImageSimple
   publishedAt: DateTime
   slug: Slug
   tagline: String
@@ -151,7 +162,7 @@ type Recipe implements Document {
   author: AuthorLink
   categories: [Category]
   contentRaw: JSON
-  mainImage: Image
+  mainImage: ImageSimple
   publishedAt: DateTime
   recipeInfo: RecipeInfo
   slug: Slug
@@ -490,7 +501,7 @@ input AuthorFilter {
   _rev: StringFilter
   _type: StringFilter
   _updatedAt: DatetimeFilter
-  image: ImageFilter
+  image: ImageSimpleFilter
   instagram: StringFilter
   name: StringFilter
   slug: SlugFilter
@@ -518,7 +529,7 @@ input AuthorSorting {
   _rev: SortOrder
   _type: SortOrder
   _updatedAt: SortOrder
-  image: ImageSorting
+  image: ImageSimpleSorting
   instagram: SortOrder
   name: SortOrder
   slug: SlugSorting
@@ -666,6 +677,23 @@ input ImageFilter {
   hotspot: SanityImageHotspotFilter
 }
 
+input ImageSimpleFilter {
+  _key: StringFilter
+  _type: StringFilter
+  alt: StringFilter
+  asset: SanityImageAssetFilter
+  crop: SanityImageCropFilter
+  hotspot: SanityImageHotspotFilter
+}
+
+input ImageSimpleSorting {
+  _key: SortOrder
+  _type: SortOrder
+  alt: SortOrder
+  crop: SanityImageCropSorting
+  hotspot: SanityImageHotspotSorting
+}
+
 input ImageSorting {
   _key: SortOrder
   _type: SortOrder
@@ -718,7 +746,7 @@ input PostFilter {
   _type: StringFilter
   _updatedAt: DatetimeFilter
   author: AuthorLinkFilter
-  mainImage: ImageFilter
+  mainImage: ImageSimpleFilter
   publishedAt: DatetimeFilter
   slug: SlugFilter
   tagline: StringFilter
@@ -732,7 +760,8 @@ input PostSorting {
   _rev: SortOrder
   _type: SortOrder
   _updatedAt: SortOrder
-  mainImage: ImageSorting
+  author: AuthorLinkSorting
+  mainImage: ImageSimpleSorting
   publishedAt: SortOrder
   slug: SlugSorting
   tagline: SortOrder
@@ -749,7 +778,7 @@ input RecipeFilter {
   _type: StringFilter
   _updatedAt: DatetimeFilter
   author: AuthorLinkFilter
-  mainImage: ImageFilter
+  mainImage: ImageSimpleFilter
   publishedAt: DatetimeFilter
   recipeInfo: RecipeInfoFilter
   slug: SlugFilter
@@ -797,7 +826,7 @@ input RecipeSorting {
   _type: SortOrder
   _updatedAt: SortOrder
   author: AuthorLinkSorting
-  mainImage: ImageSorting
+  mainImage: ImageSimpleSorting
   publishedAt: SortOrder
   recipeInfo: RecipeInfoSorting
   slug: SlugSorting

@@ -29,16 +29,13 @@ const Post = {
     {
       name: 'author',
       title: 'Author',
-      type: 'reference',
-      to: { type: SchemaTypes.AuthorLink },
+      type: SchemaTypes.AuthorLink,
     },
     {
       name: 'mainImage',
       title: 'Main Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      type: SchemaTypes.ImageSimple,
+      options: { hotspot: false },
     },
     {
       name: 'categories',
@@ -60,7 +57,7 @@ const Post = {
     {
       name: 'content',
       title: 'Content',
-      type: 'blockContent',
+      type: SchemaTypes.BlockContent,
     },
   ],
 

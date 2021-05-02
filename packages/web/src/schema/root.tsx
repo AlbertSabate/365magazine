@@ -192,7 +192,7 @@ export type Author = Document & {
   instagram?: Maybe<Scalars['String']>;
   website?: Maybe<Scalars['String']>;
   slug?: Maybe<Slug>;
-  image?: Maybe<Image>;
+  image?: Maybe<ImageSimple>;
   bioRaw?: Maybe<Scalars['JSON']>;
 };
 
@@ -218,14 +218,18 @@ export type Slug = {
   current?: Maybe<Scalars['String']>;
 };
 
-export type Image = {
-  __typename?: 'Image';
+export type ImageSimple = {
+  __typename?: 'ImageSimple';
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
+  captionRaw?: Maybe<Scalars['JSON']>;
+  /** Important for SEO and accessibility. */
+  alt?: Maybe<Scalars['String']>;
   asset?: Maybe<SanityImageAsset>;
   hotspot?: Maybe<SanityImageHotspot>;
   crop?: Maybe<SanityImageCrop>;
 };
+
 
 export type SanityImageAsset = Document & {
   __typename?: 'SanityImageAsset';
@@ -340,7 +344,6 @@ export type SanityImageCrop = {
   right?: Maybe<Scalars['Float']>;
 };
 
-
 export type Category = Document & {
   __typename?: 'Category';
   /** Document ID */
@@ -392,7 +395,7 @@ export type Post = Document & {
   tagline?: Maybe<Scalars['String']>;
   slug?: Maybe<Slug>;
   author?: Maybe<AuthorLink>;
-  mainImage?: Maybe<Image>;
+  mainImage?: Maybe<ImageSimple>;
   categories?: Maybe<Array<Maybe<Category>>>;
   tags?: Maybe<Array<Maybe<Tag>>>;
   publishedAt?: Maybe<Scalars['DateTime']>;
@@ -424,7 +427,7 @@ export type Recipe = Document & {
   tagline?: Maybe<Scalars['String']>;
   slug?: Maybe<Slug>;
   author?: Maybe<AuthorLink>;
-  mainImage?: Maybe<Image>;
+  mainImage?: Maybe<ImageSimple>;
   categories?: Maybe<Array<Maybe<Category>>>;
   tags?: Maybe<Array<Maybe<Tag>>>;
   publishedAt?: Maybe<Scalars['DateTime']>;
@@ -527,7 +530,7 @@ export type AuthorFilter = {
   instagram?: Maybe<StringFilter>;
   website?: Maybe<StringFilter>;
   slug?: Maybe<SlugFilter>;
-  image?: Maybe<ImageFilter>;
+  image?: Maybe<ImageSimpleFilter>;
 };
 
 export type Sanity_DocumentFilter = {
@@ -580,9 +583,10 @@ export type SlugFilter = {
   current?: Maybe<StringFilter>;
 };
 
-export type ImageFilter = {
+export type ImageSimpleFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
+  alt?: Maybe<StringFilter>;
   asset?: Maybe<SanityImageAssetFilter>;
   hotspot?: Maybe<SanityImageHotspotFilter>;
   crop?: Maybe<SanityImageCropFilter>;
@@ -720,7 +724,7 @@ export type AuthorSorting = {
   instagram?: Maybe<SortOrder>;
   website?: Maybe<SortOrder>;
   slug?: Maybe<SlugSorting>;
-  image?: Maybe<ImageSorting>;
+  image?: Maybe<ImageSimpleSorting>;
 };
 
 export enum SortOrder {
@@ -736,9 +740,10 @@ export type SlugSorting = {
   current?: Maybe<SortOrder>;
 };
 
-export type ImageSorting = {
+export type ImageSimpleSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
+  alt?: Maybe<SortOrder>;
   hotspot?: Maybe<SanityImageHotspotSorting>;
   crop?: Maybe<SanityImageCropSorting>;
 };
@@ -822,7 +827,7 @@ export type PostFilter = {
   tagline?: Maybe<StringFilter>;
   slug?: Maybe<SlugFilter>;
   author?: Maybe<AuthorLinkFilter>;
-  mainImage?: Maybe<ImageFilter>;
+  mainImage?: Maybe<ImageSimpleFilter>;
   publishedAt?: Maybe<DatetimeFilter>;
 };
 
@@ -843,8 +848,15 @@ export type PostSorting = {
   title?: Maybe<SortOrder>;
   tagline?: Maybe<SortOrder>;
   slug?: Maybe<SlugSorting>;
-  mainImage?: Maybe<ImageSorting>;
+  author?: Maybe<AuthorLinkSorting>;
+  mainImage?: Maybe<ImageSimpleSorting>;
   publishedAt?: Maybe<SortOrder>;
+};
+
+export type AuthorLinkSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  addFeature?: Maybe<SortOrder>;
 };
 
 export type RecipeFilter = {
@@ -860,7 +872,7 @@ export type RecipeFilter = {
   tagline?: Maybe<StringFilter>;
   slug?: Maybe<SlugFilter>;
   author?: Maybe<AuthorLinkFilter>;
-  mainImage?: Maybe<ImageFilter>;
+  mainImage?: Maybe<ImageSimpleFilter>;
   publishedAt?: Maybe<DatetimeFilter>;
   recipeInfo?: Maybe<RecipeInfoFilter>;
 };
@@ -884,15 +896,9 @@ export type RecipeSorting = {
   tagline?: Maybe<SortOrder>;
   slug?: Maybe<SlugSorting>;
   author?: Maybe<AuthorLinkSorting>;
-  mainImage?: Maybe<ImageSorting>;
+  mainImage?: Maybe<ImageSimpleSorting>;
   publishedAt?: Maybe<SortOrder>;
   recipeInfo?: Maybe<RecipeInfoSorting>;
-};
-
-export type AuthorLinkSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  addFeature?: Maybe<SortOrder>;
 };
 
 export type RecipeInfoSorting = {
@@ -1087,7 +1093,7 @@ export type DocumentSorting = {
   _rev?: Maybe<SortOrder>;
 };
 
-export type BlockOrImage = Block | Image;
+export type BlockOrImageSimple = Block | ImageSimple;
 
 export type Block = {
   __typename?: 'Block';
@@ -1106,7 +1112,7 @@ export type Span = {
   text?: Maybe<Scalars['String']>;
 };
 
-export type BlockOrImageOrRecipeStep = Block | Image | RecipeStep;
+export type BlockOrImageSimpleOrRecipeStep = Block | ImageSimple | RecipeStep;
 
 export type RecipeStep = {
   __typename?: 'RecipeStep';
@@ -1114,6 +1120,15 @@ export type RecipeStep = {
   _type?: Maybe<Scalars['String']>;
   step?: Maybe<Scalars['Float']>;
   contentRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type Image = {
+  __typename?: 'Image';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  asset?: Maybe<SanityImageAsset>;
+  hotspot?: Maybe<SanityImageHotspot>;
+  crop?: Maybe<SanityImageCrop>;
 };
 
 export type File = {
@@ -1154,6 +1169,14 @@ export type DateFilter = {
 };
 
 
+export type ImageFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  asset?: Maybe<SanityImageAssetFilter>;
+  hotspot?: Maybe<SanityImageHotspotFilter>;
+  crop?: Maybe<SanityImageCropFilter>;
+};
+
 export type FileFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
@@ -1172,6 +1195,13 @@ export type RecipeIngredientFilter = {
   amount?: Maybe<StringFilter>;
   ingredient?: Maybe<StringFilter>;
   note?: Maybe<StringFilter>;
+};
+
+export type ImageSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  hotspot?: Maybe<SanityImageHotspotSorting>;
+  crop?: Maybe<SanityImageCropSorting>;
 };
 
 export type FileSorting = {

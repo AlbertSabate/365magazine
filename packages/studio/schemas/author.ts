@@ -1,4 +1,5 @@
 import { MdPerson } from 'react-icons/md';
+import { SimpleBlock } from './block-content';
 import SchemaTypes from './types';
 
 const Author = {
@@ -44,22 +45,15 @@ const Author = {
     {
       name: 'image',
       title: 'Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      type: SchemaTypes.ImageSimple,
+      options: { hotspot: false },
     },
     {
       name: 'bio',
       title: 'Bio',
       type: 'array',
       of: [
-        {
-          title: 'Block',
-          type: 'block',
-          styles: [{ title: 'Normal', value: 'normal' }],
-          lists: [],
-        },
+        SimpleBlock,
       ],
     },
   ],

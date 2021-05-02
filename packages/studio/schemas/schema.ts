@@ -17,9 +17,11 @@ import Recipe from './recipe';
 import RecipeInfo from './recipe-info';
 import RecipeIngredient from './recipe-ingredient';
 import RecipeStepContent from './recipe-step-content';
+import RecipeContent from './recipe-content';
 import LandingConfig from './landing-config';
 import SiteConfig from './site-config';
 import Tag from './tag';
+import ImageSimple from './image-simple';
 
 export default createSchema({
   name: 'default',
@@ -33,11 +35,13 @@ export default createSchema({
     SiteConfig,
     LandingConfig,
     // other objects
+    ImageSimple,
     AuthorLink,
     BlockContent,
     RecipeInfo,
     RecipeStep,
     RecipeStepContent,
     RecipeIngredient,
+    RecipeContent,
   ]),
 });

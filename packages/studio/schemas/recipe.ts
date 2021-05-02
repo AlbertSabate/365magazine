@@ -34,10 +34,8 @@ const Recipe = {
     {
       name: 'mainImage',
       title: 'Main Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      type: SchemaTypes.ImageSimple,
+      options: { hotspot: false },
     },
     {
       name: 'categories',
@@ -64,12 +62,7 @@ const Recipe = {
     {
       name: 'content',
       title: 'Content',
-      type: 'array',
-      of: [
-        { type: 'block' },
-        { type: 'image' },
-        { type: SchemaTypes.RecipeStep },
-      ],
+      type: SchemaTypes.RecipeContent,
     },
   ],
 

@@ -87,7 +87,7 @@ const Fragments = {
     },
   `,
   ImageBasic: gql`
-    fragment ImageBasic on Image {
+    fragment ImageBasic on ImageSimple {
       _key
       asset {
         _id
