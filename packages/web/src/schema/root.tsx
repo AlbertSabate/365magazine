@@ -104,9 +104,9 @@ export type Block = {
   list?: Maybe<Scalars['String']>;
 };
 
-export type BlockOrImageSimple = Block | ImageSimple;
+export type BlockOrEmbedInstagramOrImageSimple = Block | EmbedInstagram | ImageSimple;
 
-export type BlockOrImageSimpleOrRecipeStep = Block | ImageSimple | RecipeStep;
+export type BlockOrEmbedInstagramOrImageSimpleOrRecipeStep = Block | EmbedInstagram | ImageSimple | RecipeStep;
 
 export type BooleanFilter = {
   /** Checks if the value is equal to the given input. */
@@ -154,6 +154,32 @@ export type CategorySorting = {
   _key?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
   description?: Maybe<SortOrder>;
+};
+
+export type Code = {
+  __typename?: 'Code';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
+  language?: Maybe<Scalars['String']>;
+  filename?: Maybe<Scalars['String']>;
+  highlightedLines?: Maybe<Array<Maybe<Scalars['Float']>>>;
+};
+
+export type CodeFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  code?: Maybe<StringFilter>;
+  language?: Maybe<StringFilter>;
+  filename?: Maybe<StringFilter>;
+};
+
+export type CodeSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  code?: Maybe<SortOrder>;
+  language?: Maybe<SortOrder>;
+  filename?: Maybe<SortOrder>;
 };
 
 
@@ -218,6 +244,25 @@ export type DocumentSorting = {
   _createdAt?: Maybe<SortOrder>;
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
+};
+
+export type EmbedInstagram = {
+  __typename?: 'EmbedInstagram';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
+};
+
+export type EmbedInstagramFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  code?: Maybe<StringFilter>;
+};
+
+export type EmbedInstagramSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  code?: Maybe<SortOrder>;
 };
 
 export type File = {

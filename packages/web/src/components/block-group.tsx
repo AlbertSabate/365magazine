@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { FC } from 'react';
 import type { SpaceProps } from 'styled-system';
-import { Flex } from 'theme-ui';
-import { BlockContent, isBlockImage, isBlockRecipeStep, isBlockText } from '../schema/block';
-import { ARTICLE_GUTTER, ARTICLE_WIDTH } from '../theme';
+import { Box } from 'theme-ui';
+import { BlockContent, isBlockEmbedInstagram, isBlockImage, isBlockRecipeStep, isBlockText } from '../schema/block';
+import { ARTICLE_GUTTER } from '../theme';
 import BlockImage from './block-image';
 import BlockRecipeStep from './block-recipe-step';
 import BlockText from './block-text';
@@ -46,6 +46,27 @@ const BlockGroup: FC<BlockGroupProps> = ({ blocks, ...props }) => (
             px={ARTICLE_GUTTER}
             {...props}
           />
+        );
+      }
+      if (isBlockEmbedInstagram(b)) {
+        return (
+          <Box
+            sx={{
+              textAlign: 'center',
+            }}
+          >
+            <style>
+              {`
+#ig-embed-${b._key} > iframe {
+  margin: 0 auto !important;
+}`}
+            </style>
+            <div
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: b.code }}
+              id={`ig-embed-${b._key}`}
+            />
+          </Box>
         );
       }
 

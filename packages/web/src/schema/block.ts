@@ -57,7 +57,18 @@ export interface BlockRecipeStepContent {
   step: number;
 }
 
-export type BlockContent = BlockImageContent | BlockTextContent | BlockRecipeStepContent;
+export interface BlockEmbedInstagram {
+  _type: 'embedInstagram',
+  _key: string;
+  code: string;
+}
+
+export type BlockContent = (
+  | BlockImageContent
+  | BlockTextContent
+  | BlockRecipeStepContent
+  | BlockEmbedInstagram
+);
 
 export const isBlockImage = (block?: BlockContent): block is BlockImageContent => block
   && (block as BlockImageContent)._type === 'image';
@@ -65,3 +76,5 @@ export const isBlockText = (block?: BlockContent): block is BlockTextContent => 
   && (block as BlockTextContent)._type === 'block';
 export const isBlockRecipeStep = (block?: BlockContent): block is BlockRecipeStepContent => block
   && (block as BlockRecipeStepContent)._type === 'recipeStep';
+export const isBlockEmbedInstagram = (block?: BlockContent): block is BlockEmbedInstagram => block
+  && (block as BlockEmbedInstagram)._type === 'embedInstagram';

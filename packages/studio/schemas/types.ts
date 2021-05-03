@@ -14,6 +14,7 @@ enum SchemaTypes {
   RecipeContent = 'recipeContent',
   SiteConfig = 'siteConfig',
   LandingConfig = 'landingConfig',
+  EmbedInstagram = 'embedInstagram',
 }
 
 export default SchemaTypes;

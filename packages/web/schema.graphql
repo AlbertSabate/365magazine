@@ -18,9 +18,9 @@ interface Document {
   _updatedAt: DateTime
 }
 
-union BlockOrImageSimple = Block | ImageSimple
+union BlockOrEmbedInstagramOrImageSimple = Block | EmbedInstagram | ImageSimple
 
-union BlockOrImageSimpleOrRecipeStep = Block | ImageSimple | RecipeStep
+union BlockOrEmbedInstagramOrImageSimpleOrRecipeStep = Block | EmbedInstagram | ImageSimple | RecipeStep
 
 union PostOrRecipe = Post | Recipe
 
@@ -74,6 +74,21 @@ type Category implements Document {
   _updatedAt: DateTime
   description: String
   title: String
+}
+
+type Code {
+  _key: String
+  _type: String
+  code: String
+  filename: String
+  highlightedLines: [Float]
+  language: String
+}
+
+type EmbedInstagram {
+  _key: String
+  _type: String
+  code: String
 }
 
 type File {
@@ -570,6 +585,22 @@ input CategorySorting {
   title: SortOrder
 }
 
+input CodeFilter {
+  _key: StringFilter
+  _type: StringFilter
+  code: StringFilter
+  filename: StringFilter
+  language: StringFilter
+}
+
+input CodeSorting {
+  _key: SortOrder
+  _type: SortOrder
+  code: SortOrder
+  filename: SortOrder
+  language: SortOrder
+}
+
 input DateFilter {
   "Checks if the value is equal to the given input."
   eq: Date
@@ -616,6 +647,18 @@ input DocumentSorting {
   _rev: SortOrder
   _type: SortOrder
   _updatedAt: SortOrder
+}
+
+input EmbedInstagramFilter {
+  _key: StringFilter
+  _type: StringFilter
+  code: StringFilter
+}
+
+input EmbedInstagramSorting {
+  _key: SortOrder
+  _type: SortOrder
+  code: SortOrder
 }
 
 input FileFilter {

@@ -64,6 +64,9 @@ const BlockContent = {
     {
       type: SchemaTypes.ImageSimple,
     },
+    {
+      type: SchemaTypes.EmbedInstagram,
+    },
   ],
 };
 

@@ -22,6 +22,7 @@ import LandingConfig from './landing-config';
 import SiteConfig from './site-config';
 import Tag from './documents/tag';
 import ImageSimple from './objects/image-simple';
+import EmbedInstagram from './objects/embed-instagram';
 
 export default createSchema({
   name: 'default',
@@ -43,5 +44,6 @@ export default createSchema({
     RecipeStepContent,
     RecipeIngredient,
     RecipeContent,
+    EmbedInstagram,
   ]),
 });
