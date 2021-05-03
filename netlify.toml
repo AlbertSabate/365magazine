@@ -1,6 +1,0 @@
-[build]
-  command = "yarn workspace @365/web build"
-  publish = "packages/web/build"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
