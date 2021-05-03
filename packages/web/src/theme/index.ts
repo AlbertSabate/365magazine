@@ -44,7 +44,8 @@ const theme: AppTheme = {
       float: 'left',
       fontSize: '64px',
       lineHeight: '70px',
-      margin: '-4px 8px 0 -4px',
+      // margin: '-4px 8px -2px -4px',
+      margin: '-3px 7px -3px 0px',
     },
     'post-intro': {
       fontFamily: 'body',
