@@ -1,13 +1,13 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 import { SanityProjectDetails } from '../types/sanity.types';
 
-const {
-  SANITY_PROJECT_ID = 'n4kphzu5',
-  SANITY_DATASET = 'dev',
-  SANITY_TAG = 'default',
-  SANITY_USE_CDN = 'false',
-  SANITY_TOKEN,
-} = process.env;
+/* eslint-disable prefer-destructuring */
+const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID;
+const SANITY_DATASET = process.env.SANITY_DATASET;
+const SANITY_TAG = process.env.SANITY_TAG;
+const SANITY_USE_CDN = process.env.SANITY_USE_CDN;
+const SANITY_TOKEN = process.env.SANITY_TOKEN;
+/* eslint-enable prefer-destructuring */
 
 export const SANITY_PROJECT: SanityProjectDetails = {
   projectId: SANITY_PROJECT_ID,
