@@ -1,4 +1,7 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { Article } from '../schema/article';
+import Queries from '../schema/queries';
+import { Post, Recipe, RootQuery } from '../schema/root';
 import { SanityProjectDetails } from '../types/sanity.types';
 
 /* eslint-disable prefer-destructuring */
@@ -30,3 +33,50 @@ const client = new ApolloClient({
 });
 
 export default client;
+
+
+const pickArticle = <T extends Article = Article>(articles: T[] = [], preview?: boolean): T => articles
+  .filter((a) => {
+    const isDraft = a._id.startsWith('drafts.');
+    return preview ? isDraft : !isDraft;
+  })[0];
+
+export async function getPostBySlug(slug: string, draft?: boolean): Promise<Post | null> {
+  const { data, error } = await client.query<RootQuery>({
+    query: Queries.getPostBySlug,
+    variables: {
+      slug,
+    },
+  });
+
+  if (error) {
+    console.error(error);
+  }
+
+  const post = pickArticle<Post>(data?.allPost, draft);
+  if (!post) {
+    return null;
+  }
+
+  return post;
+}
+
+export async function getRecipeBySlug(slug: string, draft?: boolean): Promise<Recipe | null> {
+  const { data, error } = await client.query<RootQuery>({
+    query: Queries.getRecipeBySlug,
+    variables: {
+      slug,
+    },
+  });
+
+  if (error) {
+    console.error(error);
+  }
+
+  const recipe = pickArticle<Recipe>(data?.allRecipe, draft);
+  if (!recipe) {
+    return null;
+  }
+
+  return recipe;
+}

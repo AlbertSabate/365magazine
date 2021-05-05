@@ -10,8 +10,8 @@ import ArticleSplashPortrait from '../components/article-splash-portrait';
 import BlockGroup from '../components/block-group';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import client from '../lib/apollo';
-import { isRecipeArticle } from '../schema/article';
+import client, { getPostBySlug, getRecipeBySlug } from '../lib/apollo';
+import { Article, isRecipeArticle } from '../schema/article';
 import { BlockContent } from '../schema/block';
 import Queries from '../schema/queries';
 import { Post, Recipe, RootQuery } from '../schema/root';
@@ -62,7 +62,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const allPaths: string[] = [];
 
   allArticles.forEach((a) => {
-    if (a._id.startsWith('drafts')) {
+    if (a._id.startsWith('drafts.')) {
       return;
     }
     const path = a.slug?.current;
@@ -79,61 +79,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-type Article = Post | Recipe;
-
-async function getPostBySlug(slug: string): Promise<Article | null> {
-  const { data, error } = await client.query<RootQuery>({
-    query: Queries.getPostBySlug,
-    variables: {
-      slug,
-    },
-  });
-
-  if (error) {
-    console.error(error);
-  }
-
-  const [post] = data?.allPost || [];
-  if (!post || error) {
-    return null;
-  }
-
-  return post;
-}
-
-async function getRecipeBySlug(slug: string): Promise<Article | null> {
-  const { data, error } = await client.query<RootQuery>({
-    query: Queries.getRecipeBySlug,
-    variables: {
-      slug,
-    },
-  });
-
-  if (error) {
-    console.error(error);
-  }
-
-  const [recipe] = data?.allRecipe || [];
-  if (!recipe || error) {
-    return null;
-  }
-
-  return recipe;
-}
-
 type PostInitialProps = {
   slug: string;
   article: Post | Recipe;
 };
 
-export const getStaticProps: GetStaticProps<PostInitialProps> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PostInitialProps> = async ({ params, preview }) => {
   if (Array.isArray(params.slug)) {
     throw Error('slug is array');
   }
 
   const slug = params.slug.startsWith('/') ? params.slug.substr(1) : params.slug;
 
-  let article = await getPostBySlug(slug);
+  let article: Article = await getPostBySlug(slug);
   if (!article) {
     article = await getRecipeBySlug(slug);
   }
@@ -162,6 +120,10 @@ const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({ slug, article, ro
   if (router.isFallback) {
     // todo: implement loading placeholder for the dynamic article
     return <div>loading........</div>;
+  }
+
+  if (article._id.startsWith('drafts.')) {
+    // todo: setup subscription for data updates to render this in live preview window
   }
 
   const isMainImagePortrait = article.mainImage.asset.metadata.dimensions.aspectRatio < 1;

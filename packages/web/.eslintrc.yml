@@ -33,3 +33,4 @@ rules:
   react/react-in-jsx-scope: off
   no-console: off
   no-underscore-dangle: off
+  consistent-return: off
