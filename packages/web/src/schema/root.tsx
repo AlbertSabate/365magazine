@@ -1,4 +1,3 @@
-import { gql } from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -17,7 +16,6 @@ export type Scalars = {
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
 };
-
 
 
 export type Author = Document & {
@@ -351,11 +349,9 @@ export type ImageFilter = {
   crop?: Maybe<SanityImageCropFilter>;
 };
 
-export type ImageSimple = {
-  __typename?: 'ImageSimple';
+export type ImageSimple = SanityImageAsset & {
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
-  asset?: Maybe<SanityImageAsset>;
   hotspot?: Maybe<SanityImageHotspot>;
   crop?: Maybe<SanityImageCrop>;
   captionRaw?: Maybe<Scalars['JSON']>;
@@ -460,7 +456,7 @@ export type Post = Document & {
   categories?: Maybe<Array<Maybe<Category>>>;
   tags?: Maybe<Array<Maybe<Tag>>>;
   publishedAt?: Maybe<Scalars['DateTime']>;
-  contentRaw?: Maybe<Scalars['JSON']>;
+  content?: Maybe<Scalars['JSON']>;
 };
 
 export type PostFilter = {
@@ -519,7 +515,7 @@ export type Recipe = Document & {
   tags?: Maybe<Array<Maybe<Tag>>>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   recipeInfo?: Maybe<RecipeInfo>;
-  contentRaw?: Maybe<Scalars['JSON']>;
+  content?: Maybe<Scalars['JSON']>;
 };
 
 export type RecipeFilter = {
@@ -612,7 +608,7 @@ export type RecipeStep = {
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
   step?: Maybe<Scalars['Float']>;
-  contentRaw?: Maybe<Scalars['JSON']>;
+  content?: Maybe<Scalars['JSON']>;
 };
 
 export type RecipeStepFilter = {

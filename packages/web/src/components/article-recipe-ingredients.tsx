@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { Box, Flex, Heading, Text } from '@theme-ui/components';
 import { FC } from 'react';
-import { Box, Flex, Heading, Text } from 'theme-ui';
 import { RecipeIngredient } from '../schema/root';
 
 

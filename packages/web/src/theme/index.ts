@@ -1,5 +1,5 @@
 import type * as CSS from 'csstype';
-import { Theme } from 'theme-ui';
+import { Theme } from '@theme-ui/core';
 import colors from './colors';
 
 

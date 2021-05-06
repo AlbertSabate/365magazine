@@ -1,6 +1,7 @@
-import { Global } from '@emotion/core';
+import { Global } from '@emotion/react';
+import { Box } from '@theme-ui/components';
+import { ThemeProvider } from '@theme-ui/core';
 import { FC, useCallback, useEffect, useState } from 'react';
-import { Box, ThemeProvider } from 'theme-ui';
 import theme from '../theme';
 import Header from './header';
 import ResetCss from './reset-css';

@@ -1,14 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading,no-underscore-dangle */
+import { Heading, Text } from '@theme-ui/components';
+import { ThemeUIStyleObject } from '@theme-ui/css';
 import { ElementType, FC } from 'react';
 import type { SpaceProps } from 'styled-system';
-import { Heading, SxStyleProp, Text } from 'theme-ui';
-import { BlockTextContent, BlockTextContentChildren, HeadingTag, MarkDefLink } from '../schema/block';
+import { BlockTextContent, BlockTextContentChildren, MarkDefLink } from '../schema/block';
 
 
 type BlockTextProps = SpaceProps & {
   content: BlockTextContent;
   variant?: string;
-  sx?: SxStyleProp;
+  sx?: ThemeUIStyleObject;
   dropCap?: boolean;
   as?: ElementType;
 };
@@ -44,7 +45,7 @@ const WithLink: FC<{ linkDef?: MarkDefLink }> = ({ children, linkDef }) => (
 );
 
 const BlockTextElement: FC<BlockTextProps> = ({ content, sx, as = 'p', variant, children, ...props }) => {
-  const styles: SxStyleProp = {
+  const styles: ThemeUIStyleObject = {
     ...sx,
   };
 

@@ -1,11 +1,10 @@
-import { useQuery } from '@apollo/client';
+import { Box, Button, Flex, Text } from '@theme-ui/components';
 import Link from 'next/link';
 import React, { FC, useCallback, useState } from 'react';
-import { Box, Button, Flex, Text } from 'theme-ui';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import Queries from '../schema/queries';
-import { Post, Recipe, RootQuery } from '../schema/root';
+import { Article } from '../schema/article';
+import { Post, Recipe } from '../schema/root';
 
 
 const PostPreview: FC<{ post: Post | Recipe }> = ({ post }) => {
@@ -48,7 +47,7 @@ const PostPreview: FC<{ post: Post | Recipe }> = ({ post }) => {
         p='0px'
         sx={{
           border: '1px solid black',
-          backgroundImage: post.mainImage && `url(${post.mainImage.asset.url})`,
+          backgroundImage: post.mainImage && `url(${post.mainImage.url})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           borderRadius: '0px',
@@ -109,10 +108,7 @@ const PostPreview: FC<{ post: Post | Recipe }> = ({ post }) => {
 };
 
 const IndexPage: FC = (props) => {
-  const { data: categoriesData } = useQuery<RootQuery>(Queries.listCategories);
-  const { data: authorsData } = useQuery<RootQuery>(Queries.listAuthors);
-  const { data: postsData } = useQuery<RootQuery>(Queries.listPosts);
-  const { data: recipesData } = useQuery<RootQuery>(Queries.listRecipes);
+  const articlesData: Article[] = [];
 
   return (
     <Layout>
@@ -124,10 +120,7 @@ const IndexPage: FC = (props) => {
           justifyContent: 'flex-start',
         }}
       >
-        {(postsData?.allPost || []).map((p) => (
-          <PostPreview key={p._key || p._id} post={p} />
-        ))}
-        {(recipesData?.allRecipe || []).map((p) => (
+        {articlesData.map((p) => (
           <PostPreview key={p._key || p._id} post={p} />
         ))}
       </Flex>

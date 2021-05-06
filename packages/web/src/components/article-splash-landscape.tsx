@@ -1,5 +1,5 @@
+import { Box, Heading, Image } from '@theme-ui/components';
 import { FC } from 'react';
-import { Box, Heading, Image } from 'theme-ui';
 import { Article } from '../schema/article';
 import { BlockContent, isBlockText } from '../schema/block';
 import { ARTICLE_GUTTER, ARTICLE_WIDTH } from '../theme';
@@ -11,7 +11,7 @@ type ArticleSplashProps = {
 };
 
 const ArticleSplashLandscape: FC<ArticleSplashProps> = ({ article, children }) => {
-  const content = (article?.contentRaw || []) as BlockContent[];
+  const content = (article?.content || []) as BlockContent[];
   const [firstBlock] = content;
 
   return (
@@ -21,7 +21,7 @@ const ArticleSplashLandscape: FC<ArticleSplashProps> = ({ article, children }) =
       >
         {article.mainImage && (
           <Image
-            src={article.mainImage.asset.url}
+            src={article.mainImage.url}
             mx='auto'
             mb={4}
             sx={{

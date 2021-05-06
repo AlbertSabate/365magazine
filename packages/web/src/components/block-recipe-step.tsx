@@ -1,14 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { Box, Flex, Text } from '@theme-ui/components';
+import { ThemeUIStyleObject } from '@theme-ui/css';
 import { FC } from 'react';
 import type { SpaceProps } from 'styled-system';
-import { Box, Flex, SxStyleProp, Text } from 'theme-ui';
 import { BlockRecipeStepContent } from '../schema/block';
 import BlockText from './block-text';
 
 
 type BlockRecipeStepProps = SpaceProps & {
   content: BlockRecipeStepContent;
-  sx?: SxStyleProp;
+  sx?: ThemeUIStyleObject;
 };
 
 function padStepNumber(step: number): number {

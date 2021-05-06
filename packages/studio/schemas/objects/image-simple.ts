@@ -5,6 +5,9 @@ const ImageSimple = {
   name: SchemaTypes.ImageSimple,
   title: 'Image',
   type: 'image',
+  options: {
+    metadata: ['palette', 'dimensions'],
+  },
   fields: [
     {
       name: 'caption',

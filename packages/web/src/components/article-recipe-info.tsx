@@ -1,5 +1,5 @@
+import { Box, Flex, Heading, Text } from '@theme-ui/components';
 import { FC } from 'react';
-import { Box, Flex, Heading, Text } from 'theme-ui';
 import { RecipeInfo } from '../schema/root';
 
 

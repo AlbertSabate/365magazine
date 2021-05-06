@@ -1,5 +1,5 @@
+import { Box, Flex, Heading, Link, Text } from '@theme-ui/components';
 import { FC, forwardRef } from 'react';
-import { Box, Flex, Heading, Link, Text, ThemeProvider } from 'theme-ui';
 
 
 const LEFT_NAV_ITEMS = [

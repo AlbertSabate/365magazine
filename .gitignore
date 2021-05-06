@@ -24,4 +24,4 @@ node_modules/
 .next
 dist
 
-packages/web/.env.local
+packages/web/src/.env.local

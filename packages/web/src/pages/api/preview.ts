@@ -1,6 +1,7 @@
 import { NextApiHandler } from 'next';
-import { getPostBySlug, getRecipeBySlug } from '../../lib/apollo';
+import getClient from '../../lib/sanity';
 import { Article } from '../../schema/article';
+import Queries from '../../schema/queries';
 
 
 const handler: NextApiHandler = async (req, res) => {
@@ -22,11 +23,7 @@ const handler: NextApiHandler = async (req, res) => {
     return invalidRequest('Invalid slug');
   }
 
-  let article: Article = await getPostBySlug(slug, true);
-  if (!article) {
-    article = await getRecipeBySlug(slug, true);
-  }
-
+  const { article } = await getClient().fetch<{ article?: Article }>(Queries.getArticleBySlug, { slug });
   // If the slug doesn't exist prevent preview mode from being enabled
   if (!article) {
     return invalidRequest('Invalid slug');

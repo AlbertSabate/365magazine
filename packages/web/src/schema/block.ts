@@ -11,7 +11,7 @@ export type BlockStyle = HeadingTag | (
 );
 
 export interface BlockImageContent {
-  _type: 'image';
+  _type: 'imageSimple';
   _key: string;
   asset: {
     _ref: string;
@@ -71,7 +71,7 @@ export type BlockContent = (
 );
 
 export const isBlockImage = (block?: BlockContent): block is BlockImageContent => block
-  && (block as BlockImageContent)._type === 'image';
+  && (block as BlockImageContent)._type === 'imageSimple';
 export const isBlockText = (block?: BlockContent): block is BlockTextContent => block
   && (block as BlockTextContent)._type === 'block';
 export const isBlockRecipeStep = (block?: BlockContent): block is BlockRecipeStepContent => block

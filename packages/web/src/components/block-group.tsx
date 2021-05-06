@@ -1,7 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { Box } from '@theme-ui/components';
+import { css } from '@theme-ui/css';
+import { Global } from '@emotion/react';
 import { FC } from 'react';
 import type { SpaceProps } from 'styled-system';
-import { Box } from 'theme-ui';
 import { BlockContent, isBlockEmbedInstagram, isBlockImage, isBlockRecipeStep, isBlockText } from '../schema/block';
 import { ARTICLE_GUTTER } from '../theme';
 import BlockImage from './block-image';
@@ -51,16 +53,18 @@ const BlockGroup: FC<BlockGroupProps> = ({ blocks, ...props }) => (
       if (isBlockEmbedInstagram(b)) {
         return (
           <Box
+            key={b._key}
             sx={{
               textAlign: 'center',
             }}
           >
-            <style>
-              {`
-#ig-embed-${b._key} > iframe {
-  margin: 0 auto !important;
-}`}
-            </style>
+            <Global
+              styles={`
+                #ig-embed-${b._key} > iframe {
+                  margin: 0 auto !important;
+                }
+              `}
+            />
             <div
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{ __html: b.code }}

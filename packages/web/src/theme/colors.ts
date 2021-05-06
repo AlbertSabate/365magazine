@@ -1,4 +1,4 @@
-import { Theme } from 'theme-ui';
+import { Theme } from '@theme-ui/core';
 
 const colors: Theme['colors'] = {
   brand: '#604AEA',

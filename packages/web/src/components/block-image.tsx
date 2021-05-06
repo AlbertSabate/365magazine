@@ -1,14 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import imageUrlBuilder from '@sanity/image-url';
+import { Box, Flex, Image } from '@theme-ui/components';
 import { FC } from 'react';
 import type { SpaceProps } from 'styled-system';
-import { Box, Flex, Image } from 'theme-ui';
-import { SANITY_PROJECT } from '../lib/apollo';
+import { imageBuilder } from '../lib/sanity';
 import { BlockImageContent } from '../schema/block';
 import BlockText from './block-text';
 
-
-const builder = imageUrlBuilder(SANITY_PROJECT);
 
 type BlockImageProps = SpaceProps & {
   content: BlockImageContent;
@@ -33,7 +30,7 @@ const BlockImage: FC<BlockImageProps> = ({ content, ...props }) => (
         objectFit: 'cover',
         objectPosition: 'center center',
       }}
-      src={builder.image(content.asset).url()}
+      src={imageBuilder.image(content.asset).url()}
     />
     {content.caption && (
       <Box p={1}>

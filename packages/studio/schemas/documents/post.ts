@@ -35,7 +35,6 @@ const Post = {
       name: 'mainImage',
       title: 'Main Image',
       type: SchemaTypes.ImageSimple,
-      options: { hotspot: false },
     },
     {
       name: 'categories',

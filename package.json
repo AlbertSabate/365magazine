@@ -10,8 +10,10 @@
     "packages/*"
   ],
   "scripts": {
-    "start:web": "yarn workspace @365/web start",
-    "start:studio": "yarn workspace @365/studio start"
+    "web:start": "yarn workspace @365/web start",
+    "web:build": "yarn workspace @365/web build",
+    "studio:start": "yarn workspace @365/studio start",
+    "vercel:install": "rm -rf packages/studio && yarn install"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.17.0",

@@ -1,8 +1,8 @@
+import { Box } from '@theme-ui/components';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { WithRouterProps } from 'next/dist/client/with-router';
 import { withRouter } from 'next/router';
 import { FC } from 'react';
-import { Box } from 'theme-ui';
 import ArticleRecipeInfo from '../components/article-recipe-info';
 import ArticleRecipeIngredients from '../components/article-recipe-ingredients';
 import ArticleSplashLandscape from '../components/article-splash-landscape';
@@ -10,78 +10,31 @@ import ArticleSplashPortrait from '../components/article-splash-portrait';
 import BlockGroup from '../components/block-group';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import client, { getPostBySlug, getRecipeBySlug } from '../lib/apollo';
+import getClient, { imageBuilder, usePreviewSubscription } from '../lib/sanity';
 import { Article, isRecipeArticle } from '../schema/article';
 import { BlockContent } from '../schema/block';
 import Queries from '../schema/queries';
-import { Post, Recipe, RootQuery } from '../schema/root';
+import { Post, Recipe } from '../schema/root';
 import { ARTICLE_GUTTER, ARTICLE_WIDTH } from '../theme';
 
 
-async function listPosts() {
-  const { data, error } = await client.query<RootQuery>({
-    query: Queries.listPostSlugs,
-  });
-
-  if (error) {
-    console.error('error listing posts', error);
-    return [];
-  }
-  if (!data) {
-    console.error('empty list posts response');
-    return [];
-  }
-
-  return data.allPost;
-}
-
-async function listRecipes() {
-  const { data, error } = await client.query<RootQuery>({
-    query: Queries.listRecipeSlugs,
-  });
-
-  if (error) {
-    console.error('error listing posts', error);
-    return [];
-  }
-  if (!data) {
-    console.error('empty list posts response');
-    return [];
-  }
-
-  return data.allRecipe;
-}
-
 export const getStaticPaths: GetStaticPaths = async () => {
-  const [posts, recipes] = await Promise.all([
-    listPosts(),
-    listRecipes(),
-  ]);
-
-  const allArticles = [...posts, ...recipes];
-  const allPaths: string[] = [];
-
-  allArticles.forEach((a) => {
-    if (a._id.startsWith('drafts.')) {
-      return;
-    }
-    const path = a.slug?.current;
-    if (path) {
-      allPaths.push(`/${path}`);
-    } else {
-      console.error(`article ${a._id} missing slug`);
-    }
-  });
+  const data = await getClient().fetch<Array<{ _id: string; slug: string; }>>(Queries.listArticlePaths);
 
   return {
-    paths: allPaths,
+    paths: data
+      .filter(({ _id }) => !_id.startsWith('drafts.'))
+      .map(({ slug }) => `/${slug}`),
     fallback: true,
   };
 };
 
 type PostInitialProps = {
+  preview?: boolean;
   slug: string;
-  article: Post | Recipe;
+  data: {
+    article: Post | Recipe
+  };
 };
 
 export const getStaticProps: GetStaticProps<PostInitialProps> = async ({ params, preview }) => {
@@ -91,11 +44,7 @@ export const getStaticProps: GetStaticProps<PostInitialProps> = async ({ params,
 
   const slug = params.slug.startsWith('/') ? params.slug.substr(1) : params.slug;
 
-  let article: Article = await getPostBySlug(slug);
-  if (!article) {
-    article = await getRecipeBySlug(slug);
-  }
-
+  const { article } = await getClient().fetch<{ article?: Article }>(Queries.getArticleBySlug, { slug });
   if (!article) {
     return {
       notFound: true,
@@ -105,7 +54,9 @@ export const getStaticProps: GetStaticProps<PostInitialProps> = async ({ params,
   return {
     props: {
       slug,
-      article,
+      data: {
+        article,
+      },
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
@@ -114,7 +65,13 @@ export const getStaticProps: GetStaticProps<PostInitialProps> = async ({ params,
   };
 };
 
-const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({ slug, article, router, ...props }) => {
+const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({
+  preview,
+  slug,
+  data: initialData,
+  router,
+  ...props
+}) => {
   // when the article has not been pre-rendered at build time, we will try to fetch it dynamically on the server
   // by running getStaticProps and showing fallback page here
   if (router.isFallback) {
@@ -122,13 +79,15 @@ const ArticlePage: FC<WithRouterProps & PostInitialProps> = ({ slug, article, ro
     return <div>loading........</div>;
   }
 
-  if (article._id.startsWith('drafts.')) {
-    // todo: setup subscription for data updates to render this in live preview window
-  }
+  const { data: { article } } = usePreviewSubscription(Queries.getArticleBySlug, {
+    params: { slug },
+    initialData,
+    enabled: preview,
+  });
 
-  const isMainImagePortrait = article.mainImage.asset.metadata.dimensions.aspectRatio < 1;
+  const isMainImagePortrait = (article.mainImage?.metadata?.dimensions?.aspectRatio || 1) < 1;
 
-  const content = (article?.contentRaw || []) as BlockContent[];
+  const content = (article?.content || []) as BlockContent[];
   const [, ...restBlocks] = content;
 
   return (
