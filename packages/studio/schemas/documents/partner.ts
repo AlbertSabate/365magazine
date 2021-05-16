@@ -1,22 +1,16 @@
 import { MdPerson } from 'react-icons/md';
 import slugify from '../../lib/slugify';
-import { SimpleBlock } from '../objects/block-content';
 import SchemaTypes from '../types';
 
-const Author = {
-  name: SchemaTypes.Author,
-  title: 'Author',
+const Partner = {
+  name: SchemaTypes.Partner,
+  title: 'Partner',
   type: 'document',
   icon: MdPerson,
   fields: [
     {
       name: 'name',
       title: 'Name',
-      type: 'string',
-    },
-    {
-      name: 'title',
-      title: 'Title',
       type: 'string',
     },
     {
@@ -35,7 +29,7 @@ const Author = {
       type: 'slug',
       options: {
         source: 'name',
-        slugify: slugify('author'),
+        slugify: slugify('partner'),
       },
     },
     {
@@ -43,22 +37,14 @@ const Author = {
       title: 'Image',
       type: SchemaTypes.ImageSimple,
     },
-    {
-      name: 'bio',
-      title: 'Bio',
-      type: 'array',
-      of: [
-        SimpleBlock,
-      ],
-    },
   ],
   preview: {
     select: {
       title: 'name',
-      subtitle: 'title',
+      subtitle: 'instagram',
       media: 'image',
     },
   },
 };
 
-export default Author;
+export default Partner;

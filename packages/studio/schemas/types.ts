@@ -5,6 +5,8 @@ enum SchemaTypes {
   Category = 'category',
   Author = 'author',
   AuthorLink = 'author-link',
+  Partner = 'partner',
+  PartnerLink = 'partner-link',
   Post = 'post',
   Recipe = 'recipe',
   RecipeInfo = 'recipe-info',

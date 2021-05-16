@@ -13,6 +13,8 @@ import Category from './documents/category';
 import Post from './documents/post';
 import Author from './documents/author';
 import AuthorLink from './objects/author-link';
+import Partner from './documents/partner';
+import PartnerLink from './objects/partner-link';
 import Recipe from './documents/recipe';
 import RecipeInfo from './objects/recipe-info';
 import RecipeIngredient from './objects/recipe-ingredient';
@@ -29,6 +31,7 @@ export default createSchema({
   types: schemaTypes.concat([
     // documents
     Author,
+    Partner,
     Category,
     Tag,
     Post,
@@ -38,6 +41,7 @@ export default createSchema({
     // other objects
     ImageSimple,
     AuthorLink,
+    PartnerLink,
     BlockContent,
     RecipeInfo,
     RecipeStep,

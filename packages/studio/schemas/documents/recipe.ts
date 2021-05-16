@@ -32,6 +32,11 @@ const Recipe = {
       type: SchemaTypes.AuthorLink,
     },
     {
+      name: 'partner',
+      title: 'Partner',
+      type: SchemaTypes.PartnerLink,
+    },
+    {
       name: 'mainImage',
       title: 'Main Image',
       type: SchemaTypes.ImageSimple,
