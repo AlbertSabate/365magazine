@@ -1,10 +1,14 @@
-const allArticles = (pipe = '') => `*[_type in ["post", "recipe"]${pipe}]`;
+const allArticles = (pipe?: string) => `*[_type in ["post", "recipe"]${pipe ? ` ${pipe}` : ''}]`;
 const bySlug = 'slug.current == $slug';
 
 const Queries = {
-  listArticles: allArticles(),
+  listArticles: `
+${allArticles()}
+{_id, _key, 'slug': slug.current, title, tagline, 'image': mainImage.asset -> url}
+  `,
   listArticlePaths: `
-${allArticles()}{_id, 'slug': slug.current}
+${allArticles()}
+{_id, 'slug': slug.current}
   `,
   getArticleBySlug: `
 {

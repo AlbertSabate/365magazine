@@ -1,13 +1,24 @@
 import { Box, Button, Flex, Text } from '@theme-ui/components';
+import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import React, { FC, useCallback, useState } from 'react';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+import getClient, { usePreviewSubscription } from '../lib/sanity';
 import { Article } from '../schema/article';
+import Queries from '../schema/queries';
 import { Post, Recipe } from '../schema/root';
 
+interface ArticlePreview {
+  _id: string;
+  _key: string;
+  slug: string;
+  title: string;
+  tagline: string;
+  image?: string;
+}
 
-const PostPreview: FC<{ post: Post | Recipe }> = ({ post }) => {
+const PostPreview: FC<{ article: ArticlePreview }> = ({ article }) => {
   const PANEL_HEIGHT = 200;
   const PANEL_WIDTH = 280;
 
@@ -34,7 +45,7 @@ const PostPreview: FC<{ post: Post | Recipe }> = ({ post }) => {
     },
   };
 
-  const hoverStyles = post.tagline
+  const hoverStyles = article.tagline
     ? {
       ':hover': hoverTransition,
       ':focus': hoverTransition,
@@ -42,12 +53,12 @@ const PostPreview: FC<{ post: Post | Recipe }> = ({ post }) => {
     : {};
 
   return (
-    <Link href={`/${post.slug.current}`}>
+    <Link href={`/${article.slug}`}>
       <Button
         p='0px'
         sx={{
           border: '1px solid black',
-          backgroundImage: post.mainImage && `url(${post.mainImage.url})`,
+          backgroundImage: article.image && `url(${article.image})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           borderRadius: '0px',
@@ -82,10 +93,10 @@ const PostPreview: FC<{ post: Post | Recipe }> = ({ post }) => {
                   textTransform: 'uppercase',
                 }}
               >
-                {post.title}
+                {article.title}
               </Text>
             </Box>
-            {post.tagline && (
+            {article.tagline && (
               <Box
                 bg='rgba(0,0,0,0.8)'
                 ref={taglineRef}
@@ -96,7 +107,7 @@ const PostPreview: FC<{ post: Post | Recipe }> = ({ post }) => {
                 }}
               >
                 <Text>
-                  {post.tagline}
+                  {article.tagline}
                 </Text>
               </Box>
             )}
@@ -107,8 +118,34 @@ const PostPreview: FC<{ post: Post | Recipe }> = ({ post }) => {
   );
 };
 
-const IndexPage: FC = (props) => {
-  const articlesData: Article[] = [];
+type IndexInitialProps = {
+  preview?: boolean;
+  data: {
+    articles: ArticlePreview[];
+  };
+};
+
+export const getStaticProps: GetStaticProps<IndexInitialProps> = async ({ preview }) => {
+  const articles = await getClient().fetch<ArticlePreview[]>(Queries.listArticles);
+  console.log(articles);
+  return {
+    props: {
+      data: {
+        articles,
+      },
+    },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every second
+    revalidate: 60, // In seconds
+  };
+};
+
+const IndexPage: FC<IndexInitialProps> = ({ preview, data: initialData }) => {
+  const { data: { articles } } = usePreviewSubscription(Queries.listArticles, {
+    initialData,
+    enabled: preview,
+  });
 
   return (
     <Layout>
@@ -120,8 +157,8 @@ const IndexPage: FC = (props) => {
           justifyContent: 'flex-start',
         }}
       >
-        {articlesData.map((p) => (
-          <PostPreview key={p._key || p._id} post={p} />
+        {articles.map((p) => (
+          <PostPreview key={p._key || p._id} article={p} />
         ))}
       </Flex>
     </Layout>

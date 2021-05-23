@@ -10,7 +10,7 @@ import ArticleSplashPortrait from '../components/article-splash-portrait';
 import BlockGroup from '../components/block-group';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import getClient, { imageBuilder, usePreviewSubscription } from '../lib/sanity';
+import getClient, { usePreviewSubscription } from '../lib/sanity';
 import { Article, isRecipeArticle } from '../schema/article';
 import { BlockContent } from '../schema/block';
 import Queries from '../schema/queries';
