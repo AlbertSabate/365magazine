@@ -1,6 +1,5 @@
 import { Global } from '@emotion/react';
-import { Box } from '@theme-ui/components';
-import { ThemeProvider } from '@theme-ui/core';
+import { Box, ChakraProvider } from '@chakra-ui/react';
 import { FC, useCallback, useEffect, useState } from 'react';
 import theme from '../theme';
 import Header from './header';
@@ -56,7 +55,7 @@ const Layout: FC<LayoutProps> = ({ children, stickyHeader }) => {
   return (
     <>
       <ResetCss />
-      <ThemeProvider theme={theme}>
+      <ChakraProvider theme={theme}>
         <Global
           styles={(t: typeof theme) => ({
             body: {
@@ -84,7 +83,7 @@ const Layout: FC<LayoutProps> = ({ children, stickyHeader }) => {
         >
           <main>{children}</main>
         </Box>
-      </ThemeProvider>
+      </ChakraProvider>
     </>
   );
 };

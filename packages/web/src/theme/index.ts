@@ -1,5 +1,5 @@
+import { Theme } from '@chakra-ui/react';
 import type * as CSS from 'csstype';
-import { Theme } from '@theme-ui/core';
 import colors from './colors';
 
 
@@ -28,6 +28,7 @@ const theme: AppTheme = {
     body: '"Radley", serif',
     heading: '"Montserrat", sans-serif',
     display: '"Playfair Display", serif',
+    mono: '"Montserrat", sans-serif',
   },
   fontWeights: {
     body: 300,
